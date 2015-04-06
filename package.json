@@ -1,0 +1,11 @@
+{
+  "name": "cs179-final-project",
+  "description": "Final Project for CS179",
+  "author": "A-Team",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "less": "2.5.x"
+  },
+  "engine": "node >= 0.10.x"
+}
