@@ -24,7 +24,7 @@ BEFORE BUILDING/CONTRIBUTING
 
     `lessc styles.less > styles.css #creates a stylesheet from the .less files `
   
-  3. Run Makefile to compile .less files when ready for build in either of the project folders. `make css`
+  3. Run Makefile to compile .less files when ready for build in either of the project folders. `make`
 
 #Workflow For LESS and Chrome DevTools
   https://youtu.be/6bcCpk_U3qc
