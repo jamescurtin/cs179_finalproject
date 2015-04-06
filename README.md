@@ -26,5 +26,8 @@ BEFORE BUILDING/CONTRIBUTING
   
   3. Run Makefile to compile .less files when ready for build in either of the project folders. `make`
 
+#LESS Documentation (Features & Syntax)
+http://lesscss.org/features/
+
 #Workflow For LESS and Chrome DevTools
   https://youtu.be/6bcCpk_U3qc
