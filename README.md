@@ -17,8 +17,8 @@ BEFORE BUILDING/CONTRIBUTING
           ```
       2. OR (skip if a) has been completed already).
         Download the latest nodejs version from http://nodejs.org
-  2. After node is properly installed, run to install the less css pre-processor:
-    `npm install -g less`
+  2. After node is properly installed, run to install the less css pre-processor in the project directory:
+    `npm install`
     
     from now on less compile can be run as lessc:
 
