@@ -7,18 +7,18 @@
     console.log(1);
 });
 
-//shows hidden div by id
+//shows hidden element by id
 function show(id){
     $( "#" + id ).removeClass("hidden");
 }
 
-//shows hidden div by id
+//hides element by id
 function hide(id){
     $( "#" + id ).addClass("hidden");
 }
 
 
-//detect if sizes is required
+//detects if sizes is required when selecting items
 function getsize(item, id){
     item = item.split("_");
     id = "select-" + id + "-size";
