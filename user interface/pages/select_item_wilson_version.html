@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Lunch Express/select_item</title>
+
+     <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
+    <link href="../css/lib/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../css/freelancer.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body id="page-top" class="index">
+
+   <!-- Navigation -->
+    <nav class="navbar navbar-default" style="margin: 0; border-radius: 0">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-1">
+                    <a href="settings.html"><i class="fa fa-cog fa-inverse fa-2x" style="margin: 20px 0 0 0"></i></a>
+                </div>
+                <div class="col-xs-8 col-xs-offset-1">
+                    <h3 class="text-center" style="color:white;">Lunch Express</h3>
+                </div>
+                <div class="col-xs-1">
+                    <a href="home_screen.html"><i class="fa fa-home fa-inverse fa-2x" style="margin:20px 0 0 0;"></i></a>
+                </div>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <!--Section Goes Here -->
+    <!-- About Section -->
+    <section class="success" id="about" style="background-color:gray;">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <h3>Order Meal</h3>
+                    <hr class="star-light">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <form name="select_item" id="select_item" novalidate>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 text-center">
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12">
+                                <select id="entree" class="form-control" onchange="getsize(this.value, this.id)" required data-validation-required-message="Required.">
+                                    <option value="meat_ball_sub_s">Meat Ball Sub - varies by size</option>
+                                    <option value="blt_sub_s">BLT Sub - varies by size</option>
+                                    <option value="turkey_club_s">Turkey Club - varies by size</option>
+                                    <option value="chicken_salad">Casear Salad - $7.99</option>
+                                    <option value="None" selected="selected">Choose Entree</option>
+                                </select>
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+                        <div id="select-entree-size" class="row control-group hidden">
+                            <div class="form-group col-xs-12">
+                                <label style="margin-right: 20px;" ><input type="radio" id="entree-size" name="entree-size" value="L">&nbsp;Large ($7.99)</label>
+                                <label style="margin-right: 20px;" ><input type="radio" id="entree-size" name="entree-size" value="M">&nbsp;Medium ($6.99)</label>
+                                <label style="margin-right: 20px;" ><input type="radio" id="entree-size" name="entree-size" value="S">&nbsp;Small ($5.99)</label>
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12">
+                                <select id="side" class="form-control" onchange="getsize(this.value, this.id)" required data-validation-required-message="Required.">
+                                    <option value="fries_s">French Fries - varies by size</option>
+                                    <option value="bagged_chips">Bagged Chips - $1.50</option>
+                                    <option value="None" selected="selected">Choose Side</option>
+                                </select>
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+                        <div id="select-side-size" class="row control-group hidden">
+                            <div class="form-group col-xs-12">
+                                <label style="margin-right: 20px;" ><input type="radio" id="side-size" name="side-size" value="L">&nbsp;Large ($2.99)</label>
+                                <label style="margin-right: 20px;" ><input type="radio" id="side-size" name="side-size" value="M">&nbsp;Medium ($1.99)</label>
+                                <label style="margin-right: 20px;" ><input type="radio" id="side-size" name="side-size" value="S">&nbsp;Small ($1.50)</label>
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12">
+                                <select id="drink" class="form-control" onchange="getsize(this.value, this.id)" required data-validation-required-message="Required.">
+                                    <option value="coke_s">Coke - varies by size</option>
+                                    <option value="pepsi_s">Pepsi - varies by size</option>
+                                    <option value="seven_up_s">Seven Up - varies by size</option>
+                                    <option value="bottled_water">Bottled Water - $1.99</option>
+                                    <option value="None" selected="selected">Choose Drink</option>
+                                </select>
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+                        <div id="select-drink-size" class="row control-group hidden">
+                            <div class="form-group col-xs-12">
+                                <label style="margin-right: 20px;" ><input type="radio" id="drink-size" name="drink-size" value="L">&nbsp;Large ($1.99)</label>
+                                <label style="margin-right: 20px;" ><input type="radio" id="drink-size" name="drink-size" value="M">&nbsp;Medium ($1.50)</label>
+                                <label style="margin-right: 20px;" ><input type="radio" id="drink-size" name="drink-size" value="S">&nbsp;Small ($0.99)</label>
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12">
+                                <label for="notes">Special Notes:</label>
+                                <textarea class="form-control" rows="4" cols="50" id="notes" placeholder="ex: no cheese" required data-validation-required-message="Required."></textarea>
+                            </div>
+                        </div>
+                        
+                        <br>
+                        <div id="success"></div>
+                        <div class="row">
+                            <div class="form-group col-xs-12 text-center">
+                                <a href="home_screen.html"><button type="button" class="btn btn-lg btn-outline ">Go Back</button>&nbsp;</a>
+                                <a href="check_out.html"><button type="button" class="btn btn-lg btn-outline " style="background-color:#18BC9C;">Review Order</button></a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="footer-above">
+        </div>
+    </footer>
+
+    
+    <!-- jQuery -->
+    <script src="../js/lib/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../js/lib/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+
+    <!-- Contact Form JavaScript -->
+
+    <!-- Custom Theme JavaScript -->
+    <script src="../js/LE.js"></script>
+    <script src="../js/LEDataModel.js"></script>
+    <script src="../js/site.js"></script>
+</body>
+</html>
