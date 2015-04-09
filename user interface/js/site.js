@@ -32,15 +32,19 @@ function getsize(item, id){
 
 // call this function to initialize for home_screen.html
 function initHome(){
-    var homeScreen = window.LE.homeScreen;
+    $(function(){
+        var homeScreen = window.LE.homeScreen;
 
-    $("#restaurant").on("change",function() {
-        var selection = document.getElementById("restaurant");
-        var inputBox = document.getElementById("inputBox");
-        
-        var selectedVal = $('#restaurant').find(':selected').text();
-        if (document.getElementById('inputBox').innerHTML !== undefined ) {
-            document.getElementById('inputBox').innerHTML = homeScreen.placeholderText[selectedVal];
-        }
+        $("#restaurant").on("change",function() {
+            var selection = document.getElementById("restaurant");
+            var inputBox = document.getElementById("inputBox");
+            
+            var selectedVal = $('#restaurant').find(':selected').text();
+            if (document.getElementById('inputBox').innerHTML !== undefined ) {
+                document.getElementById('inputBox').innerHTML = homeScreen.placeholderText[selectedVal];
+            }
+
+            console.log(selectedVal);
+        });
     });
 }
