@@ -1,23 +1,23 @@
 {
 	"000001-a":{ 
 		"menu": {
-			"entrees":{
-				"MeatBall Sub":{"s": 2.99, "m": 3.99, "l": 4.99}, 
-				"Salad": 3.99
-			},
-			"drinks":{
-				"bottled water": 1.99,
-				"coke": {"s": 0.99, "m": 1.50, "l": 2.00},
-				"pepsi": {"s": 0.99, "m": 1.50, "l": 2.00}
-			},
-			"sides":{
-				"fries": {"s":1.00, "m":1.50, "l":1.99}, 
-				"biscuits": 2.00
-			},
-			"desserts":{
-				"sundae": 2.00, 
-				"cone": 1.00
-			}
+			"entrees": [
+				{"name": "MeatBall Sub", "prices" : {"s": 2.99, "m": 3.99, "l": 4.99}},
+				{"name": "Salad", "price": 3.99}
+			],
+			"drinks":[
+				{"name": "bottled water", "price": 1.99}, 
+				{"name": "coke", "prices": {"s": 0.99, "m": 1.50, "l": 2.00}},
+				{"name": "pepsi", "prices": {"s": 0.99, "m": 1.50, "l": 2.00}}
+			],
+			"sides":[
+				{"name": "fries", "prices": {"s":1.00, "m":1.50, "l":1.99}}, 
+				{"name": "biscuits", "price": 2.00}
+			],
+			"desserts":[
+				{"name": "sundae", "price": 2.00}, 
+				{"name": "cone", "price": 1.00}
+			]
 		},
 		"geo": [], 
 		"rate": 1.0, 
@@ -27,23 +27,23 @@
 	},
 	"000001-b":{ 
 		"menu": {
-			"entrees":{
-				"MeatBall Sub":{"s": 2.99, "m": 3.99, "l": 4.99}, 
-				"Salad": 3.99
-			},
-			"drinks":{
-				"bottled water": 1.99,
-				"coke": {"s": 0.99, "m": 1.50, "l": 2.00},
-				"pepsi": {"s": 0.99, "m": 1.50, "l": 2.00}
-			},
-			"sides":{
-				"fries": {"s":1.00, "m":1.50, "l":1.99}, 
-				"biscuits": 2.00
-			},
-			"desserts":{
-				"sundae": 2.00, 
-				"cone": 1.00
-			}
+			"entrees": [
+				{"name": "MeatBall Sub", "prices" : {"s": 2.99, "m": 3.99, "l": 4.99}},
+				{"name": "Salad", "price": 3.99}
+			],
+			"drinks":[
+				{"name": "bottled water", "price": 1.99}, 
+				{"name": "coke", "prices": {"s": 0.99, "m": 1.50, "l": 2.00}},
+				{"name": "pepsi", "prices": {"s": 0.99, "m": 1.50, "l": 2.00}}
+			],
+			"sides":[
+				{"name": "fries", "prices": {"s":1.00, "m":1.50, "l":1.99}}, 
+				{"name": "biscuits", "price": 2.00}
+			],
+			"desserts":[
+				{"name": "sundae", "price": 2.00}, 
+				{"name": "cone", "price": 1.00}
+			]
 		},
 		"geo": [], 
 		"rate": 1.0, 
@@ -53,23 +53,23 @@
 	},
 	"000001-c":{ 
 		"menu": {
-			"entrees":{
-				"MeatBall Sub":{"s": 2.99, "m": 3.99, "l": 4.99}, 
-				"Salad": 3.99
-			},
-			"drinks":{
-				"bottled water": 1.99,
-				"coke": {"s": 0.99, "m": 1.50, "l": 2.00},
-				"pepsi": {"s": 0.99, "m": 1.50, "l": 2.00}
-			},
-			"sides":{
-				"fries": {"s":1.00, "m":1.50, "l":1.99}, 
-				"biscuits": 2.00
-			},
-			"desserts":{
-				"sundae": 2.00, 
-				"cone": 1.00
-			}
+			"entrees": [
+				{"name": "MeatBall Sub", "prices" : {"s": 2.99, "m": 3.99, "l": 4.99}},
+				{"name": "Salad", "price": 3.99}
+			],
+			"drinks":[
+				{"name": "bottled water", "price": 1.99}, 
+				{"name": "coke", "prices": {"s": 0.99, "m": 1.50, "l": 2.00}},
+				{"name": "pepsi", "prices": {"s": 0.99, "m": 1.50, "l": 2.00}}
+			],
+			"sides":[
+				{"name": "fries", "prices": {"s":1.00, "m":1.50, "l":1.99}}, 
+				{"name": "biscuits", "price": 2.00}
+			],
+			"desserts":[
+				{"name": "sundae", "price": 2.00}, 
+				{"name": "cone", "price": 1.00}
+			]
 		},
 		"geo": [], 
 		"rate": 1.0, 

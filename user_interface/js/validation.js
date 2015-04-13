@@ -8,10 +8,10 @@
 var page = {"register-form":"credit_card",
            "creditcard-form":"welcome",
            "login-form":"home_screen",
-            "select_item-form":"",
+            "select_item-form":""
            }
 // function to execute
-var fx = {"login-form": login,
+var fx = {"login-form": login, "register-form": login, 
 }
 
 // validation function

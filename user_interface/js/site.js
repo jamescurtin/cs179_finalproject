@@ -5,13 +5,19 @@
 
 var userid = null;
 window.onload = function (){ 
-    getpage('login_screen');
     // local storage
     userid = null;
     if(typeof(Storage) !== "undefined") {
         if (localStorage.exp_userid) {
             userid = localStorage.getItem("exp_userid");
-        }        
+            getpage('home_screen');
+        }  
+        else{
+            getpage('login_screen');
+        }
+    }
+    else{
+        getpage('login_screen');
     }
 }
 
@@ -41,6 +47,55 @@ function initHome(){
             console.log(selectedVal);
         });
     });
+}
+
+// call this to initialize for the select item screen
+function initSelectItem(restaurantID){
+    $(function(){
+        var r = window.LE.restaurants;
+
+        // prepare select-item-template
+        var source   = $("#select-item-template").html();
+        var templateSelect = Handlebars.compile(source);
+
+        // prepare item-choice-template
+        source = $("#item-choice-template").html();
+        templateChoice = Handlebars.compile(source);
+
+        // prepare item-choice-template
+        source = $("#item-size-template").html();
+        templateSize = Handlebars.compile(source);
+
+        // TODO - context is the object to pass into the template for checkout
+        var context = {};
+        var html    = templateSelect(context);
+        $('#render').append(html);
+
+        // synchronization structure.
+        // wait for restaurants data to be loaded from JSON
+        $.when(window.LE.loadingRestaurants).done(function(){
+            var restaurant = r.getRestaurant(restaurantID);
+            
+            //render entrees
+            console.log(restaurant.menu.entrees);
+            html = templateChoice(restaurant.menu.entrees);
+            console.log(html);
+            $('#entree-render').append(html);
+
+            //render drinks
+            html = templateChoice(restaurant.menu.drinks);
+            $('#drink-render').append(html);
+
+            //render sides
+            templateChoice(restaurant.menu.sides);
+            $('#side-render').append(html);
+        });
+    });
+}
+
+function testSelectItem(){
+    // TODO remove after test
+    initSelectItem("000001-a");
 }
 
 // loads correct section
@@ -74,7 +129,7 @@ function logout(){
             localStorage.removeItem("exp_userid");
         }        
     }
-    index.href = index.html;
+    getpage("login_screen");
 }
 
 function login(){
