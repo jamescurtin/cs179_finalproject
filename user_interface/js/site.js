@@ -3,8 +3,8 @@
  * 
  */
 
-(window.onload = function (){   
-    console.log(1);
+(window.onload = function (){ 
+    getpage('login_screen');
 });
 
 //shows hidden element by id
@@ -46,5 +46,13 @@ function initHome(){
 
             console.log(selectedVal);
         });
+    });
+}
+
+// loads correct section
+function getpage (id) {
+    var url = 'pages/' + id + '.html #section';
+    console.log(url);
+    $("#section").load(url,function(){
     });
 }
