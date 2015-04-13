@@ -1,10 +1,12 @@
 /**
  * Validation.js
- * Enrique Meneses
  * 
  */
  
 // form validation
+
+
+page = {"register-form":"credit_card", }
 function val(id){
     var form_id = id
     var values = document.getElementById(form_id).querySelectorAll('input, select');
@@ -25,9 +27,7 @@ function val(id){
 	    }
     }
     if (input_check){
-	    //DO SOMETHING BASED on id[0]
-        if(id == "register-form"){
-            getpage("credit_card");
-        }
+	    //get page
+        getpage(page[form_id]);
     }
 }
