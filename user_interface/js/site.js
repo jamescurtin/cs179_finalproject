@@ -150,7 +150,8 @@ function selectitemform(theForm){
     var drink_cost = theForm.drink_size;
     var subtotal = entree_cost + side_cost + drink_cost;
     var tax = subtotal * 0.0625;
-    
+    console.log(entree);
+    console.log("!!!!!");
     var items = {
 }
     }
