@@ -8,8 +8,8 @@ window.onload = function (){
     // local storage
     userid = null;
     if(typeof(Storage) !== "undefined") {
-        if (localStorage.exp_userid) {
-            userid = localStorage.getItem("exp_userid");
+        if (localStorage.userid) {
+            userid = localStorage.getItem("userid");
             getpage('home_screen');
         }  
         else{
@@ -125,8 +125,8 @@ function checkpassword(){
 function logout(){
     userid = null;
     if(typeof(Storage) !== "undefined") {
-        if (localStorage.exp_userid) {
-            localStorage.removeItem("exp_userid");
+        if (localStorage.userid) {
+            localStorage.removeItem("userid");
         }        
     }
     getpage("login_screen");
@@ -135,9 +135,7 @@ function logout(){
 function login(){
     userid = 1;
     if(typeof(Storage) !== "undefined") {
-        if (localStorage.exp_userid) {
-            localStorage.setItem("exp_userid", 1);
-        }        
+        localStorage.setItem("userid", 1);
     }
 }
 
