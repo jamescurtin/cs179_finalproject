@@ -4,11 +4,17 @@
  */
  
 // form validation
+// page to get
 var page = {"register-form":"credit_card",
            "creditcard-form":"welcome",
            "login-form":"home_screen",
+            "select_item-form":"",
            }
+// function to execute
+var fx = {"login-form": login,
+}
 
+// validation function
 function val(id){
     var form_id = id
     var values = document.getElementById(form_id).querySelectorAll('input, select');
@@ -31,5 +37,7 @@ function val(id){
     if (input_check){
 	    //get page
         getpage(page[form_id]);
+        // callback
+        fx[form_id]();
     }
 }
