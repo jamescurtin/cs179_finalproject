@@ -5,13 +5,19 @@
 
 var userid = null;
 window.onload = function (){ 
-    getpage('login_screen');
     // local storage
     userid = null;
     if(typeof(Storage) !== "undefined") {
         if (localStorage.exp_userid) {
             userid = localStorage.getItem("exp_userid");
-        }        
+            getpage('home_screen');
+        }  
+        else{
+            getpage('login_screen');
+        }
+    }
+    else{
+        getpage('login_screen');
     }
 }
 
@@ -74,14 +80,12 @@ function logout(){
             localStorage.removeItem("exp_userid");
         }        
     }
-    index.href = index.html;
+    getpage("login_screen");
 }
 
 function login(){
     userid = 1;
     if(typeof(Storage) !== "undefined") {
-        if (localStorage.exp_userid) {
-            localStorage.setItem("exp_userid", 1);
-        }        
-    }
+        localStorage.setItem("exp_userid", 1);
+    }        
 }
