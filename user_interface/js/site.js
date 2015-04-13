@@ -77,18 +77,18 @@ function initSelectItem(restaurantID){
             var restaurant = r.getRestaurant(restaurantID);
             
             //render entrees
-            console.log(restaurant.menu.entrees);
             html = templateChoice(restaurant.menu.entrees);
-            console.log(html);
-            $('#entree-render').append(html);
+            $('#entree-render').after(html);
 
             //render drinks
             html = templateChoice(restaurant.menu.drinks);
-            $('#drink-render').append(html);
+            console.log(restaurant.menu.drinks);
+            $('#drink-render').after(html);
 
             //render sides
             templateChoice(restaurant.menu.sides);
-            $('#side-render').append(html);
+            console.log(restaurant.menu.sides);
+            $('#side-render').after(html);
         });
     });
 }

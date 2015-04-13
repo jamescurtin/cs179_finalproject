@@ -196,10 +196,10 @@
         {{#each this}}
             {{#if this.prices}}
                 {{! Has size }}
-                <option value="{{this.name}}">{{this.name}} - varies by size</option>
+                <option value="{{this.name}}" data-gen="1">{{this.name}} - varies by size</option>
             {{else}}
                 {{! No size, display price }}
-                <option value="{{this.name}}">{{this.name}} - ${{this.price}}</option>
+                <option value="{{this.name}}" data-gen="1">{{this.name}} - ${{this.price}}</option>
             {{/if}}
         {{/each}}
     </script>
@@ -218,11 +218,10 @@
                     <form name="select_item" id="select_item" novalidate>
                         <div class="row control-group">
                             <div class="form-group col-xs-12">
-                                <select id="entree" class="form-control" onchange="getsize(this.value, this.id)" required data-validation-required-message="Required.">
-                                    <option value="">Select Entree</option>
+                                <select id="entree" class="form-control" required data-validation-required-message="Required.">
+                                    <option value="" id="entree-render">Select Entree</option>
 
                                     {{! Render Item choice template here}}
-                                    <span id="entree-render"></span>
 
                                     <option value="None">None</option>
                                 </select>
@@ -234,11 +233,10 @@
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12">
-                                <select id="side" class="form-control" onchange="getsize(this.value, this.id)" required data-validation-required-message="Required.">
-                                    <option value="">Select Side</option>
+                                <select id="side" class="form-control" required data-validation-required-message="Required.">
+                                    <option value="" id="side-render">Select Side</option>
                                     
                                     {{! Render Item choice template here}}
-                                    <span id="side-render"></span>
 
                                     <option value="None">None</option>
                                 </select>
@@ -250,11 +248,10 @@
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12">
-                                <select id="drink" class="form-control" onchange="getsize(this.value, this.id)" required data-validation-required-message="Required.">
-                                    <option value="">Select Drink</option>
+                                <select id="drink" class="form-control" required data-validation-required-message="Required.">
+                                    <option value="" id="drink-render">Select Drink</option>
 
                                     {{! Render Item choice template here}}
-                                    <span id="drink-render"></span>
 
                                     <option value="None">None</option>
                                 </select>
