@@ -50,10 +50,13 @@
     </nav>
     
     <!--Section Goes Here -->
-    <!-- About Section -->
     <section class="success" id="section">
-    
     </section>
+
+    <!--Handlebars Render Zone -->
+    <section id="render">
+    </section>
+
     <!-- Footer -->
     <footer class="text-center">
         <div class="footer-above">
@@ -99,12 +102,94 @@
             var template = Handlebars.compile(source);
             var context = {title: "My New Post", body: "This is my first post!"};
             var html    = template(context);
-            $('.success').append(html);
+            $('body').append(html);
             console.log('template load');
         });
     </script>
 
     <!-- END handlebars test-->
+
+
+    <!-- LUNCH EXPRESS Handlebars templates -->
+    <script id="checkout-template" type="text/x-handlebars-template">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <h3>Check Out</h3>
+                    <hr class="star-light">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-8 col-xs-offset-2 text-center">
+                    <table style="width: 100%">
+                        {{#each items}}
+                            <tr>
+                                <td class="text-left" style="margin: 15px;">{{name}}:</td>
+                                <td class="text-right">{{price}}</td>
+                            </tr>
+                        {{/each}}
+                        <tr style="height: 15px;"></tr>
+                        <tr>
+                            <td class="text-left">Premium Rate ({{rate}}%):</td>
+                            <td class="text-right">{{premium_paid}}</td>
+                        </tr>
+                        <tr style="height: 15px;"></tr>
+                        <tr>
+                            <td class="text-left">Sub Total:</td>
+                            <td class="text-right">{{subtotal}}</td>
+                        </tr>
+                        <tr style="height: 15px;"></tr>
+                        <tr>
+                            <td class="text-left">Tax:</td>
+                            <td class="text-right">{{tax_paid}}</td>
+                        </tr>
+                        <tr style="height: 15px;"></tr>
+                        <tr>
+                            <td class="text-left">Tip:</td>
+                            <td class="text-right" style="z-axis: 999999;overflow: scroll">
+                                <select style="color: black;">
+                                    <option value=10>10%</option>
+                                    <option value=15>15%</option>
+                                    <option value=20>20%</option>
+                                    <option value=0>No Tip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                        <td><hr></td><td><hr></td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">Total:</td>
+                            <td class="text-right">{{total_paid}}</td>
+                        </tr>
+                    </table>
+                </div>
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <a onclick="getpage('select_item');"><button type="button" class="btn btn-lg btn-outline ">Go Back</button>&nbsp;</a>
+                    <a onclick="getpage('thank_you');"><button type="button" class="btn btn-lg btn-outline ">Place Order</button></a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <br>
+                    <small>You have 2m 59s left to place your order*</small>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script>
+        $(function(){
+            var source   = $("#checkout-template").html();
+            var template = Handlebars.compile(source);
+            // TODO - context is the object to pass into the template for checkout
+            var context = {};
+            var html    = template(context);
+            $('body').append(html);
+            console.log('template load');
+        });
+    </script>
 
 </body>
 </html>
