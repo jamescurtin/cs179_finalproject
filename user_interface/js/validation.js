@@ -6,7 +6,9 @@
 // form validation
 
 
-page = {"register-form":"credit_card", }
+var page = {"register-form":"credit_card",
+           "creditcard-form":"welcome",
+           }
 function val(id){
     var form_id = id
     var values = document.getElementById(form_id).querySelectorAll('input, select');
