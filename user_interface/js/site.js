@@ -80,13 +80,15 @@ function initSelectItem(restaurantID){
             console.log(restaurant.menu.entrees);
             html = templateChoice(restaurant.menu.entrees);
             console.log(html);
-            $('#entree-render').after(html);
+            $('#entree-render').append(html);
 
             //render drinks
-            templateChoice(restaurant.menu.drinks);
+            html = templateChoice(restaurant.menu.drinks);
+            $('#drink-render').append(html);
 
             //render sides
             templateChoice(restaurant.menu.sides);
+            $('#side-render').append(html);
         });
     });
 }

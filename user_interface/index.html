@@ -176,23 +176,22 @@
 
     <script id="item-size-template" type="text/x-handlebars-template">
         <div class="form-group col-xs-12">
-            {{#each size}}
+            {{#each this}}
                 {{! TODO size as full word needed in text}}
-                <label style="margin-right: 20px;" ><input type="radio" id="entree-size" name="entree-size" value={{@key}}>&nbsp;{{@key}} {{this}}</label>
+                <label style="margin-right: 20px;" ><input type="radio" id="entree-size" name="entree-size" value={{@key}}>&nbsp;{{@key}} ${{this}}</label>
             {{/each}}
             <p class="help-block"></p>
         </div>
     </script>
 
     <script id="item-choice-template" type="text/x-handlebars-template">
-        {{#each entrees}}
-            <p>{{this}}</p>
+        {{#each this}}
             {{#if this.prices}}
                 {{! Has size }}
                 <option value="{{this.name}}">{{this.name}} - varies by size</option>
             {{else}}
                 {{! No size, display price }}
-                <option value="{{this.name}}">{{this.name}} - {{this.price}}</option>
+                <option value="{{this.name}}">{{this.name}} - ${{this.price}}</option>
             {{/if}}
         {{/each}}
     </script>
@@ -212,9 +211,10 @@
                         <div class="row control-group">
                             <div class="form-group col-xs-12">
                                 <select id="entree" class="form-control" onchange="getsize(this.value, this.id)" required data-validation-required-message="Required.">
-                                    <option value="" id="entree-render">Select Entree</option>
+                                    <option value="">Select Entree</option>
 
                                     {{! Render Item choice template here}}
+                                    <span id="entree-render"></span>
 
                                     <option value="None">None</option>
                                 </select>
@@ -230,7 +230,7 @@
                                     <option value="">Select Side</option>
                                     
                                     {{! Render Item choice template here}}
-                                    <div id="side-render"></div>
+                                    <span id="side-render"></span>
 
                                     <option value="None">None</option>
                                 </select>
@@ -246,7 +246,7 @@
                                     <option value="">Select Drink</option>
 
                                     {{! Render Item choice template here}}
-                                    <div id="drink-render"></div>
+                                    <span id="drink-render"></span>
 
                                     <option value="None">None</option>
                                 </select>
