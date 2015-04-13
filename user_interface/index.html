@@ -66,9 +66,10 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="js/lib/bootstrap.min.js"></script>
 
+    <script src="js/lib/handlebars-1.0.rc.2.js"></script>
+
     <!-- Plugin JavaScript -->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-    <script src="js/lib/classie.js"></script>
     <script src="js/lib/cbpAnimatedHeader.js"></script>
 
     <!-- Contact Form JavaScript -->
@@ -81,5 +82,29 @@
     <script src="js/LEDataModel.js"></script>
     <script src="js/site.js"></script>
     <script src="js/validation.js"></script>
+
+    <!-- START test sample handlebars TODO: delete once people are comfortable w. handlebars -->
+    <script id="entry-template" type="text/x-handlebars-template">
+      <div class="entry">
+        <h1>{{title}}</h1>
+        <div class="body">
+          {{body}}
+        </div>
+      </div>
+    </script>
+
+    <script>
+        $(function(){
+            var source   = $("#entry-template").html();
+            var template = Handlebars.compile(source);
+            var context = {title: "My New Post", body: "This is my first post!"};
+            var html    = template(context);
+            $('.success').append(html);
+            console.log('template load');
+        });
+    </script>
+
+    <!-- END handlebars test-->
+
 </body>
 </html>
