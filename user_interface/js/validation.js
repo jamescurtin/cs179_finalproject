@@ -11,7 +11,7 @@ var page = {"register-form":"credit_card",
             "select_item-form":"",
            }
 // function to execute
-var fx = {"login-form": login,
+var fx = {"login-form": login, "register-form": login, 
 }
 
 // validation function
