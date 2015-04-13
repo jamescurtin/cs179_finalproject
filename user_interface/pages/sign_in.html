@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- redirect to index.html -->
+    <meta http-equiv="refresh" content="0;/index.html">
+    <meta name="description" content="html for modals">
+    <title>login_screen.html</title>
+</head>
+    <section class="success" id="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <h3>Welcome!</h3>
+                    <hr class="star-light">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <form name="login" id="login-form" method="post" novalidate>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12">
+                                <input id="username" class="form-control" placeholder="User Name" onchange="getsize(this.value, this.id)" required data-validation-required-message="Required.">
+                                <p class="help-block" id="username-alert"></p>
+                                <input id="password" class="form-control" placeholder="Password" onchange="getsize(this.value, this.id)" required data-validation-required-message="Required.">
+                                <p class="help-block" id="password-alert"></p>
+                            </div>
+                        </div>
+                        <br>
+                        <div id="success"></div>
+                        <div class="row">
+                            <div class="form-group col-xs-12 text-center">
+                                <button type="button" onclick="val('login-form');" class="btn btn-lg btn-outline ">Continue</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section> 
+</body>
+</html>
