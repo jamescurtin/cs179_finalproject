@@ -35,8 +35,12 @@ function val(id){
     }
     if (input_check){
 	    //get page
-        getpage(page[form_id]);
+        if(page[form_id] != undefined){
+            getpage(page[form_id]);
+        }
         // callback
-        fx[form_id]();
+        if(fx[form_id] != undefined){
+            fx[form_id]();
+        }
     }
 }
