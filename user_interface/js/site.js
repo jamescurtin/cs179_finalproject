@@ -49,6 +49,53 @@ function initHome(){
     });
 }
 
+// call this to initialize for the select item screen
+function initSelectItem(restaurantID){
+    $(function(){
+        var r = window.LE.restaurants;
+
+        // prepare select-item-template
+        var source   = $("#select-item-template").html();
+        var templateSelect = Handlebars.compile(source);
+
+        // prepare item-choice-template
+        source = $("#item-choice-template").html();
+        templateChoice = Handlebars.compile(source);
+
+        // prepare item-choice-template
+        source = $("#item-size-template").html();
+        templateSize = Handlebars.compile(source);
+
+        // TODO - context is the object to pass into the template for checkout
+        var context = {};
+        var html    = templateSelect(context);
+        $('#render').append(html);
+
+        // synchronization structure.
+        // wait for restaurants data to be loaded from JSON
+        $.when(window.LE.loadingRestaurants).done(function(){
+            var restaurant = r.getRestaurant(restaurantID);
+            
+            //render entrees
+            console.log(restaurant.menu.entrees);
+            html = templateChoice(restaurant.menu.entrees);
+            console.log(html);
+            $('#entree-render').after(html);
+
+            //render drinks
+            templateChoice(restaurant.menu.drinks);
+
+            //render sides
+            templateChoice(restaurant.menu.sides);
+        });
+    });
+}
+
+function testSelectItem(){
+    // TODO remove after test
+    initSelectItem("000001-a");
+}
+
 // loads correct section
 function getpage (id) {
     var url = 'pages/' + id + '.html #section';

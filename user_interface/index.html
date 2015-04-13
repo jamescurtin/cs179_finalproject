@@ -73,11 +73,6 @@
 
     <!-- Plugin JavaScript -->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-    <script src="js/lib/cbpAnimatedHeader.js"></script>
-
-    <!-- Contact Form JavaScript -->
-    <script src="js/lib/jqBootstrapValidation.js"></script>
-    <script src="js/contact_me.js"></script>
 
     <!-- Custom Theme JavaScript -->
     <script src="js/freelancer.js"></script>
@@ -179,16 +174,111 @@
         </div>
     </script>
 
+    <script id="item-size-template" type="text/x-handlebars-template">
+        <div class="form-group col-xs-12">
+            {{#each size}}
+                {{! TODO size as full word needed in text}}
+                <label style="margin-right: 20px;" ><input type="radio" id="entree-size" name="entree-size" value={{@key}}>&nbsp;{{@key}} {{this}}</label>
+            {{/each}}
+            <p class="help-block"></p>
+        </div>
+    </script>
+
+    <script id="item-choice-template" type="text/x-handlebars-template">
+        {{#each entrees}}
+            <p>{{this}}</p>
+            {{#if this.prices}}
+                {{! Has size }}
+                <option value="{{this.name}}">{{this.name}} - varies by size</option>
+            {{else}}
+                {{! No size, display price }}
+                <option value="{{this.name}}">{{this.name}} - {{this.price}}</option>
+            {{/if}}
+        {{/each}}
+    </script>
+
+
+     <script id="select-item-template" type="text/x-handlebars-template">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <h3>Select Items</h3>
+                    <hr class="star-light">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <form name="select_item" id="select_item" novalidate>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12">
+                                <select id="entree" class="form-control" onchange="getsize(this.value, this.id)" required data-validation-required-message="Required.">
+                                    <option value="" id="entree-render">Select Entree</option>
+
+                                    {{! Render Item choice template here}}
+
+                                    <option value="None">None</option>
+                                </select>
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+                        <div id="select-entree-size" class="row control-group hidden">
+                            {{! partial template needed for generating this}}
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12">
+                                <select id="side" class="form-control" onchange="getsize(this.value, this.id)" required data-validation-required-message="Required.">
+                                    <option value="">Select Side</option>
+                                    
+                                    {{! Render Item choice template here}}
+                                    <div id="side-render"></div>
+
+                                    <option value="None">None</option>
+                                </select>
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+                        <div id="select-side-size" class="row control-group hidden">
+                           {{! Render Item size template here}}
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12">
+                                <select id="drink" class="form-control" onchange="getsize(this.value, this.id)" required data-validation-required-message="Required.">
+                                    <option value="">Select Drink</option>
+
+                                    {{! Render Item choice template here}}
+                                    <div id="drink-render"></div>
+
+                                    <option value="None">None</option>
+                                </select>
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+                        <div id="select-drink-size" class="row control-group hidden">
+                            {{! Render Item size template here}}
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12">
+                                <label for="notes">Special Notes:</label>
+                                <textarea class="form-control" rows="4" cols="50" id="notes" placeholder="ex: no cheese" required data-validation-required-message="Required."></textarea>
+                            </div>
+                        </div>
+                        
+                        <br>
+                        <div id="success"></div>
+                        <div class="row">
+                            <div class="form-group col-xs-12 text-center">
+                                <a onclick="getpage('home_screen');"><button type="button" class="btn btn-lg btn-outline ">Go Back</button>&nbsp;</a>
+                                <a onclick="getpage('check_out');"><button type="button" class="btn btn-lg btn-outline ">Continue</button></a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </script>
+
     <script>
-        $(function(){
-            var source   = $("#checkout-template").html();
-            var template = Handlebars.compile(source);
-            // TODO - context is the object to pass into the template for checkout
-            var context = {};
-            var html    = template(context);
-            $('body').append(html);
-            console.log('template load');
-        });
+        testSelectItem();
     </script>
 
 </body>
