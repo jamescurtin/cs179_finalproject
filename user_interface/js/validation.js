@@ -6,6 +6,7 @@
 // form validation
 var page = {"register-form":"credit_card",
            "creditcard-form":"welcome",
+           "login-form":"home_screen",
            }
 
 function val(id){
