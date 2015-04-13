@@ -46,7 +46,6 @@ function initHome(){
             if (document.getElementById('inputBox').innerHTML !== undefined ) {
                 document.getElementById('inputBox').innerHTML = homeScreen.placeholderText[selectedVal];
             }
-
             console.log(selectedVal);
         });
     });
