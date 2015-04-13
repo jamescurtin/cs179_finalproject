@@ -142,14 +142,14 @@ function login(){
 }
 
 function selectitemform(theForm){
-    var entree = theForm.entree;
-    var entree_cost = theForm.entree_size;
-    var side = theForm.side;
-    var side_cost = theForm.side_size;
-    var drink = theForm.drink;
-    var drink_cost = theForm.drink_size;
+    var entree = theForm.entree.options.selectedIndex;
+    /*var entree_cost = theForm.entree_size.value;
+    var side = theForm.side.value;
+    var side_cost = theForm.side_size.value;
+    var drink = theForm.drink.value;
+    var drink_cost = theForm.drink_size.value;
     var subtotal = entree_cost + side_cost + drink_cost;
-    var tax = subtotal * 0.0625;
+    var tax = (subtotal * 0.0625);*/
     console.log(entree);
     console.log("!!!!!");
     var items = {
