@@ -19,14 +19,15 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <form name="register" id="register" method="post" novalidate>
+                    <form name="register-form" id="register-form" method="post" novalidate>
                         <div class="row control-group">
                             <div class="form-group col-xs-12">
-                                <input id="first_name" class="form-control" value="First Name" onchange="getsize(this.value, this.id)" required data-validation-required-message="Required.">
-                                <p class="help-block"></p>
-                                <input id="last_name" class="form-control" value="Last Name" onchange="getsize(this.value, this.id)" required data-validation-required-message="Required.">
-                                <p class="help-block"></p>
-                                <input id="email_address" class="form-control" value="Email Address" onchange="getsize(this.value, this.id)" required data-validation-required-message="Required.">
+                                <input id="first_name" class="form-control" placeholder="First Name" onchange="getsize(this.value, this.id)" required data-validation-required-message="Required.">
+                                <p class="help-block text-danger" id="first_name-alert"></p>
+                                <input id="last_name" class="form-control" placeholder="Last Name" onchange="getsize(this.value, this.id)" required data-validation-required-message="Required.">
+                                <p class="help-block text-danger" id="last_name-alert"></p>
+                                <input id="email_address" class="form-control"  placeholder="Email Address" onchange="getsize(this.value, this.id)" required data-validation-required-message="Required.">
+                                <p class="help-block text-danger" id="email_address-alert"></p>
                             </div>
                         </div>
                         <br>
@@ -34,7 +35,7 @@
                         <div class="row">
                             <div class="form-group col-xs-12 text-center">
                                 <a onclick="getpage('login_screen');"><button type="button" class="btn btn-lg btn-outline ">Back</button></a>
-                                <a onclick="getpage('credit_card');"><button type="button" value="submit" class="btn btn-lg btn-outline ">Continue</button></a>
+                                <button type="button"  onclick="val('register-form');" class="btn btn-lg btn-outline ">Continue</button>
                             </div>
                         </div>
                     </form>

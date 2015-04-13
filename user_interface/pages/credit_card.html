@@ -19,7 +19,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <form id="register" method="post" name="register" novalidate="">
+                    <form id="register-form" method="post" name="register" novalidate="">
                         <div class="row control-group">
                             <div class="form-group col-xs-12">
                                 <input class="form-control" data-validation-required-message=
@@ -27,25 +27,27 @@
                                 "getsize(this.value, this.id)" required="" placeholder=
                                 "Credit Card Number">
 
-                                <p class="help-block">
+                                <p class="help-block text-danger" id="card_number-alert">
                                 </p>
                                 <input class="form-control" data-validation-required-message=
                                 "Required*" id="card_name" onchange=
                                 "getsize(this.value, this.id)" required=""  placeholder=
                                 "Name on Card">
-
-                                <p class="help-block">
+                                <p class="help-block text-danger" id="card_name-alert">
                                 </p>
                                 <input class="form-control" data-validation-required-message=
                                 "Required*" id="billing_address" onchange=
                                 "getsize(this.value, this.id)" required="" placeholder=
                                 "Billing Address">
 
-                                <p class="help-block">
+                                <p class="help-block text-danger" id="billing_address-alert">
                                 </p>
                                 <input class="form-control" data-validation-required-message=
                                 "Required*" id="cvv_code" onchange=
                                 "getsize(this.value, this.id)" required=""  placeholder="CVV Code">
+                                <p class="help-block text-danger" id="cvv_code-alert">
+                                </p>
+                                
                             </div>
                         </div>
                         <br>

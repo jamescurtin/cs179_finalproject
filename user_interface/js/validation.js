@@ -6,9 +6,7 @@
  
 // form validation
 function val(id){
-	id = id.split("-");
-	document.getElementById(id.join("-")).disabled = true;
-    var form_id = id[0] + "-form";
+    var form_id = id
     var values = document.getElementById(form_id).querySelectorAll('input, select');
     var formdata = {};
     // boolean check
@@ -21,12 +19,13 @@ function val(id){
 	        if (input.value == "" || input.value == null){
 	            input_check = false;
 	            var alert_id = input.getAttribute("id") + "-alert";
+                console.log(alert_id);
 	            document.getElementById(alert_id).innerHTML = isrequired;
 	        }
 	    }
     }
     if (input_check){
 	    //DO SOMETHING BASED on id[0]
-
+        alert("all fields");
     }
 }
