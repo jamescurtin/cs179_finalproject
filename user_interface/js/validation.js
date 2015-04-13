@@ -11,8 +11,7 @@ var page = {"register-form":"credit_card",
             "select_item-form":"check_out"
            }
 // function to execute
-var fx = {"login-form": login, "register-form": login, 
-}
+var fx = {"login-form": login, "register-form": login}
 
 // validation function
 function val(id){
@@ -36,8 +35,12 @@ function val(id){
     }
     if (input_check){
 	    //get page
-        getpage(page[form_id]);
+        if(page[form_id] != undefined){
+            getpage(page[form_id]);
+        }
         // callback
-        fx[form_id]();
+        if(fx[form_id] != undefined){
+            fx[form_id]();
+        }
     }
 }
