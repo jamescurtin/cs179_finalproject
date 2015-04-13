@@ -28,6 +28,10 @@
                                 <p class="help-block" id="last_name-alert"></p>
                                 <input id="email_address" class="form-control"  placeholder="Email Address" onchange="getsize(this.value, this.id)" required data-validation-required-message="Required.">
                                 <p class="help-block" id="email_address-alert"></p>
+                                <input id="password" class="form-control"  placeholder="Enter a password" required data-validation-required-message="Required.">
+                                <p class="help-block" id="password-alert"></p>
+                                <input id="confirm_password" class="form-control"  placeholder="Confirm the password" required data-validation-required-message="Required.">
+                                <p class="help-block" id="confirm_password-alert"></p>
                             </div>
                         </div>
                         <br>
@@ -35,7 +39,7 @@
                         <div class="row">
                             <div class="form-group col-xs-12 text-center">
                                 <button type="button" onclick="getpage('login_screen');" class="btn btn-lg btn-outline ">Back</button>
-                                <button type="button"  onclick="val('register-form');" class="btn btn-lg btn-outline ">Continue</button>
+                                <button type="button"  onclick="checkpassword();" class="btn btn-lg btn-outline ">Continue</button>
                             </div>
                         </div>
                     </form>

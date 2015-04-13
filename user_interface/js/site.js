@@ -58,12 +58,12 @@ function getpage (id) {
 }
 
 function checkpassword(){
-    var password = document.getElementById("password");
-    var cpassword =  document.getElementById("confirm_password");
-    if(password = cpassword){
-        return true;
+    var password = document.getElementById("password").value;
+    var cpassword =  document.getElementById("confirm_password").value;
+    if(password == cpassword){
+        val('register-form');
     }
     else{
-        return false;
+        alert('The passwords do not match. Try again');
     }
 }
