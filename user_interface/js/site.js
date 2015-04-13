@@ -3,7 +3,8 @@
  * 
  */
 
-(window.onload = function (){   
+(window.onload = function (){ 
+    getpage('login_screen');
 });
 
 //shows hidden element by id
