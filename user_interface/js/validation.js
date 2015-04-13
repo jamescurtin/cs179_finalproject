@@ -4,11 +4,15 @@
  */
  
 // form validation
+<<<<<<< Updated upstream
 
 
 var page = {"register-form":"credit_card",
            "creditcard-form":"welcome",
            }
+=======
+var page = {"register-form":"credit_card", }
+>>>>>>> Stashed changes
 function val(id){
     var form_id = id
     var values = document.getElementById(form_id).querySelectorAll('input, select');

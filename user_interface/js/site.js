@@ -56,3 +56,14 @@ function getpage (id) {
     $("#section").load(url,function(){
     });
 }
+
+function checkpassword(){
+    var password = document.getElementById("password");
+    var cpassword =  document.getElementById("confirm_password");
+    if(password = cpassword){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
