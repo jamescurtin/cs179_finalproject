@@ -196,10 +196,10 @@
         {{#each this}}
             {{#if this.prices}}
                 {{! Has size }}
-                <option value="{{this.name}}" data-gen="1">{{this.name}} - varies by size</option>
+                <option value="{{@index}}" data-gen="1">{{this.name}} - varies by size</option>
             {{else}}
                 {{! No size, display price }}
-                <option value="{{this.name}}" data-gen="1">{{this.name}} - ${{this.price}}</option>
+                <option value="{{@index}}" data-gen="1">{{this.name}} - ${{this.price}}</option>
             {{/if}}
         {{/each}}
     </script>

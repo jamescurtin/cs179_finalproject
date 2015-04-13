@@ -66,7 +66,7 @@ function initSelectItem(restaurantID){
         source = $("#item-size-template").html();
         templateSize = Handlebars.compile(source);
 
-        // TODO - context is the object to pass into the template for checkout
+        // TODO - context is the object to pass into the template
         var context = {};
         var html    = templateSelect(context);
         $('#render').append(html);
@@ -82,13 +82,47 @@ function initSelectItem(restaurantID){
 
             //render drinks
             html = templateChoice(restaurant.menu.drinks);
-            console.log(restaurant.menu.drinks);
             $('#drink-render').after(html);
 
             //render sides
-            templateChoice(restaurant.menu.sides);
-            console.log(restaurant.menu.sides);
+            html = templateChoice(restaurant.menu.sides);
             $('#side-render').after(html);
+        });
+
+        // setup handler for displaying the entree size option box
+        $('#entree').on('change', function(e){
+            var restaurant = r.getRestaurant(restaurantID);
+            var selectedEntree = restaurant.menu.entrees[this.value];
+            if('prices' in selectedEntree){
+                $('#select-entree-size').html(templateSize(selectedEntree.prices));
+                $('#select-entree-size').removeClass('hidden');
+            }else{
+                $('#select-entree-size').addClass('hidden');
+            }
+        });
+
+        // setup handler for displaying the drink size option box
+        $('#drink').on('change', function(e){
+            var restaurant = r.getRestaurant(restaurantID);
+            var selectedDrink = restaurant.menu.drinks[this.value];
+            if('prices' in selectedDrink){
+                $('#select-drink-size').html(templateSize(selectedDrink.prices));
+                $('#select-drink-size').removeClass('hidden');
+            }else{
+                $('#select-drink-size').addClass('hidden');
+            }
+        });
+
+        // setup handler for displaying the side size option box
+        $('#side').on('change', function(e){
+            var restaurant = r.getRestaurant(restaurantID);
+            var selectedSide = restaurant.menu.sides[this.value];
+            if('prices' in selectedSide){
+                $('#select-side-size').html(templateSize(selectedSide.prices));
+                $('#select-side-size').removeClass('hidden');
+            }else{
+                $('#select-side-size').addClass('hidden');
+            }
         });
     });
 }
