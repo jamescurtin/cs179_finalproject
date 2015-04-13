@@ -26,7 +26,7 @@
 
                         <div class="row control-group">
                             <div class="form-group col-xs-12">
-                                 <select id="restaurant" class="form-control" onchange="getsize(this.value, this.id)" required data-validation-required-message="Required.">
+                                 <select id="restaurant" class="form-control" onchange="getsize(this.value, this.id)" required data-validation-required-message="Required*">
                                     <option value="-1">Select a restaurant</option>
                                     <option value="0">Pinocchios Pizza</option>
                                     <option value="1">Al's Sandwiches</option>
@@ -34,7 +34,8 @@
                                     <option value="3">Central Chinese Kitchen</option>
                                     <option value="4">Crema Cafe</option>
                                     <option value="5">Au Bon Pain</option>
-                                </select><br>
+                                </select>
+                                <p id="id-alert" class="help-block text-danger"></p><br>
                                 <div class="text-center"><p id="inputBox"></p></div>
                                 <p class="help-block">
                                 </p>
@@ -61,8 +62,6 @@
                 </div>
             </div>
         </div>
-
-
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -80,6 +79,7 @@
                             </div>
                         </div>
                     </form>
+                    <p id="food-alert" class="help-block text-danger"></p>
                 </div>
             </div>
             <div class="row">

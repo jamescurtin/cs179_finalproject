@@ -43,12 +43,13 @@
                         <tr>
                             <td class="text-left">Tip:</td>
                             <td class="text-right" style="z-axis: 999999;overflow: scroll">
-                                <select style="color: black;">
+                                <select style="color: black;" id="tip" required data-validation-required-message="required*">
                                     <option value=10>10%</option>
                                     <option value=15>15%</option>
                                     <option value=20>20%</option>
                                     <option value=0>No Tip</option>
                                 </select>
+                                <p id="tip-alert" class="help-block text-danger"></p>
                             </td>
                         </tr>
                         <tr>
