@@ -3,9 +3,12 @@
  * 
  */
 
-(window.onload = function (){ 
+var userid = null;
+window.onload = function (){ 
     getpage('login_screen');
-});
+    // local storage
+    userid = null;
+};
 
 //shows hidden element by id
 function show(id){
@@ -52,9 +55,11 @@ function initHome(){
 // loads correct section
 function getpage (id) {
     var url = 'pages/' + id + '.html #section';
-    console.log(url);
-    $("#section").load(url,function(){
-    });
+    if(userid != null){
+        $("#section").load(url,function(){});
+    }
+    url = 'pages/login_screen.html #section';
+    $("#section").load(url,function(){});
 }
 
 function checkpassword(){
