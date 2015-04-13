@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- redirect to index.html -->
+    <meta http-equiv="refresh" content="0;/index.html">
+    <meta name="description" content="html for modals">
+    <meta name="author" content="A-Team">
+    <title>login.html</title>
+</head>
+<body>
+    <!--Section Goes Here -->
+    <section id="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="row">
+                        <span class="col-xs-12 text-center">
+                            <img src="../img/lunch_express/forkknife.jpeg"></img>
+                        </span>
+                    </div>
+                    <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
+                    <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
+                    <form name="login" id="loginForm" novalidate>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Username</label>
+                                <input type="text" class="form-control" placeholder="Username" id="name" required data-validation-required-message="Please enter your username.">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label>Password</label>
+                                <input type="password" class="form-control" placeholder="Password" id="password" required>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 controls">
+                                <label>Save Username</label>
+                                <input type="checkbox" aria-label="Save Username">
+                            </div>
+                        </div>
+                        <div id="success"></div>
+                        <div class="row">
+                            <div class="form-group col-xs-12 text-center">
+                                <button type="submit" class="btn btn-success btn-lg">Login</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <a href="register.html">Don't have an account? Register</a>
+                    <br/>
+                    <a href="forgot_password.html">Forgot Password</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>    
+</html>
