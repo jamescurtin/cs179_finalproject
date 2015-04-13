@@ -4,7 +4,6 @@
  */
 
 (window.onload = function (){   
-    console.log(1);
 });
 
 //shows hidden element by id
@@ -51,7 +50,8 @@ function initHome(){
 
 // loads correct section
 function getpage (id) {
-    var url = 'pages/' + id[0] + '.html #section';
+    var url = 'pages/' + id + '.html #section';
+    console.log(url);
     $("#section").load(url,function(){
     });
 }
