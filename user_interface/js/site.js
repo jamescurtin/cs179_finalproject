@@ -140,16 +140,71 @@ function login(){
 }
 
 function selectitemform(theForm){
-    var entree = theForm.entree.options.selectedIndex;
-    /*var entree_cost = theForm.entree_size.value;
-    var side = theForm.side.value;
-    var side_cost = theForm.side_size.value;
-    var drink = theForm.drink.value;
-    var drink_cost = theForm.drink_size.value;
+    var entree = 'meal';
+    var entree_cost = 1.00;
+    var side = 'side';
+    var side_cost = 1.00;
+    var drink = 'meal';
+    var drink_cost = 0.50;
     var subtotal = entree_cost + side_cost + drink_cost;
-    var tax = (subtotal * 0.0625);*/
-    console.log(entree);
-    console.log("!!!!!");
-    var items = {
-}
+    var rate = 2
+    var premium_paid = (subtotal * rate)
+    var tax = (subtotal * 0.0625);
+    var total = (subtotal + premium_paid + tax)
+    var items = {entree: entree,
+                 entree_cost: entree_cost,
+                 side: side,
+                 side_cost: side_cost,
+                 drink: drink,
+                 drink_cost: drink_cost,
+                 subtotal: subtotal,
+                 rate: rate,
+                 premium_paid: premium_paid,
+                 tax: tax,
+                 total: total
+                };
+    localStorage.setItem('items', JSON.stringify(items));
     }
+
+function initcheckout(){
+    $(function(){
+        var r = window.LE.restaurants;
+
+        // prepare select-item-template
+        var source   = $("#select-item-template").html();
+        var templateSelect = Handlebars.compile(source);
+
+        // prepare item-choice-template
+        source = $("#item-choice-template").html();
+        templateChoice = Handlebars.compile(source);
+
+        // prepare item-choice-template
+        source = $("#item-size-template").html();
+        templateSize = Handlebars.compile(source);
+
+        // TODO - context is the object to pass into the template for checkout
+        var context = {};
+        var html    = templateSelect(context);
+        $('#render').append(html);
+
+        // synchronization structure.
+        // wait for restaurants data to be loaded from JSON
+        $.when(window.LE.loadingRestaurants).done(function(){
+            var restaurant = r.getRestaurant(restaurantID);
+            
+            //render entrees
+            html = templateChoice(restaurant.menu.entrees);
+            $('#entree-render').after(html);
+
+            //render drinks
+            html = templateChoice(restaurant.menu.drinks);
+            console.log(restaurant.menu.drinks);
+            $('#drink-render').after(html);
+
+            //render sides
+            templateChoice(restaurant.menu.sides);
+            console.log(restaurant.menu.sides);
+            $('#side-render').after(html);
+        });
+    });
+}
