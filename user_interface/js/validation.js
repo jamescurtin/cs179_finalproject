@@ -26,6 +26,8 @@ function val(id){
     }
     if (input_check){
 	    //DO SOMETHING BASED on id[0]
-        alert("all fields");
+        if(id == "register-form"){
+            getpage("credit_card");
+        }
     }
 }
