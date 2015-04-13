@@ -49,26 +49,9 @@ function initHome(){
     });
 }
 
-
+// loads correct section
 function getpage (id) {
     var url = 'pages/' + id[0] + '.html #section';
-        $("#modal-body-test").load(url,function(){
-    		if(callback != undefined){
-			    // start test is trial
-			    if(cdata != undefined){callback(cdata);}
-			    else{callback();}
-			}
-			setTimeout(function(){
-				document.getElementById("page-top").setAttribute("class", "index modal-open");
-				document.getElementById("noscroll").setAttribute("class", "hidden");
-			}, 500);
-    	});
-        $('#portfolioModal-test').modal('show');
-        $("#portfolioModal-test").scroll();
-        $("#portfolioModal-test").animate({ scrollTop: 1}, 1);
-        if(hist === true){
-            user_history[user_history.length] = id.join("-");
-            user_history.length += 1;
-            user_position = user_history.length - 1;
-        }
-    }
+    $("#section").load(url,function(){
+    });
+}
