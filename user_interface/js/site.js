@@ -168,6 +168,7 @@ function initSelectItem(restaurantID){
         $('#select-item-continue-button').on('click', function(){
             var items = val('select_item-form');
             userdata.items = items;
+            getpage("check_out");
         });
     });
 }
@@ -193,10 +194,11 @@ function getpage (id, callback) {
     else{
         if(userid != null){
             if(id == "select_item"){initSelectItem(userdata.restaurant);}
+            // uncomment after initcheckout is fixed
+            //if(id == "check_out"){initcheckout(userdata.items);}
             else{
                 $("#getpage-section").load(url,function(){
                      if(id == "home_screen"){initHome();}
-                     else if (id == "check_out"){initcheckout(userdata.items);}
                      else{}
                      deferred.resolve();
                 });
