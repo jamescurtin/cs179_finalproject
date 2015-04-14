@@ -79,5 +79,32 @@
 		"wait_time": 7,
 		"time_saved": 20,
 		"name": "Crema Cafe"
+	},
+	"000001-d":{ 
+		"menu": {
+			"entrees": [
+				{"name": "Hamburger", "prices" : {"s": 4.99, "m": 5.99, "l": 6.99}},
+				{"name": "Salad", "price": 3.99}
+			],
+			"drinks":[
+				{"name": "bottled water", "price": 1.99}, 
+				{"name": "coke", "prices": {"s": 0.99, "m": 1.50, "l": 2.00}},
+				{"name": "pepsi", "prices": {"s": 0.99, "m": 1.50, "l": 2.00}}
+			],
+			"sides":[
+				{"name": "fries", "prices": {"s":1.00, "m":1.50, "l":1.99}}, 
+				{"name": "biscuits", "price": 2.00}
+			],
+			"desserts":[
+				{"name": "sundae", "price": 2.00}, 
+				{"name": "cone", "price": 1.00}
+			]
+		},
+		"geo": [], 
+		"distance": 0.7,
+		"rate": 1.0, 
+		"wait_time": 9,
+		"time_saved": 20,
+		"name": "Tasty Burger"
 	}
 }

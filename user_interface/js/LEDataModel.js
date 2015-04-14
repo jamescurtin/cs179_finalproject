@@ -25,6 +25,9 @@
     restaurants: {
       getRestaurant: getRestaurant
     },
-    loadingRestaurants: loadingRestaurants
+    loadingRestaurants: loadingRestaurants,
+    userData: {
+      currentRestaurant: null
+    }
   };
 })();

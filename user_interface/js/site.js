@@ -30,6 +30,8 @@ function initHome(){
         var homeScreen = window.LE.homeScreen;
         var getRestaurant = window.LE.restaurants.getRestaurant;
 
+        var isSearch;
+
         // when the restaurant changes, we need to display rate and other data
         $("#restaurant").on("change", function(){
             var inputBox = $("#inputBox");
@@ -47,10 +49,27 @@ function initHome(){
             }else{
                 inputBox.html("");
             }
+            isSearch = false;
+        });
+
+        // handler to process changes to the search bar for food
+        $('#food').on("input", function(){
+            var searchVal = $(this).val();
+
+            if(_debug){ console.log("search value: ", searchVal); }
+
+            //only is a search if there is content in the field
+            isSearch = (searchVal.length > 0);
         });
 
         $("#home-screen-continue-button").on("click", function(){
-            getpage('select_item');
+            if(isSearch){
+                if(_debug){ console.log("continue as search, next: select restaurant"); }
+                getpage('select_restaurant');
+            }else{
+                if(_debug){ console.log("continue as select restaurant, next: select items"); }
+                getpage('select_item');
+            }
         });
     });
 
