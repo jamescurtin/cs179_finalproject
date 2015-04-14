@@ -22,6 +22,11 @@ function val(id){
     // boolean check
     var input_check = true;
     var radio_names = {}
+
+    // TODO: i is global variable right now...
+    // let's get some comments in here?
+    // we have a problem with item size validation. 
+    // i'm selecting a size for all my 3 varies by size items and it's not being validated
     for (i = 0; i < values["length"]; i++){
         var input = values[i];
         var isrequired = values[i].getAttribute("data-validation-required-message");
