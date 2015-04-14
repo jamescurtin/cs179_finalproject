@@ -21,15 +21,16 @@ function val(id){
     var formdata = {};
     // boolean check
     var input_check = true;
-    var radio_names = {}
+    var radio_names = {};
+    var ischecked = 0;
     for (i = 0; i < values["length"]; i++){
         var input = values[i];
         var isrequired = values[i].getAttribute("data-validation-required-message");
         if(input.type == "radio"){
             radio_names[input.name] = 1;
             if(input.checked){
-                formdata[input.getAttribute("name")] = input.value; 
-                delete radio_names[input.name];
+                formdata[input.name] = input.value; 
+                ischecked += 1;
             }
         }
         else{formdata[input.getAttribute("id")] = input.value;}
@@ -42,8 +43,8 @@ function val(id){
 	    }
     }
     c = 0;
-    for (i in radio_names){ c+=1;}
-    if(c > 0){
+    for (i in radio_names){ c+= radio_names[i];}
+    if(c > ischecked){
         input_check = false;
         document.getElementById("sizes-alert").innerHTML = "Please select sizes for your item(s).";
     }
