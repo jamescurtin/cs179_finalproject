@@ -21,6 +21,9 @@ function hide(id){
 // call this function to initialize for home_screen.html
 function initHome(){
 
+    //set currentRestaurant storage
+    window.LE.userData.currentRestaurant = null;
+
     if(_debug){ console.log('initHome called'); }
 
     //prepare template that shows restaurant details
@@ -68,12 +71,20 @@ function initHome(){
                 if(_debug){ console.log("continue as search, next: select restaurant"); }
                 // GET RESULTS THEN GET PAGE!
                 getpage('select_restaurant');
+
+                // cleanup old event handlers before leaving home context
+                destroyHome();
             }
             else{
                 // this is the restaurant id to render later
                 var selectedVal = $("#restaurant").val();
                 localStorage.setItem('restaurant', selectedVal);
-                console.log(selectedVal);
+                
+                if(_debug){ console.log(selectedVal); }
+
+                // cleanup old event handlers before leaving home context
+                destroyHome();
+
                 initSelectItem(selectedVal);
                 // ease scroll to top of next view
                 $("html, body").animate({ scrollTop: 0 }, "slow");
@@ -92,6 +103,9 @@ function destroyHome(){
 function initSelectItem(restaurantID){
     $(function(){
         var r = window.LE.restaurants;
+
+        //set currentRestaurant storage
+        window.LE.userData.currentRestaurant = restaurantID;
 
         // prepare select-item-template
         var source   = $("#select-item-template").html();
@@ -167,10 +181,33 @@ function initSelectItem(restaurantID){
             }
         });
 
+        // handle going back 
+        $('#select-item-back-button').on('click', function(e){
+            initHome();
+        });
+
         $('#select-item-continue-button').on('click', function(e){
             var choiceIndex;
+            var items = {};
+
+            var entreeVal = $('#entree'),
+                drinkVal = $('#drink'),
+                sideVal = $('#side');
+
+            entreeVal
+
+            destroySelectItem();
+            initCheckout(items);
         });
     });
+}
+
+function destroySelectItem(){
+    $('#entree').off('change');
+    $('#drink').off('change');
+    $('#side').off('change');
+    $('#select-item-back-button').off('click');
+    $('#select-item-continue-button').off('click');
 }
 
 function testSelectItem(){
@@ -242,7 +279,7 @@ function login(){
     show("settings");
 }
 
-function selectitemform(theForm){
+function selectItemSubmit(items){
     var entree = 'meal';
     var entree_cost = 1.00;
     var side = 'side';
@@ -266,12 +303,14 @@ function selectitemform(theForm){
                  tax: tax,
                  total: total
                 };
-    localStorage.setItem('items', JSON.stringify(items));
-    }
 
-function initcheckout(){
+    return items;
+}
+
+function initCheckout(){
     $(function(){
         var r = window.LE.restaurants;
+        var restaurantID = window.LE.userData.currentRestaurant;
 
         // prepare select-item-template
         var source   = $("#select-item-template").html();
@@ -294,6 +333,8 @@ function initcheckout(){
         // wait for restaurants data to be loaded from JSON
         $.when(window.LE.loadingRestaurants).done(function(){
             var restaurant = r.getRestaurant(restaurantID);
+
+            console.log(restaurant);
             
             //render entrees
             html = templateChoice(restaurant.menu.entrees);
