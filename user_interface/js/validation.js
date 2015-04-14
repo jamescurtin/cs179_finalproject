@@ -11,7 +11,7 @@ var page = {"register-form":"credit_card",
            };
            
 // function to execute
-var fx = {"login-form": login, "register-form": login};
+var fx = {"login-form": login, "creditcard-form": login};
 
 // validation function
 function val(id){
@@ -57,6 +57,7 @@ function val(id){
         }
         else{
         }
+        if(id == "creditcard-form"){userdata.payment = formdata;}
         // return form data
         return formdata;
     }

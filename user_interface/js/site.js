@@ -7,7 +7,7 @@ var userid = null;
 
 var hasStorage = false;
 
-var userdata={"restaurant": null, "items": null, "info": null, "credit_card": null}
+var userdata={"restaurant": null, "items": null, "info": null, "payment": null}
 
 //shows hidden element by id
 function show(id){
@@ -186,7 +186,7 @@ function getpage (id, callback) {
     }
     var deferred = $.Deferred();
     var url = 'pages/' + id + '.html #section';
-    if (id == "sign_in" || id == "register" || id== "login_screen"){
+    if (id == "sign_in" || id == "register" || id== "login_screen" || id=="credit_card"){
         $("#getpage-section").load(url, function(){
             deferred.resolve();
         });
@@ -208,11 +208,12 @@ function getpage (id, callback) {
     return deferred;
 }
 
-function checkpassword(){
+function checkpassword(id){
     var password = document.getElementById("password").value;
     var cpassword =  document.getElementById("confirm_password").value;
     if(password == cpassword){
-        val('register-form');
+        var data = val(id);
+        if(id == "register-form"){ userdata.info = data;}
     }
     else{
         alert('The passwords do not match. Try again');
@@ -329,3 +330,7 @@ $(function (){
         hide("settings");
     }
 });
+
+function load_data(id){
+    
+}
