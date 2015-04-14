@@ -17,7 +17,7 @@ var fx = {"login-form": login, "register-form": login};
 // validation function
 function val(id){
     var form_id = id
-    var values = document.getElementById(form_id).querySelectorAll('input, select');
+    var values = document.getElementById(form_id).querySelectorAll('input, select, textarea');
     var formdata = {};
     // boolean check
     var input_check = true;
