@@ -182,9 +182,9 @@
 
     <script id="item-size-template" type="text/x-handlebars-template">
         <div class="form-group col-xs-12">
-            {{#each this}}
+            {{#each prices}}
                 {{! TODO size as full word needed in text}}
-                <label style="margin-right: 20px;" ><input type="radio" id="entree-size" name="entree-size" value={{@key}}>&nbsp;{{@key}} ${{this}}</label>
+                <label style="margin-right: 20px;" ><input type="radio" id="{{../type}}-size" name="{{../type}}-size" value={{@key}}>&nbsp;{{@key}} ${{this}}</label>
             {{/each}}
             <p class="help-block"></p>
         </div>
@@ -194,10 +194,10 @@
         {{#each this}}
             {{#if this.prices}}
                 {{! Has size }}
-                <option value="{{@index}}" data-gen="1">{{this.name}} - varies by size</option>
+                <option value="{{@index}}" data-gen="1" data-sizes=1>{{this.name}} - varies by size</option>
             {{else}}
                 {{! No size, display price }}
-                <option value="{{@index}}" data-gen="1">{{this.name}} - ${{this.price}}</option>
+                <option value="{{@index}}" data-gen="1" data-sizes=0>{{this.name}} - ${{this.price}}</option>
             {{/if}}
         {{/each}}
     </script>
@@ -270,7 +270,7 @@
                         <div id="success"></div>
                         <div class="row">
                             <div class="form-group col-xs-12 text-center">
-                                <a onclick="getpage('home_screen');"><button type="button" class="btn btn-lg btn-outline ">Go Back</button>&nbsp;</a>
+                                <a id="select-item-continue-button"><button type="button" class="btn btn-lg btn-outline ">Go Back</button>&nbsp;</a>
                                 <a onclick="getpage('check_out');"><button type="button" class="btn btn-lg btn-outline ">Continue</button></a>
                             </div>
                         </div>

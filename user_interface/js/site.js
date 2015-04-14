@@ -67,8 +67,16 @@ function initHome(){
                 if(_debug){ console.log("continue as search, next: select restaurant"); }
                 getpage('select_restaurant');
             }else{
+                // this is the restaurant id to render later
+                var selectedVal = $("#restaurant").val();
+
+                console.log(selectedVal);
+
                 if(_debug){ console.log("continue as select restaurant, next: select items"); }
-                getpage('select_item');
+                initSelectItem(selectedVal);
+
+                // ease scroll to top of next view
+                $("html, body").animate({ scrollTop: 0 }, "slow");
             }
         });
     });
@@ -100,7 +108,7 @@ function initSelectItem(restaurantID){
         // TODO - context is the object to pass into the template
         var context = {};
         var html    = templateSelect(context);
-        $('#render').append(html);
+        $('#getpage-section').html(html);
 
         // synchronization structure.
         // wait for restaurants data to be loaded from JSON
@@ -124,8 +132,9 @@ function initSelectItem(restaurantID){
         $('#entree').on('change', function(e){
             var restaurant = r.getRestaurant(restaurantID);
             var selectedEntree = restaurant.menu.entrees[this.value];
+            selectedEntree.type = 'entree';
             if('prices' in selectedEntree){
-                $('#select-entree-size').html(templateSize(selectedEntree.prices));
+                $('#select-entree-size').html(templateSize(selectedEntree));
                 $('#select-entree-size').removeClass('hidden');
             }else{
                 $('#select-entree-size').addClass('hidden');
@@ -136,8 +145,9 @@ function initSelectItem(restaurantID){
         $('#drink').on('change', function(e){
             var restaurant = r.getRestaurant(restaurantID);
             var selectedDrink = restaurant.menu.drinks[this.value];
+            selectedDrink.type = 'drink';
             if('prices' in selectedDrink){
-                $('#select-drink-size').html(templateSize(selectedDrink.prices));
+                $('#select-drink-size').html(templateSize(selectedDrink));
                 $('#select-drink-size').removeClass('hidden');
             }else{
                 $('#select-drink-size').addClass('hidden');
@@ -148,12 +158,17 @@ function initSelectItem(restaurantID){
         $('#side').on('change', function(e){
             var restaurant = r.getRestaurant(restaurantID);
             var selectedSide = restaurant.menu.sides[this.value];
+            selectedSide.type = 'side';
             if('prices' in selectedSide){
-                $('#select-side-size').html(templateSize(selectedSide.prices));
+                $('#select-side-size').html(templateSize(selectedSide));
                 $('#select-side-size').removeClass('hidden');
             }else{
                 $('#select-side-size').addClass('hidden');
             }
+        });
+
+        $('#select-item-continue-button').on('click', function(e){
+            var choiceIndex;
         });
     });
 }
