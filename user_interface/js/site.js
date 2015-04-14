@@ -4,22 +4,6 @@
  */
 
 var userid = null;
-window.onload = function (){ 
-    // local storage
-    userid = null;
-    if(typeof(Storage) !== "undefined") {
-        if (localStorage.userid) {
-            userid = localStorage.getItem("userid");
-            getpage('home_screen');
-        }  
-        else{
-            getpage('login_screen');
-        }
-    }
-    else{
-        getpage('login_screen');
-    }
-}
 
 //shows hidden element by id
 function show(id){
@@ -33,20 +17,36 @@ function hide(id){
 
 // call this function to initialize for home_screen.html
 function initHome(){
+    console.log('initHome called');
     $(function(){
         var homeScreen = window.LE.homeScreen;
 
-        $("#restaurant").on("change",function() {
-            var selection = document.getElementById("restaurant");
-            var inputBox = document.getElementById("inputBox");
+        console.log($('#restaurant').html());
+
+        // when the restaurant changes, we need to display rate and other data
+        $("#restaurant").on("change", function(){
+            var inputBox = $("#inputBox");
             
-            var selectedVal = $('#restaurant').find(':selected').text();
-            if (document.getElementById('inputBox').innerHTML !== undefined ) {
-                document.getElementById('inputBox').innerHTML = homeScreen.placeholderText[selectedVal];
+            var selectedVal = this.value();
+            if (inputBox.html() !== undefined ) {
+                inputBox.html(homeScreen.placeholderText[selectedVal]);
             }
             console.log(selectedVal);
         });
+
+        $("#home-screen-continue-button").on("click", function(){
+            getpage('select_item');
+        });
+
+        console.log("hi");
     });
+
+    console.log($('#restaurant').html());
+}
+
+// call this function to deinitialize handlers for home_screen.html
+function destroyHome(){
+    $('#restaurant').off('change');
 }
 
 // call this to initialize for the select item screen
@@ -133,16 +133,19 @@ function testSelectItem(){
 }
 
 // loads correct section
+// returns deferred for synchronization purposes
 function getpage (id) {
+    var deferred;
     var url = 'pages/' + id + '.html #section';
     if (id == "sign_in" || id == "register" || id== "login_screen"){
-         $("#section").load(url,function(){});
+         deferred = $("#section").load(url);
     }
     else{
         if(userid != null){
-            $("#section").load(url,function(){});
+            deferred = $("#section").load(url);
         }
     }
+    return deferred;
 }
 
 function checkpassword(){
@@ -236,9 +239,31 @@ function initcheckout(){
             $('#drink-render').after(html);
 
             //render sides
-            templateChoice(restaurant.menu.sides);
+            html = templateChoice(restaurant.menu.sides);
             console.log(restaurant.menu.sides);
             $('#side-render').after(html);
         });
     });
+}
+
+window.onload = function (){ 
+    // local storage
+    userid = null;
+    if(typeof(Storage) !== "undefined") {
+        if (localStorage.userid) {
+            userid = localStorage.getItem("userid");
+
+            // synchronize, wait for home_screen to be loaded, before calling its init func
+            $.when(getpage('home_screen')).done(function(){
+                console.log('home_screen getpage loaded');
+                initHome();
+            });
+        }  
+        else{
+            getpage('login_screen');
+        }
+    }
+    else{
+        getpage('login_screen');
+    }
 }

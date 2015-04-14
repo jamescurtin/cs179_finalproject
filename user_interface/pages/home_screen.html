@@ -26,14 +26,22 @@
 
                         <div class="row control-group">
                             <div class="form-group col-xs-12">
-                                 <select id="restaurant" class="form-control" onchange="getsize(this.value, this.id)" required data-validation-required-message="Required*">
-                                    <option value="-1">Select a restaurant</option>
-                                    <option value="0">Pinocchios Pizza</option>
-                                    <option value="1">Al's Sandwiches</option>
-                                    <option value="2">Corner Diner</option>
-                                    <option value="3">Central Chinese Kitchen</option>
-                                    <option value="4">Crema Cafe</option>
-                                    <option value="5">Au Bon Pain</option>
+                                 <select id="restaurant" class="form-control" required data-validation-required-message="Required*">
+                                    <option value="">
+                                        Select a restaurant
+                                    </option>
+
+                                    <option value="000001-a">
+                                        Pinocchios Pizza
+                                    </option>
+
+                                    <option value="000001-b">
+                                        Al's Sandwiches
+                                    </option>
+
+                                    <option value="000001-c">
+                                        Crema Cafe
+                                    </option>
                                 </select>
                                 <p id="id-alert" class="help-block text-danger"></p><br>
                                 <div class="text-center"><p id="inputBox"></p></div>
@@ -54,7 +62,7 @@
 
                         <div class="row control-group">
                             <div class="form-group col-xs-12">
-                                <input type="text" id="food" class="form-control" onchange="getsize(this.value, this.id)" required data-validation-required-message="Required.">
+                                <input type="text" id="food" class="form-control" required data-validation-required-message="Required.">
 
                                 <div class="text-center"><p id="foodInputBox"></p></div>
                                 <p class="help-block">
@@ -72,7 +80,7 @@
             </div>
             <div class="row">
                 <div class="form-group col-xs-12 text-center">
-                    <a onclick="getpage('select_item');">
+                    <a id="home-screen-continue-button">
                         <button class="btn btn-lg btn-outline" type=
                     "button">Continue</button>
                     </a>

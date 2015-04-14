@@ -23,7 +23,7 @@
 		"rate": 1.0, 
 		"wait_time": 4,
 		"time_saved": 20,
-		"name": "Als"
+		"name": "Pinocchio's Pizza"
 	},
 	"000001-b":{ 
 		"menu": {
@@ -49,7 +49,7 @@
 		"rate": 1.0, 
 		"wait_time": 4,
 		"time_saved": 20,
-		"name": "Als"
+		"name": "Al's Sandwiches"
 	},
 	"000001-c":{ 
 		"menu": {
@@ -75,6 +75,6 @@
 		"rate": 1.0, 
 		"wait_time": 4,
 		"time_saved": 20,
-		"name": "Als"
+		"name": "Crema Cafe"
 	}
 }
