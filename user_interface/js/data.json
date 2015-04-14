@@ -20,8 +20,9 @@
 			]
 		},
 		"geo": [], 
+		"distance": 0.9,
 		"rate": 1.0, 
-		"wait_time": 4,
+		"wait_time": 3,
 		"time_saved": 20,
 		"name": "Pinocchio's Pizza"
 	},
@@ -46,8 +47,9 @@
 			]
 		},
 		"geo": [], 
+		"distance": 0.5,
 		"rate": 1.0, 
-		"wait_time": 4,
+		"wait_time": 8,
 		"time_saved": 20,
 		"name": "Al's Sandwiches"
 	},
@@ -72,8 +74,9 @@
 			]
 		},
 		"geo": [], 
+		"distance": 1.0,
 		"rate": 1.0, 
-		"wait_time": 4,
+		"wait_time": 7,
 		"time_saved": 20,
 		"name": "Crema Cafe"
 	}

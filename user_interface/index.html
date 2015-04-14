@@ -50,7 +50,7 @@
     </nav>
     
     <!--Section Goes Here -->
-    <section class="success" id="section">
+    <section class="success" id="getpage-section">
     </section>
 
     <!--Handlebars Render Zone -->
@@ -106,6 +106,12 @@
 
 
     <!-- LUNCH EXPRESS Handlebars templates -->
+    <script id="restaurant-info-template" type="text/x-handlebars-template">
+        <div>
+            Rate: <b>{{rate}} x</b><br>Wait time: <b>{{wait_time}} min</b><br>Distance: <b>{{distance}} miles</b><br>
+        </div>
+    </script>
+
     <script id="checkout-template" type="text/x-handlebars-template">
         <div class="container">
             <div class="row">
