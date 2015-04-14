@@ -7,6 +7,7 @@ var _debug = true;
 
 var userid = null;
 
+var hasStorage = false;
 //shows hidden element by id
 function show(id){
     $( "#" + id ).removeClass("hidden");
@@ -65,16 +66,15 @@ function initHome(){
         $("#home-screen-continue-button").on("click", function(){
             if(isSearch){
                 if(_debug){ console.log("continue as search, next: select restaurant"); }
+                // GET RESULTS THEN GET PAGE!
                 getpage('select_restaurant');
-            }else{
+            }
+            else{
                 // this is the restaurant id to render later
                 var selectedVal = $("#restaurant").val();
-
+                localStorage.setItem('restaurant', selectedVal);
                 console.log(selectedVal);
-
-                if(_debug){ console.log("continue as select restaurant, next: select items"); }
                 initSelectItem(selectedVal);
-
                 // ease scroll to top of next view
                 $("html, body").animate({ scrollTop: 0 }, "slow");
             }
@@ -195,7 +195,12 @@ function getpage (id, callback) {
         if(userid != null){
              $("#getpage-section").load(url,function(){
                  if(id == "home_screen"){initHome();}
-                 else if(id == "select_item"){initSelectItem();}
+                 else if(id == "select_item"){
+                    if(hasStorage){
+                        initSelectItem(localStorage.getItem("restaurant"));    
+                    }
+                    else{initSelectItem();}
+                 }
                  else if (id == "check_out"){initcheckout();}
                  else{}
                  deferred.resolve();
@@ -218,7 +223,7 @@ function checkpassword(){
 
 function logout(){
     userid = null;
-    if(typeof(Storage) !== "undefined") {
+    if(hasStorage) {
         if (localStorage.userid) {
             localStorage.removeItem("userid");
         }        
@@ -230,7 +235,7 @@ function logout(){
 
 function login(){
     userid = 1;
-    if(typeof(Storage) !== "undefined") {
+    if(hasStorage) {
         localStorage.setItem("userid", 1);
     }
     show("home");
@@ -310,6 +315,7 @@ $(function (){
     userid = null;
     userdata = {};
     if(typeof(Storage) !== "undefined") {
+        hasStorage = true;
         if (localStorage.userid) {
             userid = localStorage.getItem("userid");
             getpage('home_screen');

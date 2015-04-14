@@ -22,7 +22,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <form name="select_item-form" id="select_item" action="#" onsubmit="return selectitemform(this);">
+                    <form name="select_item-form" id="select_item-form" action="#" onsubmit="return selectitemform(this);">
                         <div class="row control-group">
                             <div class="form-group col-xs-12">
                                 <select id="entree" class="form-control"  required data-validation-required-message="Required.">
@@ -99,7 +99,7 @@
                         <div class="row">
                             <div class="form-group col-xs-12 text-center">
                                 <button type="button" class="btn btn-lg btn-outline" onclick="getpage('home_screen');">Go Back</button>
-                                <button type="submit" class="btn btn-lg btn-outline" onclick="initcheckout();">Continue</button>
+                                <button type="submit" class="btn btn-lg btn-outline" onclick="val('select_item-form');">Continue</button>
                             </div>
                         </div>
                     </form>
