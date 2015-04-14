@@ -7,7 +7,7 @@ var userid = null;
 
 var hasStorage = false;
 
-var userdata={"restaurant": null, "items": null, "info": null, "credit_card": null}
+var userdata={"restaurant": null, "items": null, "info": null, "credit_card": null};
 
 //shows hidden element by id
 function show(id){
@@ -327,12 +327,9 @@ function initCheckout(restaurantID){
         // wait for restaurants data to be loaded from JSON
         $.when(window.LE.loadingRestaurants).done(function(){
             var restaurant = r.getRestaurant(restaurantID);
-<<<<<<< HEAD
 
             console.log(restaurant);
             
-=======
->>>>>>> aa60ed2ef1f06ffcb9e2c8b8270c4beb6ff1485b
             //render entrees
             html = templateChoice(restaurant.menu.entrees);
             $('#entree-render').after(html);
