@@ -29,19 +29,19 @@ function val(id){
 	        if (input.value == "" || input.value == null){
 	            input_check = false;
 	            var alert_id = input.getAttribute("id") + "-alert";
-                console.log(alert_id);
 	            document.getElementById(alert_id).innerHTML = isrequired;
 	        }
 	    }
     }
     if (input_check){
 	    //get page
-        if(page[form_id] != undefined){
+        if(page[form_id] != undefined && fx[form_id] != undefined){
+            getpage(page[form_id],fx[form_id]());
+        }
+        else if(page[form_id] != undefined){
             getpage(page[form_id]);
         }
-        // callback
-        if(fx[form_id] != undefined){
-            fx[form_id]();
+        else{
         }
     }
 }

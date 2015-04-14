@@ -180,7 +180,10 @@ function testSelectItem(){
 
 // loads correct section
 // returns deferred for synchronization purposes
-function getpage (id) {
+function getpage (id, callback) {
+    if(callback != undefined){   
+        callback;
+    }
     var deferred = $.Deferred();
     var url = 'pages/' + id + '.html #section';
     if (id == "sign_in" || id == "register" || id== "login_screen"){
@@ -190,8 +193,12 @@ function getpage (id) {
     }
     else{
         if(userid != null){
-            $("#getpage-section").load(url,function(){
-                deferred.resolve();
+             $("#getpage-section").load(url,function(){
+                 if(id == "home_screen"){initHome();}
+                 else if(id == "select_item"){initSelectItem();}
+                 else if (id == "check_out"){initcheckout();}
+                 else{}
+                 deferred.resolve();
             });
         }
     }
@@ -217,6 +224,8 @@ function logout(){
         }        
     }
     getpage("login_screen");
+    hide("home");
+    hide("settings");
 }
 
 function login(){
@@ -224,6 +233,8 @@ function login(){
     if(typeof(Storage) !== "undefined") {
         localStorage.setItem("userid", 1);
     }
+    show("home");
+    show("settings");
 }
 
 function selectitemform(theForm){
@@ -297,23 +308,21 @@ function initcheckout(){
 $(function (){ 
     // local storage
     userid = null;
+    userdata = {};
     if(typeof(Storage) !== "undefined") {
         if (localStorage.userid) {
             userid = localStorage.getItem("userid");
-
-            // synchronize, wait for home_screen to be loaded, before calling its init func
-            $.when(getpage('home_screen')).done(function(){
-                
-                if(_debug){ console.log('home_screen getpage loaded'); }
-                
-                initHome();
-            });
+            getpage('home_screen');
         }  
         else{
             getpage('login_screen');
+            hide("home");
+            hide("settings");  
         }
     }
     else{
         getpage('login_screen');
+        hide("home");
+        hide("settings");
     }
 });
