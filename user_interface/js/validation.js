@@ -25,7 +25,7 @@ function val(id){
         var input = values[i];
         var isrequired = values[i].getAttribute("data-validation-required-message");
         formdata[input.getAttribute("id")] = input.value;
-        if(isrequired != "notrequired"){
+        if(isrequired != "Not Required."){
 	        if (input.value == "" || input.value == null){
 	            input_check = false;
 	            var alert_id = input.getAttribute("id") + "-alert";

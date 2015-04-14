@@ -10,7 +10,6 @@
   // the return value of getJSON will be used for synchronization as a Deferred Object
   var loadingRestaurants = $.getJSON( "js/data.json", function( data ) {
     restaurants = data;
-    console.log(data);
   });
 
   // returns a restaurant obj or all restaurants
@@ -25,9 +24,6 @@
     restaurants: {
       getRestaurant: getRestaurant
     },
-    loadingRestaurants: loadingRestaurants,
-    userData: {
-      currentRestaurant: null
-    }
+    loadingRestaurants: loadingRestaurants
   };
 })();

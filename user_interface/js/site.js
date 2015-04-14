@@ -3,11 +3,12 @@
  * 
  */
 
-var _debug = true;
-
 var userid = null;
 
 var hasStorage = false;
+
+var userdata={"restaurant": null, "items": null, "info": null, "credit_card": null}
+
 //shows hidden element by id
 function show(id){
     $( "#" + id ).removeClass("hidden");
@@ -33,7 +34,6 @@ function initHome(){
     $(function(){
         var homeScreen = window.LE.homeScreen;
         var getRestaurant = window.LE.restaurants.getRestaurant;
-
         var isSearch;
 
         // when the restaurant changes, we need to display rate and other data
@@ -41,8 +41,6 @@ function initHome(){
             var inputBox = $("#inputBox");
             
             var selectedVal = $(this).val();
-
-            if(_debug){ console.log("selected restaurant id: ", selectedVal); }
 
             if(selectedVal){
                 var selectedRestaurant = getRestaurant(selectedVal);
@@ -60,15 +58,13 @@ function initHome(){
         $('#food').on("input", function(){
             var searchVal = $(this).val();
 
-            if(_debug){ console.log("search value: ", searchVal); }
-
             //only is a search if there is content in the field
             isSearch = (searchVal.length > 0);
         });
 
         $("#home-screen-continue-button").on("click", function(){
             if(isSearch){
-                if(_debug){ console.log("continue as search, next: select restaurant"); }
+                //TODO
                 // GET RESULTS THEN GET PAGE!
                 getpage('select_restaurant');
 
@@ -78,13 +74,13 @@ function initHome(){
             else{
                 // this is the restaurant id to render later
                 var selectedVal = $("#restaurant").val();
-                localStorage.setItem('restaurant', selectedVal);
                 
                 if(_debug){ console.log(selectedVal); }
 
                 // cleanup old event handlers before leaving home context
                 destroyHome();
 
+                userdata.restaurant = selectedVal;
                 initSelectItem(selectedVal);
                 // ease scroll to top of next view
                 $("html, body").animate({ scrollTop: 0 }, "slow");
@@ -194,7 +190,9 @@ function initSelectItem(restaurantID){
                 drinkVal = $('#drink'),
                 sideVal = $('#side');
 
-            entreeVal
+            // TODO: this needs to be changed to return results of validation,
+            // not actually redirect/navigate/render itself
+            // val('select_item-form');
 
             destroySelectItem();
             initCheckout(items);
@@ -230,18 +228,15 @@ function getpage (id, callback) {
     }
     else{
         if(userid != null){
-             $("#getpage-section").load(url,function(){
-                 if(id == "home_screen"){initHome();}
-                 else if(id == "select_item"){
-                    if(hasStorage){
-                        initSelectItem(localStorage.getItem("restaurant"));    
-                    }
-                    else{initSelectItem();}
-                 }
-                 else if (id == "check_out"){initcheckout();}
-                 else{}
-                 deferred.resolve();
-            });
+            if(id == "select_item"){initSelectItem(userdata.restaurant);}
+            else{
+                $("#getpage-section").load(url,function(){
+                     if(id == "home_screen"){initHome();}
+                     else if (id == "check_out"){initcheckout(userdata.restaurant);}
+                     else{}
+                     deferred.resolve();
+                });
+            }
         }
     }
     return deferred;
@@ -307,10 +302,9 @@ function selectItemSubmit(items){
     return items;
 }
 
-function initCheckout(){
+function initCheckout(restaurantID){
     $(function(){
         var r = window.LE.restaurants;
-        var restaurantID = window.LE.userData.currentRestaurant;
 
         // prepare select-item-template
         var source   = $("#select-item-template").html();
@@ -333,9 +327,12 @@ function initCheckout(){
         // wait for restaurants data to be loaded from JSON
         $.when(window.LE.loadingRestaurants).done(function(){
             var restaurant = r.getRestaurant(restaurantID);
+<<<<<<< HEAD
 
             console.log(restaurant);
             
+=======
+>>>>>>> aa60ed2ef1f06ffcb9e2c8b8270c4beb6ff1485b
             //render entrees
             html = templateChoice(restaurant.menu.entrees);
             $('#entree-render').after(html);
