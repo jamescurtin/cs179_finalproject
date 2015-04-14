@@ -3,11 +3,12 @@
  * 
  */
 
-var _debug = true;
-
 var userid = null;
 
 var hasStorage = false;
+
+var userdata={"restaurant": null, "items": null, "info": null, "credit_card": null}
+
 //shows hidden element by id
 function show(id){
     $( "#" + id ).removeClass("hidden");
@@ -21,8 +22,6 @@ function hide(id){
 // call this function to initialize for home_screen.html
 function initHome(){
 
-    if(_debug){ console.log('initHome called'); }
-
     //prepare template that shows restaurant details
     var source   = $("#restaurant-info-template").html();
     var templateRestInfo = Handlebars.compile(source);
@@ -30,7 +29,6 @@ function initHome(){
     $(function(){
         var homeScreen = window.LE.homeScreen;
         var getRestaurant = window.LE.restaurants.getRestaurant;
-
         var isSearch;
 
         // when the restaurant changes, we need to display rate and other data
@@ -38,8 +36,6 @@ function initHome(){
             var inputBox = $("#inputBox");
             
             var selectedVal = $(this).val();
-
-            if(_debug){ console.log("selected restaurant id: ", selectedVal); }
 
             if(selectedVal){
                 var selectedRestaurant = getRestaurant(selectedVal);
@@ -57,23 +53,20 @@ function initHome(){
         $('#food').on("input", function(){
             var searchVal = $(this).val();
 
-            if(_debug){ console.log("search value: ", searchVal); }
-
             //only is a search if there is content in the field
             isSearch = (searchVal.length > 0);
         });
 
         $("#home-screen-continue-button").on("click", function(){
             if(isSearch){
-                if(_debug){ console.log("continue as search, next: select restaurant"); }
+                //TODO
                 // GET RESULTS THEN GET PAGE!
                 getpage('select_restaurant');
             }
             else{
                 // this is the restaurant id to render later
                 var selectedVal = $("#restaurant").val();
-                localStorage.setItem('restaurant', selectedVal);
-                console.log(selectedVal);
+                userdata.restaurant = selectedVal;
                 initSelectItem(selectedVal);
                 // ease scroll to top of next view
                 $("html, body").animate({ scrollTop: 0 }, "slow");
@@ -167,8 +160,8 @@ function initSelectItem(restaurantID){
             }
         });
 
-        $('#select-item-continue-button').on('click', function(e){
-            var choiceIndex;
+        $('#select-item-continue-button').on('click', function(){
+            val('select_item-form');
         });
     });
 }
@@ -193,18 +186,15 @@ function getpage (id, callback) {
     }
     else{
         if(userid != null){
-             $("#getpage-section").load(url,function(){
-                 if(id == "home_screen"){initHome();}
-                 else if(id == "select_item"){
-                    if(hasStorage){
-                        initSelectItem(localStorage.getItem("restaurant"));    
-                    }
-                    else{initSelectItem();}
-                 }
-                 else if (id == "check_out"){initcheckout();}
-                 else{}
-                 deferred.resolve();
-            });
+            if(id == "select_item"){initSelectItem(userdata.restaurant);}
+            else{
+                $("#getpage-section").load(url,function(){
+                     if(id == "home_screen"){initHome();}
+                     else if (id == "check_out"){initcheckout(userdata.restaurant);}
+                     else{}
+                     deferred.resolve();
+                });
+            }
         }
     }
     return deferred;
@@ -264,12 +254,11 @@ function selectitemform(theForm){
                  rate: rate,
                  premium_paid: premium_paid,
                  tax: tax,
-                 total: total
-                };
-    localStorage.setItem('items', JSON.stringify(items));
-    }
+                 total: total};
+    userdata.items = items;
+}
 
-function initcheckout(){
+function initcheckout(restaurantID){
     $(function(){
         var r = window.LE.restaurants;
 
@@ -294,7 +283,6 @@ function initcheckout(){
         // wait for restaurants data to be loaded from JSON
         $.when(window.LE.loadingRestaurants).done(function(){
             var restaurant = r.getRestaurant(restaurantID);
-            
             //render entrees
             html = templateChoice(restaurant.menu.entrees);
             $('#entree-render').after(html);
