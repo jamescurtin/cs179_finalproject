@@ -7,7 +7,9 @@ var userid = null;
 
 var hasStorage = false;
 
-var userdata={"restaurant": null, "items": null, "info": null, "credit_card": null};
+var userdata=window.LE.userData;
+
+var _debug = true;
 
 //shows hidden element by id
 function show(id){
@@ -70,8 +72,7 @@ function initHome(){
 
                 // cleanup old event handlers before leaving home context
                 destroyHome();
-            }
-            else{
+            }else{
                 // this is the restaurant id to render later
                 var selectedVal = $("#restaurant").val();
                 
@@ -80,7 +81,7 @@ function initHome(){
                 // cleanup old event handlers before leaving home context
                 destroyHome();
 
-                userdata.restaurant = selectedVal;
+                userdata.currentRestaurant = selectedVal;
                 initSelectItem(selectedVal);
                 // ease scroll to top of next view
                 $("html, body").animate({ scrollTop: 0 }, "slow");

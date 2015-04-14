@@ -24,6 +24,12 @@
     restaurants: {
       getRestaurant: getRestaurant
     },
-    loadingRestaurants: loadingRestaurants
+    loadingRestaurants: loadingRestaurants,
+    userData: {
+      currentRestaurant: null,
+      items: null,
+      info: null,
+      credit_card: null
+    }
   };
 })();
