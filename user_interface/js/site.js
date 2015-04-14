@@ -3,8 +3,6 @@
  * 
  */
 
-var _debug = true;
-
 var userid = null;
 
 var hasStorage = false;
@@ -24,8 +22,6 @@ function hide(id){
 // call this function to initialize for home_screen.html
 function initHome(){
 
-    if(_debug){ console.log('initHome called'); }
-
     //prepare template that shows restaurant details
     var source   = $("#restaurant-info-template").html();
     var templateRestInfo = Handlebars.compile(source);
@@ -40,8 +36,6 @@ function initHome(){
             var inputBox = $("#inputBox");
             
             var selectedVal = $(this).val();
-
-            if(_debug){ console.log("selected restaurant id: ", selectedVal); }
 
             if(selectedVal){
                 var selectedRestaurant = getRestaurant(selectedVal);
@@ -59,15 +53,13 @@ function initHome(){
         $('#food').on("input", function(){
             var searchVal = $(this).val();
 
-            if(_debug){ console.log("search value: ", searchVal); }
-
             //only is a search if there is content in the field
             isSearch = (searchVal.length > 0);
         });
 
         $("#home-screen-continue-button").on("click", function(){
             if(isSearch){
-                if(_debug){ console.log("continue as search, next: select restaurant"); }
+                //TODO
                 // GET RESULTS THEN GET PAGE!
                 getpage('select_restaurant');
             }
