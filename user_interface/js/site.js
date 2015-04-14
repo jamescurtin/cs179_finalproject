@@ -66,10 +66,15 @@ function initHome(){
             else{
                 // this is the restaurant id to render later
                 var selectedVal = $("#restaurant").val();
-                userdata.restaurant = selectedVal;
-                initSelectItem(selectedVal);
-                // ease scroll to top of next view
-                $("html, body").animate({ scrollTop: 0 }, "slow");
+                if(selectedVal == ""){
+                    document.getElementById("id-alert").innerHTML = "Required.";
+                }
+                else{
+                    userdata.restaurant = selectedVal;
+                    initSelectItem(selectedVal);
+                    // ease scroll to top of next view
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
+                }
             }
         });
     });
@@ -130,7 +135,7 @@ function initSelectItem(restaurantID){
                 $('#select-entree-size').html(templateSize(selectedEntree));
                 $('#select-entree-size').removeClass('hidden');
             }else{
-                $('#select-entree-size').addClass('hidden');
+                $('#select-entree-size').html("");
             }
         });
 
@@ -143,7 +148,7 @@ function initSelectItem(restaurantID){
                 $('#select-drink-size').html(templateSize(selectedDrink));
                 $('#select-drink-size').removeClass('hidden');
             }else{
-                $('#select-drink-size').addClass('hidden');
+                $('#select-drink-size').html("");
             }
         });
 
@@ -156,12 +161,13 @@ function initSelectItem(restaurantID){
                 $('#select-side-size').html(templateSize(selectedSide));
                 $('#select-side-size').removeClass('hidden');
             }else{
-                $('#select-side-size').addClass('hidden');
+                $('#select-side-size').html("");
             }
         });
 
         $('#select-item-continue-button').on('click', function(){
-            val('select_item-form');
+            var items = val('select_item-form');
+            userdata.items = items;
         });
     });
 }
@@ -232,6 +238,7 @@ function login(){
     show("settings");
 }
 
+//WHAT IS this for?
 function selectitemform(theForm){
     var entree = 'meal';
     var entree_cost = 1.00;

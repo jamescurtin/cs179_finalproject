@@ -160,7 +160,7 @@
         <div class="form-group col-xs-12">
             {{#each prices}}
                 {{! TODO size as full word needed in text}}
-                <label style="margin-right: 20px;" ><input type="radio" id="{{../type}}_size" name="{{../type}}_size" value={{@key}} required data-validation-required-message="Required.">&nbsp;{{@key}} ${{this}}</label>
+                <label style="margin-right: 20px;" ><input type="radio" id="{{../type}}_size_{{@key}} " name="{{../type}}_size" value={{@key}} required data-validation-required-message="Required.">&nbsp;{{@key}} ${{this}}</label>
             {{/each}}
         </div>
     </script>
@@ -175,6 +175,7 @@
                 <option value="{{@index}}" data-gen="1" data-sizes=0>{{this.name}} - ${{this.price}}</option>
             {{/if}}
         {{/each}}
+        <p class="help-block" id="sizes-alert"></p>
     </script>
 
 
@@ -243,6 +244,7 @@
                         
                         <br>
                         <div id="success"></div>
+                         <p class="help-block" id="sizes-alert"></p>
                         <div class="row">
                             <div class="form-group col-xs-12 text-center">
                                 <button type="button" class="btn btn-lg btn-outline" onclick="getpage('home_screen');">Go Back</button>&nbsp;

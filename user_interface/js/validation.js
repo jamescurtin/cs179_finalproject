@@ -20,11 +20,19 @@ function val(id){
     var values = document.getElementById(form_id).querySelectorAll('input, select');
     var formdata = {};
     // boolean check
-    var input_check = true; 
+    var input_check = true;
+    var radio_names = {}
     for (i = 0; i < values["length"]; i++){
         var input = values[i];
         var isrequired = values[i].getAttribute("data-validation-required-message");
-        formdata[input.getAttribute("id")] = input.value;
+        if(input.type == "radio"){
+            radio_names[input.name] = 1;
+            if(input.checked){
+                formdata[input.getAttribute("name")] = input.value; 
+                delete radio_names[input.name];
+            }
+        }
+        else{formdata[input.getAttribute("id")] = input.value;}
         if(isrequired != "Not Required."){
 	        if (input.value == "" || input.value == null){
 	            input_check = false;
@@ -32,6 +40,13 @@ function val(id){
 	            document.getElementById(alert_id).innerHTML = isrequired;
 	        }
 	    }
+        console.log(radio_names);
+    }
+    c = 0;
+    for (i in radio_names){ c+=1;}
+    if(c > 0){
+        input_check = false;
+        document.getElementById("sizes-alert").innerHTML = "Please select sizes for your item(s).";
     }
     if (input_check){
 	    //get page
@@ -43,5 +58,8 @@ function val(id){
         }
         else{
         }
+        // return form data
+        console.log(formdata);
+        return formdata;
     }
 }
