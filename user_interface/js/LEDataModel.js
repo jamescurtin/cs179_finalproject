@@ -15,6 +15,7 @@
 
   // returns a restaurant obj or all restaurants
   function getRestaurant(key){
+      console.log(key);
     if(key == undefined){
       return restaurants;
     }
@@ -25,9 +26,6 @@
     restaurants: {
       getRestaurant: getRestaurant
     },
-    loadingRestaurants: loadingRestaurants,
-    userData: {
-      currentRestaurant: null
-    }
+    loadingRestaurants: loadingRestaurants
   };
 })();
