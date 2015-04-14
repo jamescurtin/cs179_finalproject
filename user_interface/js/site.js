@@ -196,7 +196,7 @@ function getpage (id, callback) {
             else{
                 $("#getpage-section").load(url,function(){
                      if(id == "home_screen"){initHome();}
-                     else if (id == "check_out"){initcheckout(userdata.restaurant);}
+                     else if (id == "check_out"){initcheckout(userdata.items);}
                      else{}
                      deferred.resolve();
                 });

@@ -40,7 +40,6 @@ function val(id){
 	            document.getElementById(alert_id).innerHTML = isrequired;
 	        }
 	    }
-        console.log(radio_names);
     }
     c = 0;
     for (i in radio_names){ c+=1;}
@@ -59,7 +58,6 @@ function val(id){
         else{
         }
         // return form data
-        console.log(formdata);
         return formdata;
     }
 }
