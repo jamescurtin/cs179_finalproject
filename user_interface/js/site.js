@@ -348,7 +348,8 @@ function preCheckoutPrepareItems(items, restaurantObj){
 
     if(_debug){ console.log('subtotal: ', subtotal); }
 
-    var rate = 0.2;
+    var rate = 2;
+    var effective_rate = rate - 1.00;
     var premium_paid = (subtotal * rate);
     var tax = (subtotal * 0.0625);
     var total = (subtotal + premium_paid + tax);
