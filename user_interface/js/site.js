@@ -105,6 +105,10 @@ function destroyHome(){
 function initSelectItem(restaurantID){
     userdata.restaurant = restaurantID;
     $(function(){
+        Handlebars.registerHelper('decimal', function(number) {
+            return parseFloat(Math.round(number * 100) / 100).toFixed(2);
+        });
+        
         var r = window.LE.restaurants;
 
         //set currentRestaurant storage
@@ -115,12 +119,12 @@ function initSelectItem(restaurantID){
         var templateSelect = Handlebars.compile(source);
 
         // prepare item-choice-template
-        source = $("#item-choice-template").html();
-        templateChoice = Handlebars.compile(source);
+        var source = $("#item-choice-template").html();
+        var templateChoice = Handlebars.compile(source);
 
         // prepare item-choice-template
-        source = $("#item-size-template").html();
-        templateSize = Handlebars.compile(source);
+        var source = $("#item-size-template").html();
+        var templateSize = Handlebars.compile(source);
 
         // TODO - context is the object to pass into the template
         var context = {};
@@ -367,6 +371,10 @@ function preCheckoutPrepareItems(items, restaurantObj){
 
 function initCheckout(items, restaurant){
     $(function(){
+        Handlebars.registerHelper('decimal', function(number) {
+            return parseFloat(Math.round(number * 100) / 100).toFixed(2);
+        });
+        
         var r = window.LE.restaurants;
 
         // prepare checkout-template
@@ -376,6 +384,7 @@ function initCheckout(items, restaurant){
         var html    = template(items);
         $('#getpage-section').html(html);
     });
+    startTimer(10);
 }
 
 $(function (){ 
@@ -423,7 +432,7 @@ function remove_data(id){
 }
 
 // Countdown Timer for checkout.html
-function startTimer(duration, display) {
+function startTimer(duration) {
     var start = Date.now(),
         diff,
         minutes,
@@ -440,7 +449,10 @@ function startTimer(duration, display) {
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
 
-        display.textContent = minutes + ":" + seconds; 
+        $('#timer').html(minutes + ":" + seconds)
+        if (minutes == 0 && seconds == 0) {
+            getpage('home_screen');
+        }
 
         if (diff <= 0) {
             // add one second so that the count down starts at the full duration

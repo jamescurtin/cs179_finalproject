@@ -102,23 +102,23 @@
                         {{#each items}}
                             <tr>
                                 <td class="text-left" style="margin: 15px;">{{name}}:</td>
-                                <td class="text-right">{{price}}</td>
+                                <td class="text-right">{{decimal price}}</td>
                             </tr>
                         {{/each}}
                         <tr style="height: 15px;"></tr>
                         <tr>
                             <td class="text-left">Premium Rate ({{rate}}%):</td>
-                            <td class="text-right">{{premium_paid}}</td>
+                            <td class="text-right">{{decimal premium_paid}}</td>
                         </tr>
                         <tr style="height: 15px;"></tr>
                         <tr>
                             <td class="text-left">Sub Total:</td>
-                            <td class="text-right">{{subtotal}}</td>
+                            <td class="text-right">{{decimal subtotal}}</td>
                         </tr>
                         <tr style="height: 15px;"></tr>
                         <tr>
                             <td class="text-left">Tax:</td>
-                            <td class="text-right">{{tax_paid}}</td>
+                            <td class="text-right">{{decimal tax_paid}}</td>
                         </tr>
                         <tr style="height: 15px;"></tr>
                         <tr>
@@ -137,7 +137,7 @@
                         </tr>
                         <tr>
                             <td class="text-left">Total:</td>
-                            <td class="text-right">{{total_paid}}</td>
+                            <td class="text-right">{{decimal total_paid}}</td>
                         </tr>
                     </table>
                 </div>
@@ -150,7 +150,7 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
                     <br>
-                    <small>You have 2m 59s left to place your order*</small>
+                    <p>You have <b><span id="timer"></span></b> minutes left to place your order</p>
                 </div>
             </div>
         </div>
@@ -172,7 +172,7 @@
                 <option value="{{@index}}" data-gen="1" data-sizes=1>{{this.name}} - varies by size</option>
             {{else}}
                 {{! No size, display price }}
-                <option value="{{@index}}" data-gen="1" data-sizes=0>{{this.name}} - ${{this.price}}</option>
+                <option value="{{@index}}" data-gen="1" data-sizes=0>{{this.name}} - ${{decimal this.price}}</option>
             {{/if}}
         {{/each}}
         <p class="help-block" id="sizes-alert"></p>
