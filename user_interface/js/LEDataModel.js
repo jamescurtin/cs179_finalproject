@@ -25,28 +25,26 @@
     return restaurants[key];
   }
 
-  // takes a search term and returns a list of restaurant ids that match the keyword
-  function getRestaurantsBySearch(keyword){
+  // returns a list of restaurant objects matching a keyword
+  function getRestaurantsBySearchTerm(keyword){
     if(keyword in searchIndex){
       return searchIndex[keyword];
-    }else{
-      return [];
     }
+    return [];
   }
 
   window.LE = {
     restaurants: {
       getRestaurant: getRestaurant,
-      getRestaurantsBySearch: getRestaurantsBySearch
+      getRestaurantsBySearchTerm: getRestaurantsBySearchTerm
     },
     loadingRestaurants: loadingRestaurants,
-
-    // user data can be stored here
     userData: {
       currentRestaurant: null,
       items: null,
       info: null,
       credit_card: null
+
     }
   };
 })();

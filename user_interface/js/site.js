@@ -7,7 +7,7 @@ var userid = null;
 
 var hasStorage = false;
 
-var userdata=window.LE.userData;
+var userdata = window.LE.userData;
 
 var _debug = true;
 
@@ -78,13 +78,18 @@ function initHome(){
                 
                 if(_debug){ console.log(selectedVal); }
 
-                // cleanup old event handlers before leaving home context
-                destroyHome();
+                if(selectedVal == ""){
+                    document.getElementById("id-alert").innerHTML = "Required.";
+                }else{
 
-                userdata.currentRestaurant = selectedVal;
-                initSelectItem(selectedVal);
-                // ease scroll to top of next view
-                $("html, body").animate({ scrollTop: 0 }, "slow");
+                    // cleanup old event handlers before leaving home context
+                    destroyHome();
+
+                    userdata.currentRestaurant = selectedVal;
+                    initSelectItem(selectedVal);
+                    // ease scroll to top of next view
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
+                }
             }
         });
     });
@@ -98,6 +103,7 @@ function destroyHome(){
 
 // call this to initialize for the select item screen
 function initSelectItem(restaurantID){
+    userdata.restaurant = restaurantID;
     $(function(){
         var r = window.LE.restaurants;
 
@@ -148,7 +154,7 @@ function initSelectItem(restaurantID){
                 $('#select-entree-size').html(templateSize(selectedEntree));
                 $('#select-entree-size').removeClass('hidden');
             }else{
-                $('#select-entree-size').addClass('hidden');
+                $('#select-entree-size').html("");
             }
         });
 
@@ -161,7 +167,7 @@ function initSelectItem(restaurantID){
                 $('#select-drink-size').html(templateSize(selectedDrink));
                 $('#select-drink-size').removeClass('hidden');
             }else{
-                $('#select-drink-size').addClass('hidden');
+                $('#select-drink-size').html("");
             }
         });
 
@@ -174,7 +180,7 @@ function initSelectItem(restaurantID){
                 $('#select-side-size').html(templateSize(selectedSide));
                 $('#select-side-size').removeClass('hidden');
             }else{
-                $('#select-side-size').addClass('hidden');
+                $('#select-side-size').html("");
             }
         });
 
@@ -222,7 +228,7 @@ function getpage (id, callback) {
     }
     var deferred = $.Deferred();
     var url = 'pages/' + id + '.html #section';
-    if (id == "sign_in" || id == "register" || id== "login_screen"){
+    if (id == "sign_in" || id == "register" || id== "login_screen" || id=="credit_card"){
         $("#getpage-section").load(url, function(){
             deferred.resolve();
         });
@@ -230,10 +236,11 @@ function getpage (id, callback) {
     else{
         if(userid != null){
             if(id == "select_item"){initSelectItem(userdata.restaurant);}
+            // uncomment after initcheckout is fixed
+            //if(id == "check_out"){initcheckout(userdata.items);}
             else{
                 $("#getpage-section").load(url,function(){
                      if(id == "home_screen"){initHome();}
-                     else if (id == "check_out"){initcheckout(userdata.restaurant);}
                      else{}
                      deferred.resolve();
                 });
@@ -243,11 +250,17 @@ function getpage (id, callback) {
     return deferred;
 }
 
-function checkpassword(){
+function checkpassword(id){
     var password = document.getElementById("password").value;
     var cpassword =  document.getElementById("confirm_password").value;
     if(password == cpassword){
-        val('register-form');
+        var data = val(id);
+        if(id == "register-form"){ 
+            userdata.info = data;
+            if(hasStorage) {
+                localStorage.setItem("uinfo", JSON.stringify(data));
+            }
+        }
     }
     else{
         alert('The passwords do not match. Try again');
@@ -257,9 +270,9 @@ function checkpassword(){
 function logout(){
     userid = null;
     if(hasStorage) {
-        if (localStorage.userid) {
-            localStorage.removeItem("userid");
-        }        
+        localStorage.removeItem("userid");
+        localStorage.removeItem("uinfo");  
+        localStorage.removeItem("upayment");   
     }
     getpage("login_screen");
     hide("home");
@@ -352,8 +365,10 @@ $(function (){
     userdata = {};
     if(typeof(Storage) !== "undefined") {
         hasStorage = true;
-        if (localStorage.userid) {
+        if (localStorage.userid && localStorage.uinfo && localStorage.upayment) {
             userid = localStorage.getItem("userid");
+            userdata.info = JSON.parse(localStorage.getItem("uinfo"));
+            userdata.payment = JSON.parse(localStorage.getItem("upayment"));
             getpage('home_screen');
         }  
         else{
@@ -368,3 +383,22 @@ $(function (){
         hide("settings");
     }
 });
+
+function load_data(id){
+    var data = userdata[id];
+    console.log(data);
+    setTimeout(function(){
+        for(i in data){
+            if ($( "#" + i ).length ){
+                document.getElementById(i).value = data[i];
+                $("#" + i).change();
+            }
+        }
+    },100);
+}
+
+//removes stored data from userdata by ID
+function remove_data(id){
+    console.log(id);
+    userdata[id] = null;
+}
