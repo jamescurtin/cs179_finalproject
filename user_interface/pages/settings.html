@@ -27,7 +27,7 @@
 
                 <div class="col-xs-3">
                     <button class="btn btn-sm btn-outline" onclick=
-                    "show('edit_info');" style="width: 100px;" type=
+                    "show('edit_info');load_data('info');" style="width: 100px;" type=
                     "button">edit</button>
                 </div>
             </div>
@@ -42,9 +42,19 @@
                             <div class="form-group col-xs-12">
                                 <input class="form-control"
                                 data-validation-required-message="Required."
-                                id="name" placeholder="Name" required="" type=
+                                id="first_name" placeholder="First Name" required="" type=
                                 "text">
-                                <p id="name-alert" class="help-block text-danger"></p>
+                                <p id="first_name-alert" class="help-block text-danger"></p>
+                                <p class="help-block"></p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12">
+                                <input class="form-control"
+                                data-validation-required-message="Required."
+                                id="last_name" placeholder="Last Name" required="" type=
+                                "text">
+                                <p id="last_name-alert" class="help-block text-danger"></p>
                                 <p class="help-block"></p>
                             </div>
                         </div>
@@ -59,17 +69,7 @@
                                 <p class="help-block"></p>
                             </div>
                         </div>
-
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12">
-                                <input class="form-control"
-                                data-validation-required-message="Required."
-                                id="phone" placeholder="Phone Number" required=
-                                "" type="tel">
-                                <p id="phone-alert" class="help-block text-danger"></p>
-                                <p class="help-block"></p>
-                            </div>
-                        </div><br>
+                        <br>
 
                         <div id="success"></div>
 
@@ -93,7 +93,7 @@
 
                 <div class="col-xs-3">
                     <button class="btn btn-sm btn-outline" onclick=
-                    "show('edit_payment');" style="width: 100px;" type=
+                    "show('edit_payment');load_data('payment');" style="width: 100px;" type=
                     "button">edit</button>
                 </div>
             </div>
@@ -108,10 +108,9 @@
                             <div class="form-group col-xs-12">
                                 <input class="form-control"
                                 data-validation-required-message="Required."
-                                id="name" placeholder="Name" required="" type=
+                                id="card_number" placeholder="Card Number" required="" type=
                                 "text">
-
-                                <p class="help-block"></p>
+                                <p class="help-block" id="card_number-alert"></p>
                             </div>
                         </div>
 
@@ -119,10 +118,9 @@
                             <div class="form-group col-xs-12">
                                 <input class="form-control"
                                 data-validation-required-message="Required."
-                                id="address" placeholder="Address" required=""
+                                id="expiration_date" placeholder="Expiration Date" required=""
                                 type="text">
-                                <p id="address-alert" class="help-block text-danger"></p>
-                                <p class="help-block"></p>
+                                <p id="expiration_date-alert" class="help-block"></p>
                             </div>
                         </div>
 
@@ -130,10 +128,9 @@
                             <div class="form-group col-xs-12">
                                 <input class="form-control"
                                 data-validation-required-message="Required."
-                                id="city" placeholder="City" required="" type=
+                                id="card_name" placeholder="Cardholder Name" required="" type=
                                 "text">
-                                <p id="city-alert" class="help-block text-danger"></p>
-                                <p class="help-block"></p>
+                                <p id="card_name-alert" class="help-block"></p>
                             </div>
                         </div>
 
@@ -141,10 +138,9 @@
                             <div class="form-group col-xs-12">
                                 <input class="form-control"
                                 data-validation-required-message="Required."
-                                id="state" placeholder="State" required=""
+                                id="billing_address" placeholder="Billing Address" required=""
                                 type="text">
-                                <p id="state-alert" class="help-block text-danger"></p>
-                                <p class="help-block"></p>
+                                <p id="billing_address-alert" class="help-block"></p>
                             </div>
                         </div>
 
@@ -152,43 +148,9 @@
                             <div class="form-group col-xs-12">
                                 <input class="form-control"
                                 data-validation-required-message="Required."
-                                id="zip_code" placeholder="Zip Code" required=
+                                id="cvv_code" placeholder="CVV Code" required=
                                 "" type="text">
-                                <p id="zip_code-alert" class="help-block text-danger"></p>
-                                <p class="help-block"></p>
-                            </div>
-                        </div>
-
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12">
-                                <input class="form-control"
-                                data-validation-required-message="Required."
-                                id="card" placeholder="Card" required="" type=
-                                "text">
-                                <p id="card-alert" class="help-block text-danger"></p>
-                                <p class="help-block"></p>
-                            </div>
-                        </div>
-
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12">
-                                <input class="form-control"
-                                data-validation-required-message="Required."
-                                id="expiration_date" placeholder=
-                                "Expiration Date" required="" type="text">
-                                <p id="expiration_date-alert" class="help-block text-danger"></p>
-                                <p class="help-block"></p>
-                            </div>
-                        </div>
-
-                        <div class="row control-group">
-                            <div class="form-group col-xs-12">
-                                <input class="form-control"
-                                data-validation-required-message="Required."
-                                id="secuirty_code" placeholder="Security Code"
-                                required="" type="text">
-                                <p id="security_code-alert" class="help-block text-danger"></p>
-                                <p class="help-block"></p>
+                                <p class="help-block" id ="cvv_code-alert"></p>
                             </div>
                         </div><br>
 

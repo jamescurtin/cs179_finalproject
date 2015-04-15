@@ -213,7 +213,12 @@ function checkpassword(id){
     var cpassword =  document.getElementById("confirm_password").value;
     if(password == cpassword){
         var data = val(id);
-        if(id == "register-form"){ userdata.info = data;}
+        if(id == "register-form"){ 
+            userdata.info = data;
+            if(hasStorage) {
+                localStorage.setItem("uinfo", JSON.stringify(data));
+            }
+        }
     }
     else{
         alert('The passwords do not match. Try again');
@@ -223,9 +228,9 @@ function checkpassword(id){
 function logout(){
     userid = null;
     if(hasStorage) {
-        if (localStorage.userid) {
-            localStorage.removeItem("userid");
-        }        
+        localStorage.removeItem("userid");
+        localStorage.removeItem("uinfo");  
+        localStorage.removeItem("upayment");   
     }
     getpage("login_screen");
     hide("home");
@@ -314,8 +319,10 @@ $(function (){
     userdata = {};
     if(typeof(Storage) !== "undefined") {
         hasStorage = true;
-        if (localStorage.userid) {
+        if (localStorage.userid && localStorage.uinfo && localStorage.upayment) {
             userid = localStorage.getItem("userid");
+            userdata.info = JSON.parse(localStorage.getItem("uinfo"));
+            userdata.payment = JSON.parse(localStorage.getItem("upayment"));
             getpage('home_screen');
         }  
         else{

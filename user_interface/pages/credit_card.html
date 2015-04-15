@@ -28,6 +28,10 @@
                                 <p class="help-block" id="card_number-alert">
                                 </p>
                                 <input class="form-control" data-validation-required-message=
+                                "Required*" id="expiration_date" required=""  placeholder="Expiration Date">
+                                <p class="help-block" id="expiration_date-alert">
+                                </p>
+                                <input class="form-control" data-validation-required-message=
                                 "Required*" id="card_name" required=""  placeholder=
                                 "Name on Card">
                                 <p class="help-block" id="card_name-alert">
@@ -50,7 +54,7 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-xs-12 text-center">
-                                <button class="btn btn-lg btn-outline" type="button" onclick="getpage('register');">Cacnel</button>
+                                <button class="btn btn-lg btn-outline" type="button" onclick="getpage('register');load_data('info');">Back</button>
                                 <button class="btn btn-lg btn-outline" type="button" value="submit" onclick="val('creditcard-form')">Continue</button>
                                 <div class="form-group col-xs-12 text-center">
                                     <div class="portfolio-item">

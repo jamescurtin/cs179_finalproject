@@ -57,7 +57,12 @@ function val(id){
         }
         else{
         }
-        if(id == "creditcard-form"){userdata.payment = formdata;}
+        if(id == "creditcard-form"){
+            userdata.payment = formdata;
+            if(hasStorage) {
+                localStorage.setItem("upayment", JSON.stringify(formdata));
+            }
+        }
         // return form data
         return formdata;
     }
