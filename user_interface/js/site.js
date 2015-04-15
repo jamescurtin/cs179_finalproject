@@ -88,6 +88,7 @@ function destroyHome(){
 
 // call this to initialize for the select item screen
 function initSelectItem(restaurantID){
+    userdata.restaurant = restaurantID;
     $(function(){
         var r = window.LE.restaurants;
 
