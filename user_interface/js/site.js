@@ -168,7 +168,6 @@ function initSelectItem(restaurantID){
         $('#select-item-continue-button').on('click', function(){
             var items = val('select_item-form');
             userdata.items = items;
-            getpage("check_out");
         });
     });
 }
