@@ -384,7 +384,7 @@ function initCheckout(items, restaurant){
         var html    = template(items);
         $('#getpage-section').html(html);
     });
-    startTimer(10);
+    startTimer(10, '#place-order-button');
 }
 
 $(function (){ 
@@ -432,12 +432,24 @@ function remove_data(id){
 }
 
 // Countdown Timer for checkout.html
-function startTimer(duration) {
+function startTimer(duration, interruptJueryID) {
     var start = Date.now(),
         diff,
         minutes,
-        seconds;
+        seconds,
+        interrupt = false,
+        setIntervalID;
+
     function timer() {
+        // listen on the jQueryID that when clicked, will interrupt the timer
+        $(interruptJueryID).on('click', function(e){
+            interrupt = true;
+            $(interruptJueryID).off('click');
+            if(_debug)console.log('timer interrupted by click on ', interruptJueryID);
+            clearInterval(setIntervalID);
+        });
+
+
         // get the number of seconds that have elapsed since 
         // startTimer() was called
         diff = duration - (((Date.now() - start) / 1000) | 0);
@@ -450,7 +462,9 @@ function startTimer(duration) {
         seconds = seconds < 10 ? "0" + seconds : seconds;
 
         $('#timer').html(minutes + ":" + seconds)
-        if (minutes == 0 && seconds == 0) {
+        if (!interrupt && minutes == 0 && seconds == 0) {
+            $(interruptJueryID).off('click');
+            clearInterval(setIntervalID);
             getpage('home_screen');
         }
 
@@ -460,9 +474,11 @@ function startTimer(duration) {
             start = Date.now() + 1000;
         }
     };
+
+    setIntervalID = setInterval(timer, 1000);
+
     // we don't want to wait a full second before the timer starts
-    timer();
-    setInterval(timer, 1000);
+    timer(setIntervalID);
 }
 
 // Set delay on allowing user to click through terms
