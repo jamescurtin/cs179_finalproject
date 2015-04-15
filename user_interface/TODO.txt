@@ -2,7 +2,9 @@ Things to TODO:
 
 Urgent and important
 ========
--Search functionality
+-integrate enriques validation back in
+	-selectItem -> checkout, shouldn't be able to proceed without specifying sizes. this may involve getting validation back
+-settings and home buttons don't work anymore?
 -Dynamically load in choose restaurants field on `restaurant_select` and `home_screen`
 -What is up with the rate calculation - why is a burrito $25.00 haha
 -Add more Data
