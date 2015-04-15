@@ -352,6 +352,7 @@ function load_data(id){
 }
 
 //removes stored data from userdata by ID
-function remove(id){
+function remove_data(id){
+    console.log(id);
     userdata[id] = null;
 }
