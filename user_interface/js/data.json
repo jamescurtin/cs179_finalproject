@@ -2,17 +2,17 @@
 	"000001-a":{ 
 		"menu": {
 			"entrees": [
-				{"name": "Cheese Pizza", "prices" : {"s": 3.99, "m": 4.99, "l": 5.99}},
-				{"name": "Pepperoni Pizza", "prices" : {"s": 4.99, "m": 5.99, "l": 5.99}},
+				{"name": "Cheese Pizza", "prices" : {"Sm": 3.99, "Med": 4.99, "Lg": 5.99}},
+				{"name": "Pepperoni Pizza", "prices" : {"Sm": 4.99, "Med": 5.99, "Lg": 5.99}},
 				{"name": "Salad", "price": 3.99}
 			],
 			"drinks":[
 				{"name": "bottled water", "price": 1.99}, 
-				{"name": "coke", "prices": {"s": 0.99, "m": 1.50, "l": 2.00}},
-				{"name": "pepsi", "prices": {"s": 0.99, "m": 1.50, "l": 2.00}}
+				{"name": "coke", "prices": {"Sm": 0.99, "Med": 1.50, "Lg": 2.00}},
+				{"name": "pepsi", "prices": {"Sm": 0.99, "Med": 1.50, "Lg": 2.00}}
 			],
 			"sides":[
-				{"name": "fries", "prices": {"s":1.00, "m":1.50, "l":1.99}}, 
+				{"name": "fries", "prices": {"Sm":1.00, "Med":1.50, "Lg":1.99}}, 
 				{"name": "chips", "price": 1.50},
 				{"name": "biscuits", "price": 2.00}
 			],

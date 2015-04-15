@@ -6,6 +6,11 @@
     <meta name="description" content="html for modals">
     <meta name="author" content="A-Team">
     <title>check_out.html</title>
+    <script>
+        var display = document.querySelector('#time');
+        startTimer(180, display);
+        log.console('111111');
+    </script>
 </head>
 <body>
     <!--Section Goes Here -->
@@ -70,7 +75,7 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
                     <br>
-                    <small>You have 2m 59s left to place your order*</small>
+                    <div>Registration closes in <span id="time"></span> minutes!</div>
                 </div>
             </div>
         </div>
