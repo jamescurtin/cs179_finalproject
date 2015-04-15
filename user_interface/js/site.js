@@ -353,5 +353,5 @@ function load_data(id){
 
 //removes stored data from userdata by ID
 function remove(id){
-    userdata["id"] = null;
+    userdata[id] = null;
 }
