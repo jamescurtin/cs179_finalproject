@@ -339,5 +339,11 @@ $(function (){
 });
 
 function load_data(id){
-    
+    var data = userdata[id];
+    console.log(data);
+    setTimeout(function(){
+        for(i in data){
+           document.getElementById(i).value = data[i];
+        }
+    },100);
 }
