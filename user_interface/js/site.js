@@ -33,10 +33,19 @@ function initHome(){
     var source   = $("#restaurant-info-template").html();
     var templateRestInfo = Handlebars.compile(source);
 
+     // prepare template that shows restaurant dropdown
+    var source   = $("#restaurant-dropdown-template").html();
+    var templateRestaurantDropdown = Handlebars.compile(source);
+
     $(function(){
-        var homeScreen = window.LE.homeScreen;
-        var getRestaurant = window.LE.restaurants.getRestaurant;
-        var isSearch;
+        var getRestaurant = window.LE.restaurants.getRestaurant,
+            getRestaurantsBySearchTerm = window.LE.restaurants.getRestaurantsBySearchTerm;
+        var isSearch,
+            searchTerm;
+
+        // populate dropdown for restaurants
+        var html = templateRestaurantDropdown(getRestaurant());
+        $('#render-restaurants').after(html);
 
         // when the restaurant changes, we need to display rate and other data
         $("#restaurant").on("change", function(){
@@ -53,6 +62,7 @@ function initHome(){
             }else{
                 inputBox.html("");
             }
+
             isSearch = false;
         });
 
@@ -62,16 +72,29 @@ function initHome(){
 
             //only is a search if there is content in the field
             isSearch = (searchVal.length > 0);
+
+            searchTerm = $(this).val().toLowerCase();
+            $("#restaurant").val("");
         });
 
         $("#home-screen-continue-button").on("click", function(){
             if(isSearch){
                 //TODO
                 // GET RESULTS THEN GET PAGE!
-                getpage('select_restaurant');
+                var restaurants = getRestaurantsBySearchTerm(searchTerm);
 
-                // cleanup old event handlers before leaving home context
-                destroyHome();
+                var gettingPage = getpage('select_restaurant');
+
+                // synchronization - ensure that search.json is loaded and select restaurant page fetched
+                $.when(window.LE.loadingSearchIndex, gettingPage).done(function(){
+                    initSelectRestaurant(restaurants, searchTerm);
+
+                    // ease scroll to top of next view
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
+
+                    // cleanup old event handlers before leaving home context
+                    destroyHome();
+                });
             }else{
                 // this is the restaurant id to render later
                 var selectedVal = $("#restaurant").val();
@@ -99,6 +122,26 @@ function initHome(){
 // call this function to deinitialize handlers for home_screen.html
 function destroyHome(){
     $('#restaurant').off('change');
+}
+
+// call this to initialize the select restaurant screen, accessible via search
+function initSelectRestaurant(restaurants, searchTerm){
+    $(function(){
+
+        userdata.restaurant = null;
+
+         // prepare template
+        var source   = $("#restaurant-dropdown-template").html();
+        var template = Handlebars.compile(source);
+
+        html = template(restaurants);
+
+        // populate dropdown for restaurants
+        $('#render-restaurants').after(html);
+
+        // render confirmation of the search term so the user remembers what they were looking for
+        $('#select-restaurant-search-term').html(searchTerm);
+    });
 }
 
 // call this to initialize for the select item screen
@@ -152,9 +195,9 @@ function initSelectItem(restaurantID){
         // setup handler for displaying the entree size option box
         $('#entree').on('change', function(e){
             var restaurant = r.getRestaurant(restaurantID);
-            var selectedEntree = restaurant.menu.entrees[this.value];
+            var selectedEntree = restaurant.menu.entrees[$(this).val()];
             selectedEntree.type = 'entree';
-            if('prices' in selectedEntree){
+            if(selectedEntree && ('prices' in selectedEntree)){
                 $('#select-entree-size').html(templateSize(selectedEntree));
                 $('#select-entree-size').removeClass('hidden');
             }else{
@@ -165,9 +208,9 @@ function initSelectItem(restaurantID){
         // setup handler for displaying the drink size option box
         $('#drink').on('change', function(e){
             var restaurant = r.getRestaurant(restaurantID);
-            var selectedDrink = restaurant.menu.drinks[this.value];
+            var selectedDrink = restaurant.menu.drinks[$(this).val()];
             selectedDrink.type = 'drink';
-            if('prices' in selectedDrink){
+            if(selectedDrink && ('prices' in selectedDrink)){
                 $('#select-drink-size').html(templateSize(selectedDrink));
                 $('#select-drink-size').removeClass('hidden');
             }else{
@@ -178,9 +221,9 @@ function initSelectItem(restaurantID){
         // setup handler for displaying the side size option box
         $('#side').on('change', function(e){
             var restaurant = r.getRestaurant(restaurantID);
-            var selectedSide = restaurant.menu.sides[this.value];
+            var selectedSide = restaurant.menu.sides[$(this).val()];
             selectedSide.type = 'side';
-            if('prices' in selectedSide){
+            if(selectedSide && ('prices' in selectedSide)){
                 $('#select-side-size').html(templateSize(selectedSide));
                 $('#select-side-size').removeClass('hidden');
             }else{

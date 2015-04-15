@@ -26,7 +26,8 @@
 		"rate": 1.0, 
 		"wait_time": 3,
 		"time_saved": 20,
-		"name": "Pinocchio's Pizza"
+		"name": "Pinocchio's Pizza",
+		"id": "000001-a"
 	},
 	"000001-b":{ 
 		"menu": {
@@ -53,7 +54,8 @@
 		"rate": 1.0, 
 		"wait_time": 8,
 		"time_saved": 20,
-		"name": "Al's Sandwiches"
+		"name": "Al's Sandwiches",
+		"id": "000001-b"
 	},
 	"000001-c":{ 
 		"menu": {
@@ -80,7 +82,8 @@
 		"rate": 1.0, 
 		"wait_time": 7,
 		"time_saved": 20,
-		"name": "Crema Cafe"
+		"name": "Crema Cafe",
+		"id": "000001-c"
 	},
 	"000001-d":{ 
 		"menu": {
@@ -107,6 +110,7 @@
 		"rate": 1.0, 
 		"wait_time": 9,
 		"time_saved": 20,
-		"name": "Tasty Burger"
+		"name": "Tasty Burger",
+		"id": "000001-d"
 	}
 }

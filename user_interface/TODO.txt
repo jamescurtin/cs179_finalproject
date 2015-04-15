@@ -18,3 +18,5 @@ Not Urgent, but important
     -Get geolocation coordinates of the restaurants
 -Live rate changing feature in the JS
   -this will involve adding rate checking features in at every step of purchase
+-Move compilation of templates to a one-time initial page load function. Because we don't need to recompile each time a new screen is loaded, just only the render step is needed. This will ensure better performance
+-pressing enter on search bar shouldn't completely break, and form submit to some new page (or whatever is going on)
