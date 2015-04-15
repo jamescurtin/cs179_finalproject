@@ -342,7 +342,10 @@ function load_data(id){
     console.log(data);
     setTimeout(function(){
         for(i in data){
-           document.getElementById(i).value = data[i];
+            if ($( "#" + i ).length ){
+                document.getElementById(i).value = data[i];
+                $("#" + i).change();
+            }
         }
     },100);
 }
