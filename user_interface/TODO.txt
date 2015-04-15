@@ -1,0 +1,20 @@
+Things to TODO:
+
+Urgent and important
+========
+-Search functionality
+-Dynamically load in choose restaurants field on `restaurant_select` and `home_screen`
+-What is up with the rate calculation - why is a burrito $25.00 haha
+-Add more Data
+  -Add more restaurants and even more realistic menus and prices
+  -Also accordingly update the search.json so we can have at least some searches that noticebly filter down the number of restaurants we choose from.
+
+
+
+Not Urgent, but important
+=========
+-Add in see 'past order history' feature
+-Using location and Google Distance API for distance of restaurants
+    -Get geolocation coordinates of the restaurants
+-Live rate changing feature in the JS
+  -this will involve adding rate checking features in at every step of purchase
