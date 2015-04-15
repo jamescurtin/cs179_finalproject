@@ -7,7 +7,7 @@ var userid = null;
 
 var hasStorage = false;
 
-var userdata={"restaurant": null, "items": null, "info": null, "payment": null}
+var userdata = window.LE.userData;
 
 //shows hidden element by id
 function show(id){
