@@ -8,10 +8,11 @@
 var page = {"register-form":"credit_card",
            "creditcard-form":"welcome",
            "login-form":"home_screen",
+           "select_item-form": "check_out",
            };
            
 // function to execute
-var fx = {"login-form": login, "register-form": login};
+var fx = {"login-form": login, "creditcard-form": login};
 
 // validation function
 function val(id){
@@ -56,6 +57,12 @@ function val(id){
             getpage(page[form_id]);
         }
         else{
+        }
+        if(id == "creditcard-form"){
+            userdata.payment = formdata;
+            if(hasStorage) {
+                localStorage.setItem("upayment", JSON.stringify(formdata));
+            }
         }
         // return form data
         return formdata;
