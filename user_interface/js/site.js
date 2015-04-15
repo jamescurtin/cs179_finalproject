@@ -190,19 +190,45 @@ function initSelectItem(restaurantID){
         });
 
         $('#select-item-continue-button').on('click', function(e){
-            var choiceIndex;
-            var items = {};
+            var items = [];
+            var restaurant = r.getRestaurant(restaurantID);
 
-            var entreeVal = $('#entree'),
-                drinkVal = $('#drink'),
-                sideVal = $('#side');
+            var entreeVal = $('#entree').val(),
+                drinkVal = $('#drink').val(),
+                sideVal = $('#side').val(),
+                entreeSize = $('input[name="entree_size"]:checked').val(),
+                drinkSize = $('input[name="drink_size"]:checked').val(),
+                sideSize = $('input[name="side_size"]:checked').val();
+
+            if(_debug){ 
+                console.log("Entree: ", entreeVal, " Drink: ", drinkVal, " Side: ", sideVal); 
+                console.log("EntreeSize: ", entreeSize, " drinkSize: ", drinkSize, " sideSize: ", sideSize);
+            }
 
             // TODO: this needs to be changed to return results of validation,
             // not actually redirect/navigate/render itself
             // val('select_item-form');
 
-            destroySelectItem();
-            initCheckout(items);
+            
+
+            if(entreeVal){
+                items.push(['entrees', entreeVal, entreeSize]);
+            }
+            if(drinkVal){
+                items.push(['drinks', drinkVal, drinkSize]);
+            }
+            if(sideVal){
+                items.push(['sides', sideVal, sideSize]);
+            }
+
+            if(items.length > 0){
+                destroySelectItem();
+                var cleanItems = preCheckoutPrepareItems(items, restaurant);
+                initCheckout(cleanItems, restaurant);
+            }else{
+                // invalid or N/A order
+                console.log('invalid order');
+            }
         });
     });
 }
@@ -288,74 +314,66 @@ function login(){
     show("settings");
 }
 
-function selectItemSubmit(items){
-    var entree = 'meal';
-    var entree_cost = 1.00;
-    var side = 'side';
-    var side_cost = 1.00;
-    var drink = 'meal';
-    var drink_cost = 0.50;
-    var subtotal = entree_cost + side_cost + drink_cost;
-    var rate = 2
-    var premium_paid = (subtotal * rate)
+function preCheckoutPrepareItems(items, restaurantObj){
+    var subtotal = 0.00;
+
+    var resultItems = [];
+
+    // calculate all ordered items subtotal
+    for(var i in items){
+        var item = items[i];
+        //item[0] = type of entrees, drinks, sides
+        //item[1] = id of dish
+        //item[2] = size of dish if applicable
+
+        console.log('type of: ', item[0], ' id of dish: ', item[1], ' size of dish: ', item[2]);
+
+        var price;
+        var stringName;
+
+        if(item[2]){
+            // add sized price
+            price = restaurantObj.menu[item[0]][item[1]]['prices'][item[2]];
+            stringName = restaurantObj.menu[item[0]][item[1]].name + " - " + item[2];
+        }else{
+            // add non-sized price
+            price = restaurantObj.menu[item[0]][item[1]]['price'];
+            stringName = restaurantObj.menu[item[0]][item[1]].name;
+        }
+        subtotal += price;
+
+        // processed clean names and prices for items
+        resultItems.push({price: price, name: stringName});
+    }
+
+    if(_debug){ console.log('subtotal: ', subtotal); }
+
+    var rate = 0.2;
+    var premium_paid = (subtotal * rate);
     var tax = (subtotal * 0.0625);
-    var total = (subtotal + premium_paid + tax)
-    var items = {entree: entree,
-                 entree_cost: entree_cost,
-                 side: side,
-                 side_cost: side_cost,
-                 drink: drink,
-                 drink_cost: drink_cost,
-                 subtotal: subtotal,
-                 rate: rate,
-                 premium_paid: premium_paid,
-                 tax: tax,
-                 total: total
-                };
+    var total = (subtotal + premium_paid + tax);
+    var items = {
+        items: resultItems,
+        subtotal: subtotal,
+        rate: rate,
+        premium_paid: premium_paid,
+        tax_paid: tax,
+        total_paid: total
+    };
 
     return items;
 }
 
-function initCheckout(restaurantID){
+function initCheckout(items, restaurant){
     $(function(){
         var r = window.LE.restaurants;
 
-        // prepare select-item-template
-        var source   = $("#select-item-template").html();
-        var templateSelect = Handlebars.compile(source);
+        // prepare checkout-template
+        var source   = $("#checkout-template").html();
+        var template = Handlebars.compile(source);
 
-        // prepare item-choice-template
-        source = $("#item-choice-template").html();
-        templateChoice = Handlebars.compile(source);
-
-        // prepare item-choice-template
-        source = $("#item-size-template").html();
-        templateSize = Handlebars.compile(source);
-
-        // TODO - context is the object to pass into the template for checkout
-        var context = {};
-        var html    = templateSelect(context);
-        $('#render').append(html);
-
-        // synchronization structure.
-        // wait for restaurants data to be loaded from JSON
-        $.when(window.LE.loadingRestaurants).done(function(){
-            var restaurant = r.getRestaurant(restaurantID);
-
-            console.log(restaurant);
-            
-            //render entrees
-            html = templateChoice(restaurant.menu.entrees);
-            $('#entree-render').after(html);
-
-            //render drinks
-            html = templateChoice(restaurant.menu.drinks);
-            $('#drink-render').after(html);
-
-            //render sides
-            html = templateChoice(restaurant.menu.sides);
-            $('#side-render').after(html);
-        });
+        var html    = template(items);
+        $('#getpage-section').html(html);
     });
 }
 
