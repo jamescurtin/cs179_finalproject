@@ -350,3 +350,8 @@ function load_data(id){
         }
     },100);
 }
+
+//removes stored data from userdata by ID
+function remove(id){
+    userdata["id"] = null;
+}
