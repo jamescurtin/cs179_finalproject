@@ -1,25 +1,25 @@
 {
-	"000001-a":{ 
+	"pinocchio":{ 
 		"menu": {
 			"entrees": [
-				{"name": "Cheese Pizza", "prices" : {"Sm": 3.99, "Med": 4.99, "Lg": 5.99}},
-				{"name": "Pepperoni Pizza", "prices" : {"Sm": 4.99, "Med": 5.99, "Lg": 5.99}},
-				{"name": "Salad", "price": 3.99}
+				{"name": "Cheese Pizza", "prices" : {"Small": 3.99, "Large": 5.99}},
+				{"name": "Pepperoni Pizza", "prices" : {"Small": 4.99, "Large": 6.99}},
+				{"name": "Chicken Parmigiana", "prices" : {"Small": 6.25, "Large": 7.25}},
+				{"name": "Steak and Cheese", "prices" : {"Small": 6.25, "Large": 7.25}},
+				{"name": "Hamburger", "prices" : {"Small": 4.20, "Large": 5.95}}
 			],
 			"drinks":[
-				{"name": "bottled water", "price": 1.99}, 
-				{"name": "coke", "prices": {"Sm": 0.99, "Med": 1.50, "Lg": 2.00}},
-				{"name": "pepsi", "prices": {"Sm": 0.99, "Med": 1.50, "Lg": 2.00}}
+				{"name": "Bottled Water", "price": 1.99}, 
+				{"name": "Coke", "prices": {"Sm": 0.99, "Med": 1.50, "Lg": 2.00}},
+				{"name": "Pepsi", "prices": {"Sm": 0.99, "Med": 1.50, "Lg": 2.00}}
 			],
 			"sides":[
-				{"name": "fries", "prices": {"Sm":1.00, "Med":1.50, "Lg":1.99}}, 
-				{"name": "chips", "price": 1.50},
-				{"name": "biscuits", "price": 2.00}
+				{"name": "Baked Ziti w/Mozzarella", "price": 3.25},
+				{"name": "Garden Salad", "price": 5.75},
+				{"name": "Greek Salad", "price": 7.25},
+				{"name": "Antipasto", "price": 7.25}
 			],
-			"desserts":[
-				{"name": "sundae", "price": 2.00}, 
-				{"name": "cone", "price": 1.00}
-			]
+			"desserts":[]
 		},
 		"geo": [], 
 		"distance": 0.9,
@@ -27,27 +27,25 @@
 		"wait_time": 3,
 		"time_saved": 20,
 		"name": "Pinocchio's Pizza",
-		"id": "000001-a"
+		"id": "pinocchio"
 	},
-	"000001-b":{ 
+	"al":{ 
 		"menu": {
 			"entrees": [
-				{"name": "MeatBall Sub", "prices" : {"s": 2.99, "m": 3.99, "l": 4.99}},
-				{"name": "Salad", "price": 3.99}
+				{"name": "Oven Roasted Turkey", "prices" : {"Small": 6.50, "Large": 8.50}},
+				{"name": "Honey Ham", "prices" : {"Small": 6.50, "Large": 8.50}},
+				{"name": "Italian’s Italian", "prices" : {"Small": 6.50, "Large": 8.50}},
+				{"name": "Albacore Tuna", "prices" : {"Small": 6.50, "Large": 8.50}}
 			],
 			"drinks":[
-				{"name": "bottled water", "price": 1.99}, 
-				{"name": "coke", "prices": {"s": 0.99, "m": 1.50, "l": 2.00}},
-				{"name": "pepsi", "prices": {"s": 0.99, "m": 1.50, "l": 2.00}}
+				{"name": "Bottled Soda", "price": 1.50}
 			],
 			"sides":[
-				{"name": "fries", "prices": {"s":1.00, "m":1.50, "l":1.99}}, 
-				{"name": "biscuits", "price": 2.00}
+				{"name": "Insalada", "price": 4.50}, 
+				{"name": "Italian Wedding Soup", "price": 3.50},
+				{"name": "Chips", "price": 0.75}
 			],
-			"desserts":[
-				{"name": "sundae", "price": 2.00}, 
-				{"name": "cone", "price": 1.00}
-			]
+			"desserts":[]
 		},
 		"geo": [], 
 		"distance": 0.5,
@@ -55,26 +53,32 @@
 		"wait_time": 8,
 		"time_saved": 20,
 		"name": "Al's Sandwiches",
-		"id": "000001-b"
+		"id": "al"
 	},
-	"000001-c":{ 
+	"crema":{ 
 		"menu": {
 			"entrees": [
 				{"name": "Roast Beef on Flatbread", "prices" : {"s": 4.99, "m": 5.99, "l": 6.50}},
-				{"name": "Salad", "price": 3.99}
+				{"name": "Soup of the day", "prices" : {"Cup": 3.95, "Bowl": 7.50}},
+				{"name": "Hazelnut Salad", "price" : 8.95},
+				{"name": "Cremini Mushroom Salad", "price" : 8.95},
+				{"name": "Organic Chicken Panini", "price" : 8.95}
 			],
 			"drinks":[
-				{"name": "bottled water", "price": 1.99}, 
-				{"name": "coke", "prices": {"s": 0.99, "m": 1.50, "l": 2.00}},
-				{"name": "pepsi", "prices": {"s": 0.99, "m": 1.50, "l": 2.00}}
+				{"name": "Iced Coffee", "prices": {"12 Oz": 2.95, "16 Oz": 3.65}}, 
+				{"name": "Iced Latte", "prices": {"12 Oz": 3.25, "16 Oz": 3.75}},
+				{"name": "Chai Latte", "prices": {"12 Oz": 2.85, "16 Oz": 3.35, "24 Oz": 3.85}}
 			],
 			"sides":[
-				{"name": "fries", "prices": {"s":1.00, "m":1.50, "l":1.99}}, 
-				{"name": "biscuits", "price": 2.00}
+				{"name": "Plain Croissant", "price": 2.25}, 
+				{"name": "Almond Croissant", "price": 2.85},
+				{"name": "Banana Date Walnut Bread", "price": 2.75},
+				{"name": "Brioche", "price": 2.00}
 			],
 			"desserts":[
-				{"name": "sundae", "price": 2.00}, 
-				{"name": "cone", "price": 1.00}
+				{"name": "Brownie", "price": 3.50}, 
+				{"name": "Canele", "price": 2.00},
+				{"name": "French Macarons", "price": 1.75}
 			]
 		},
 		"geo": [], 
@@ -83,13 +87,16 @@
 		"wait_time": 7,
 		"time_saved": 20,
 		"name": "Crema Cafe",
-		"id": "000001-c"
+		"id": "crema"
 	},
-	"000001-d":{ 
+	"tasty":{ 
 		"menu": {
 			"entrees": [
-				{"name": "Hamburger", "prices" : {"s": 4.99, "m": 5.99, "l": 6.99}},
-				{"name": "Salad", "price": 3.99}
+				{"name": "Hamburger", "prices" : {"Single": 4.00, "Double": 5.50}},
+				{"name": "Cheeseburger", "prices": {"Single": 4.50, "Double": 6.00}},
+				{"name": "Bacon Cheeseburger", "prices": {"Single": 5.50, "Double": 7.00}},
+				{"name": "Spicy Jalepeno", "prices": {"Single": 5.50, "Double": 7.00}},
+				{"name": "Garden Salad", "price": 4.00}
 			],
 			"drinks":[
 				{"name": "bottled water", "price": 1.99}, 
@@ -97,13 +104,12 @@
 				{"name": "pepsi", "prices": {"s": 0.99, "m": 1.50, "l": 2.00}}
 			],
 			"sides":[
-				{"name": "fries", "prices": {"s":1.00, "m":1.50, "l":1.99}}, 
+				{"name": "French Fries", "price": 3.00}, 
+				{"name": "Nuggets", "price": 6.00},
+				{"name": "Pile Of Onion Rings", "price": 4.00},
 				{"name": "biscuits", "price": 2.00}
 			],
-			"desserts":[
-				{"name": "sundae", "price": 2.00}, 
-				{"name": "cone", "price": 1.00}
-			]
+			"desserts":[]
 		},
 		"geo": [], 
 		"distance": 0.7,
@@ -111,6 +117,6 @@
 		"wait_time": 9,
 		"time_saved": 20,
 		"name": "Tasty Burger",
-		"id": "000001-d"
+		"id": "tasty"
 	}
 }

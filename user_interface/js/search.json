@@ -1,15 +1,28 @@
 {
-    "fast food":["000001-a", "000001-b", "000001-c", "000001-d"],
-    "pizza":["000001-a"],
-    "meatballs":["000001-a", "000001-b"],
-    "meatball sub":["000001-a", "000001-b"],
-    "subs":["000001-b", "000001-c"],
-    "sandwich":["000001-b", "000001-c"],
-    "sandwiches":["000001-b", "000001-c"],
-    "burger":["000001-d"],
-    "hamburger":["000001-d"],
-    "salad":["000001-a"],
-    "quick":["000001-a", "000001-b", "000001-c", "000001-d"],
-    "american":["000001-b", "000001-c", "000001-d"],
-    "italian":["000001-a"]
+    "fast food":["pinocchio", "al", "crema", "tasty"],
+    "pizza":["pinocchio"],
+    "meatballs":["pinocchio", "al"],
+    "meatball sub":["pinocchio", "al"],
+    "subs":["al", "crema"],
+    "sandwich":["al", "crema"],
+    "sandwiches":["al", "crema"],
+    "burger":["tasty"],
+    "hamburger":["tasty"],
+    "salad":["pinocchio", "al", "crema", "tasty"],
+    "quick":["pinocchio", "al", "crema", "tasty"],
+    "american":["al", "crema", "tasty"],
+    "italian":["pinocchio"],
+    "soup":["crema"],
+    "bakery":["crema"],
+    "coffee":["crema"],
+    "pasta":["pinocchio", "crema"],
+    "deli":["al"],
+    "artisan":["crema"],
+    "cafe":["crema"]
 }
+
+
+pinocchio
+al
+crema
+tasty
