@@ -427,7 +427,7 @@ function initCheckout(items, restaurant){
         var html    = template(items);
         $('#getpage-section').html(html);
     });
-    startTimer(10, '#place-order-button');
+    startTimer(180, '#place-order-button');
 }
 
 $(function (){ 

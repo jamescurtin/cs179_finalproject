@@ -6,7 +6,6 @@
     <meta content="0;/index.html" http-equiv="refresh">
     <meta content="html for modals" name="description">
     <meta content="James Curtin" name="author">
-
     <title>thank_you.html</title>
 </head>
 
@@ -32,15 +31,14 @@
             <div class="row">
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2 text-center">
-                        <a class="btn btn-lg btn-outline" onclick="getpage('cancel');remove_data('items');">Cancel Order</a>
+                        <a class="btn btn-lg btn-outline" id='cancelorder' onclick="getpage('cancel');remove_data('items');">Cancel Order</a>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2 text-center">
                         <br>
-                        <small>you have 30 seconds left to cancel your
-                        order*</small>
+                        <p>You have <b><span id="timer"></span></b> seconds left to cancel your order</p>
                     </div>
                 </div>
             </div>
