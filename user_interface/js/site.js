@@ -216,10 +216,12 @@ function initSelectItem(restaurantID){
         $('#entree').on('change', function(e){
             var restaurant = r.getRestaurant(restaurantID);
             var selectedEntree = restaurant.menu.entrees[$(this).val()];
-            selectedEntree.type = 'entree';
-            if(selectedEntree && ('prices' in selectedEntree)){
-                $('#select-entree-size').html(templateSize(selectedEntree));
-                $('#select-entree-size').removeClass('hidden');
+            if(selectedEntree){
+                selectedEntree.type = 'entree';
+                if('prices' in selectedEntree){
+                    $('#select-entree-size').html(templateSize(selectedEntree));
+                    $('#select-entree-size').removeClass('hidden');
+                }
             }else{
                 $('#select-entree-size').html("");
             }
@@ -229,10 +231,12 @@ function initSelectItem(restaurantID){
         $('#drink').on('change', function(e){
             var restaurant = r.getRestaurant(restaurantID);
             var selectedDrink = restaurant.menu.drinks[$(this).val()];
-            selectedDrink.type = 'drink';
-            if(selectedDrink && ('prices' in selectedDrink)){
-                $('#select-drink-size').html(templateSize(selectedDrink));
-                $('#select-drink-size').removeClass('hidden');
+            if(selectedDrink){
+                selectedDrink.type = 'drink';
+                if ('prices' in selectedDrink){
+                    $('#select-drink-size').html(templateSize(selectedDrink));
+                    $('#select-drink-size').removeClass('hidden');
+                }
             }else{
                 $('#select-drink-size').html("");
             }
@@ -242,10 +246,12 @@ function initSelectItem(restaurantID){
         $('#side').on('change', function(e){
             var restaurant = r.getRestaurant(restaurantID);
             var selectedSide = restaurant.menu.sides[$(this).val()];
-            selectedSide.type = 'side';
-            if(selectedSide && ('prices' in selectedSide)){
-                $('#select-side-size').html(templateSize(selectedSide));
-                $('#select-side-size').removeClass('hidden');
+            if(selectedSide){
+                selectedSide.type = 'side';
+                if ('prices' in selectedSide){
+                    $('#select-side-size').html(templateSize(selectedSide));
+                    $('#select-side-size').removeClass('hidden');
+                }
             }else{
                 $('#select-side-size').html("");
             }
@@ -389,36 +395,41 @@ function preCheckoutPrepareItems(items, restaurantObj){
         var price;
         var stringName;
 
-        if(item[2]){
-            // add sized price
-            price = restaurantObj.menu[item[0]][item[1]]['prices'][item[2]];
-            stringName = restaurantObj.menu[item[0]][item[1]].name + " - " + item[2];
-        }else{
-            // add non-sized price
-            price = restaurantObj.menu[item[0]][item[1]]['price'];
-            stringName = restaurantObj.menu[item[0]][item[1]].name;
-        }
-        subtotal += price;
+        // only deal with the dish, if it is a valid selection (that is not none)
+        if((item[1] !== undefined) && (item[1] !== 'None')){
+            if(item[2] !== undefined){
+                // add sized price
+                price = restaurantObj.menu[item[0]][item[1]]['prices'][item[2]];
+                stringName = restaurantObj.menu[item[0]][item[1]].name + " - " + item[2];
+            }else{
+                // add non-sized price
+                price = restaurantObj.menu[item[0]][item[1]]['price'];
+                stringName = restaurantObj.menu[item[0]][item[1]].name;
+            }
+            subtotal += price;
 
-        // processed clean names and prices for items
-        resultItems.push({price: price, name: stringName});
+            // processed clean names and prices for items
+            resultItems.push({price: price, name: stringName});
+        }
     }
 
     if(_debug){ console.log('subtotal: ', subtotal); }
 
     var rate = 2;
     var effective_rate = rate - 1.00;
-    var premium_paid = (subtotal * rate);
+    var premium_paid = (subtotal * effective_rate);
     var tax = (subtotal * 0.0625);
     var total = (subtotal + premium_paid + tax);
     var items = {
         items: resultItems,
         subtotal: subtotal,
-        rate: rate,
+        rate: effective_rate * 100,
         premium_paid: premium_paid,
         tax_paid: tax,
         total_paid: total
     };
+
+    console.log(items);
 
     return items;
 }
@@ -437,8 +448,9 @@ function initCheckout(items, restaurant){
 
         var html    = template(items);
         $('#getpage-section').html(html);
+
+        startTimer(180, '#place-order-button');
     });
-    startTimer(180, '#place-order-button');
 }
 
 $(function (){ 

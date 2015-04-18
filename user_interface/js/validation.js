@@ -7,8 +7,7 @@
 // page to get
 var page = {"register-form":"credit_card",
            "creditcard-form":"welcome",
-           "login-form":"home_screen",
-           "select_item-form": "check_out",
+           "login-form":"home_screen"
            };
            
 // function to execute
