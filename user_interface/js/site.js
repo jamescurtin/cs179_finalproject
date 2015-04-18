@@ -141,6 +141,26 @@ function initSelectRestaurant(restaurants, searchTerm){
 
         // render confirmation of the search term so the user remembers what they were looking for
         $('#select-restaurant-search-term').html(searchTerm);
+        
+        $("#select-restaurant-continue-button").on("click", function(){
+            // this is the restaurant id to render later
+            var selectedVal = $("#restaurant").val();
+
+            if(_debug){ console.log(selectedVal); }
+
+            if(selectedVal == ""){
+                document.getElementById("restaurant-alert").innerHTML = "Required.";
+            }else{
+
+                // cleanup old event handlers before leaving home context
+                destroyHome();
+
+                userdata.currentRestaurant = selectedVal;
+                initSelectItem(selectedVal);
+                // ease scroll to top of next view
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+            }
+        });
     });
 }
 
@@ -231,50 +251,41 @@ function initSelectItem(restaurantID){
             }
         });
 
-        // handle going back 
-        $('#select-item-back-button').on('click', function(e){
-            initHome();
-        });
-
         $('#select-item-continue-button').on('click', function(e){
-            var items = [];
-            var restaurant = r.getRestaurant(restaurantID);
+            var items = val('select_item-form');
+            if(items != undefined){
+                userdata.items = items;
+                var items = [];
+                var restaurant = r.getRestaurant(restaurantID);
+                var entreeVal = $('#entree').val(),
+                    drinkVal = $('#drink').val(),
+                    sideVal = $('#side').val(),
+                    entreeSize = $('input[name="entree_size"]:checked').val(),
+                    drinkSize = $('input[name="drink_size"]:checked').val(),
+                    sideSize = $('input[name="side_size"]:checked').val();
 
-            var entreeVal = $('#entree').val(),
-                drinkVal = $('#drink').val(),
-                sideVal = $('#side').val(),
-                entreeSize = $('input[name="entree_size"]:checked').val(),
-                drinkSize = $('input[name="drink_size"]:checked').val(),
-                sideSize = $('input[name="side_size"]:checked').val();
+                if(_debug){ 
+                    console.log("Entree: ", entreeVal, " Drink: ", drinkVal, " Side: ", sideVal); 
+                    console.log("EntreeSize: ", entreeSize, " drinkSize: ", drinkSize, " sideSize: ", sideSize);
+                }
 
-            if(_debug){ 
-                console.log("Entree: ", entreeVal, " Drink: ", drinkVal, " Side: ", sideVal); 
-                console.log("EntreeSize: ", entreeSize, " drinkSize: ", drinkSize, " sideSize: ", sideSize);
-            }
+                if(entreeVal){
+                    items.push(['entrees', entreeVal, entreeSize]);
+                }
+                if(drinkVal){
+                    items.push(['drinks', drinkVal, drinkSize]);
+                }
+                if(sideVal){
+                    items.push(['sides', sideVal, sideSize]);
+                }
 
-            // TODO: this needs to be changed to return results of validation,
-            // not actually redirect/navigate/render itself
-            // val('select_item-form');
-
-            
-
-            if(entreeVal){
-                items.push(['entrees', entreeVal, entreeSize]);
-            }
-            if(drinkVal){
-                items.push(['drinks', drinkVal, drinkSize]);
-            }
-            if(sideVal){
-                items.push(['sides', sideVal, sideSize]);
-            }
-
-            if(items.length > 0){
-                destroySelectItem();
-                var cleanItems = preCheckoutPrepareItems(items, restaurant);
-                initCheckout(cleanItems, restaurant);
-            }else{
-                // invalid or N/A order
-                console.log('invalid order');
+                if(items.length > 0){
+                    destroySelectItem();
+                    var cleanItems = preCheckoutPrepareItems(items, restaurant);
+                    initCheckout(cleanItems, restaurant);
+                }else{
+                    console.log('invalid order');
+                }
             }
         });
     });
