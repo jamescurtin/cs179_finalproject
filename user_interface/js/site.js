@@ -50,12 +50,12 @@ function initHome(){
         // when the restaurant changes, we need to display rate and other data
         $("#restaurant").on("change", function(){
             var inputBox = $("#inputBox");
-            
             var selectedVal = $(this).val();
 
             if(selectedVal){
                 var selectedRestaurant = getRestaurant(selectedVal);
-
+                localStorage.setItem("rate", Number.random(1, 2, 2));
+                selectedRestaurant.rate = localStorage.getItem("rate");
                 // render restaurant info for selected restaurant
                 var html  = templateRestInfo(selectedRestaurant);
                 inputBox.html(html);
@@ -327,7 +327,7 @@ function getpage (id, callback) {
         if(userid != null){
             if(id == "select_item"){initSelectItem(userdata.restaurant);}
             // uncomment after initcheckout is fixed
-            //if(id == "check_out"){initcheckout(userdata.items);}
+            if(id == "check_out"){initcheckout(userdata.items);}
             else{
                 $("#getpage-section").load(url,function(){
                      if(id == "home_screen"){initHome();}
@@ -414,8 +414,7 @@ function preCheckoutPrepareItems(items, restaurantObj){
     }
 
     if(_debug){ console.log('subtotal: ', subtotal); }
-
-    var rate = 2;
+    var rate = localStorage.getItem("rate");
     var effective_rate = rate - 1.00;
     var premium_paid = (subtotal * effective_rate);
     var tax = (subtotal * 0.0625);
@@ -497,7 +496,7 @@ function remove_data(id){
     userdata[id] = null;
 }
 
-// Countdown Timer for checkout.html
+// Countdown Timer for checkout.html and thank_you.html
 function startTimer(duration, interruptJueryID) {
     var start = Date.now(),
         diff,
@@ -558,4 +557,15 @@ function lockoutSubmit(button) {
         button.value = oldValue;
         button.removeAttribute('disabled');
     }, 3000)
+}
+
+// Random rate generator
+Number.random = function(minimum, maximum, precision) {
+    minimum = minimum === undefined ? 0 : minimum;
+    maximum = maximum === undefined ? 9007199254740992 : maximum;
+    precision = precision === undefined ? 0 : precision;
+
+    var random = Math.random() * (maximum - minimum) + minimum;
+
+    return random.toFixed(precision);
 }

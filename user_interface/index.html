@@ -115,13 +115,13 @@
                         {{/each}}
                         <tr style="height: 15px;"></tr>
                         <tr>
-                            <td class="text-left">Premium Rate ({{rate}}%):</td>
-                            <td class="text-right">{{decimal premium_paid}}</td>
+                            <td class="text-left">Sub Total:</td>
+                            <td class="text-right">{{decimal subtotal}}</td>
                         </tr>
                         <tr style="height: 15px;"></tr>
                         <tr>
-                            <td class="text-left">Sub Total:</td>
-                            <td class="text-right">{{decimal subtotal}}</td>
+                            <td class="text-left">Premium Rate ({{rate}}%):</td>
+                            <td class="text-right">{{decimal premium_paid}}</td>
                         </tr>
                         <tr style="height: 15px;"></tr>
                         <tr>
@@ -168,7 +168,7 @@
         <div class="form-group col-xs-12">
             {{#each prices}}
                 {{! TODO size as full word needed in text}}
-                <label style="margin-right: 20px;" ><input type="radio" id="{{../type}}_size_{{@key}} " name="{{../type}}_size" value={{@key}} required data-validation-required-message="Required.">&nbsp;{{@key}} ${{this}}</label>
+                <label style="margin-right: 20px;" ><input type="radio" id="{{../type}}_size_{{@key}} " name="{{../type}}_size" value="{{@key}}" required data-validation-required-message="Required.">&nbsp;{{@key}} ${{decimal this}}</label>
             {{/each}}
         </div>
     </script>
