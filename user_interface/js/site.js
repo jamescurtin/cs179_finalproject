@@ -331,16 +331,12 @@ function getpage (id, callback) {
                 return;
             }
             // uncomment after initcheckout is fixed
-<<<<<<< HEAD
-=======
-            if(id == "check_out"){initcheckout(userdata.items);}
-            if(id == "thank_you"){
+            else if(id == "thank_you"){
                 $("#getpage-section").load(url, function(){
                     startTimer(30, '.endtimer');
                     deferred.resolve();
                 });
             }       
->>>>>>> origin/dev
             else{
                 $("#getpage-section").load(url,function(){
                      if(id == "home_screen"){initHome();}
