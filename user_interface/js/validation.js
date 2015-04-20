@@ -68,16 +68,26 @@ function val(id){
             }
         }
         else if(id == "settings_info"){
-            userdata.info = formdata;
-            if(hasStorage) {
-                localStorage.setItem("uinfo", JSON.stringify(userdata.info));
+            if(formdata.password == formdata["confirm_password"]){
+                userdata.info = formdata;
+                if(hasStorage) {
+                    localStorage.setItem("uinfo", JSON.stringify(userdata.info));
+                }
+                hide('edit_info');
+                alert("success");
             }
+            else{
+                alert("Passwords do not match.");
+            }
+            //TODO hide div
         }
         else if(id == "settings_payment"){
             userdata.payment = formdata;
             if(hasStorage) {
                 localStorage.setItem("upayment", JSON.stringify(userdata.payment));
             } 
+            hide('edit_payment');
+            alert("success");
         }
         else{}
         return formdata;
