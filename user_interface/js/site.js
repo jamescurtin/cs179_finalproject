@@ -54,7 +54,7 @@ function initHome(){
 
             if(selectedVal){
                 var selectedRestaurant = getRestaurant(selectedVal);
-                localStorage.setItem("rate", Number.random(1, 2, 2));
+                localStorage.setItem("rate", Number.random(1, 2, 1));
                 selectedRestaurant.rate = localStorage.getItem("rate");
                 // render restaurant info for selected restaurant
                 var html  = templateRestInfo(selectedRestaurant);
@@ -325,9 +325,22 @@ function getpage (id, callback) {
     }
     else{
         if(userid != null){
-            if(id == "select_item"){initSelectItem(userdata.restaurant);}
+            if(id === "select_item"){
+                initSelectItem(userdata.restaurant);
+                load_data('items');
+                return;
+            }
             // uncomment after initcheckout is fixed
+<<<<<<< HEAD
+=======
             if(id == "check_out"){initcheckout(userdata.items);}
+            if(id == "thank_you"){
+                $("#getpage-section").load(url, function(){
+                    startTimer(30, '.endtimer');
+                    deferred.resolve();
+                });
+            }       
+>>>>>>> origin/dev
             else{
                 $("#getpage-section").load(url,function(){
                      if(id == "home_screen"){initHome();}
@@ -415,6 +428,7 @@ function preCheckoutPrepareItems(items, restaurantObj){
 
     if(_debug){ console.log('subtotal: ', subtotal); }
     var rate = localStorage.getItem("rate");
+    var printrate = rate;
     var effective_rate = rate - 1.00;
     var premium_paid = (subtotal * effective_rate);
     var tax = (subtotal * 0.0625);
@@ -422,6 +436,7 @@ function preCheckoutPrepareItems(items, restaurantObj){
     var items = {
         items: resultItems,
         subtotal: subtotal,
+        printrate: printrate,
         rate: effective_rate * 100,
         premium_paid: premium_paid,
         tax_paid: tax,
@@ -448,7 +463,7 @@ function initCheckout(items, restaurant){
         var html    = template(items);
         $('#getpage-section').html(html);
 
-        startTimer(180, '#place-order-button');
+        startTimer(180, '.endtimer');
     });
 }
 
@@ -525,7 +540,6 @@ function startTimer(duration, interruptJueryID) {
 
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
-
         $('#timer').html(minutes + ":" + seconds)
         if (!interrupt && minutes == 0 && seconds == 0) {
             $(interruptJueryID).off('click');
