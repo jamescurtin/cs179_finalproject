@@ -6,12 +6,13 @@
 // form validation
 // page to get
 var page = {"register-form":"credit_card",
-           "creditcard-form":"welcome",
-           "login-form":"home_screen"
+           "creditcard-form":"welcome"
            };
            
 // function to execute
-var fx = {"login-form": login, "creditcard-form": login};
+var fx = {"login-form": checkuser, 
+          "creditcard-form": login,
+         };
 
 // validation function
 function val(id){
@@ -55,6 +56,9 @@ function val(id){
         else if(page[form_id] != undefined){
             getpage(page[form_id]);
         }
+        else if(fx[form_id] != undefined){
+            fx[form_id](formdata);
+        }
         else{
         }
         if(id == "creditcard-form"){
@@ -63,7 +67,19 @@ function val(id){
                 localStorage.setItem("upayment", JSON.stringify(formdata));
             }
         }
-        // return form data
+        else if(id == "settings_info"){
+            userdata.info = formdata;
+            if(hasStorage) {
+                localStorage.setItem("uinfo", JSON.stringify(userdata.info));
+            }
+        }
+        else if(id == "settings_payment"){
+            userdata.payment = formdata;
+            if(hasStorage) {
+                localStorage.setItem("upayment", JSON.stringify(userdata.payment));
+            } 
+        }
+        else{}
         return formdata;
     }
 }
