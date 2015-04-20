@@ -36,13 +36,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-1">
-                    <a id="settings" onclick="getpage('settings');"><i class="fa fa-cog fa-inverse fa-2x" style="margin: 20px 0 0 0"></i></a>
+                    <a id="settings" onclick="getpage('settings');"><i class="fa fa-cog fa-inverse fa-2x endtimer" style="margin: 20px 0 0 0"></i></a>
                 </div>
                 <div class="col-xs-8 col-xs-offset-1">
                     <h3 class="text-center" style="color:white;">Lunch Express</h3>
                 </div>
                 <div class="col-xs-1">
-                    <a id="home" onclick="getpage('home_screen');"><i class="fa fa-home fa-inverse fa-2x" style="margin:20px 0 0 0;"></i></a>
+                    <a id="home" onclick="getpage('home_screen');"><i class="fa fa-home fa-inverse fa-2x endtimer" style="margin:20px 0 0 0;"></i></a>
                 </div>
             </div>
         </div>
@@ -120,7 +120,7 @@
                         </tr>
                         <tr style="height: 15px;"></tr>
                         <tr>
-                            <td class="text-left">Premium Rate ({{rate}}%):</td>
+                            <td class="text-left">Surge Rate: {{printrate}}X:</td>
                             <td class="text-right">{{decimal premium_paid}}</td>
                         </tr>
                         <tr style="height: 15px;"></tr>
@@ -151,8 +151,8 @@
                 </div>
             <div class="row">
                 <div class="col-xs-12 text-center">
-                    <button type="button" class="btn btn-lg btn-outline " onclick="getpage('select_item');load_data('items');">Go Back</button>
-                    <button id="place-order-button" type="button" class="btn btn-lg btn-outline " onclick="getpage('thank_you'); startTimer(30, '#cancelorder');">Place Order</button>
+                    <button id="back-to-itemselect-button" type="button" class="btn btn-lg btn-outline endtimer" onclick="getpage('select_item');">Go Back</button>
+                    <button id="place-order-button" type="button" class="btn btn-lg btn-outline endtimer" onclick="getpage('thank_you');">Place Order</button>
                 </div>
             </div>
             <div class="row">
