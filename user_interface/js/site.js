@@ -582,7 +582,7 @@ Number.random = function(minimum, maximum, precision) {
 
 function checkuser(formdata){
     console.log(formdata);
-    if(formdata.username == "John" && formdata.password == "Harvard"){
+    if(formdata.username.toLowerCase() == "john" && formdata.password == "Harvard"){
         login();
         userdata.info = {first_name: "John", last_name: "Harvard", email_address: "jharvard@harvard.edu", password: "Harvard", confirm_password: "Harvard"};
         userdata.payment = {card_number: "12345678910", expiration_date: "0167", card_name: "John Harvard", billing_address: "Harvard U. Cambridge, MA 02138", cvv_code: "000"};
