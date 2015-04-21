@@ -132,7 +132,7 @@
                         <tr>
                             <td class="text-left">Tip:</td>
                             <td class="text-right" style="z-axis: 999999;">
-                                <select style="color: black;">
+                                <select id="tip" onchange="updateTip();" style="color: black;">
                                     <option value=10>10%</option>
                                     <option value=15>15%</option>
                                     <option value=20>20%</option>
@@ -145,7 +145,7 @@
                         </tr>
                         <tr>
                             <td class="text-left">Total:</td>
-                            <td class="text-right">{{decimal total_paid}}</td>
+                            <td class="text-right" id="total_paid">{{decimal total_paid}}</td>
                         </tr>
                     </table>
                 </div>

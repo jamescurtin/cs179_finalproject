@@ -428,7 +428,10 @@ function preCheckoutPrepareItems(items, restaurantObj){
     var effective_rate = rate - 1.00;
     var premium_paid = (subtotal * effective_rate);
     var tax = (subtotal * 0.0625);
+    var tip = .10
     var total = (subtotal + premium_paid + tax);
+    // default 10% tip
+    total = total * (1+tip);
     var items = {
         items: resultItems,
         subtotal: subtotal,
@@ -436,10 +439,12 @@ function preCheckoutPrepareItems(items, restaurantObj){
         rate: effective_rate * 100,
         premium_paid: premium_paid,
         tax_paid: tax,
+        tip: tip,
         total_paid: total
     };
 
     console.log(items);
+    userdata.pre_total = subtotal + premium_paid + tax;
 
     return items;
 }
@@ -595,4 +600,12 @@ function checkuser(formdata){
     else{
         show('invalid_user-alert');
     }
+}
+
+function updateTip(){
+    var tip= $("#tip").val();
+    var newtotal = userdata.pre_total * (1+(tip/100));
+    newtotal = newtotal.toFixed(2);
+    userdata.newtotal = newtotal;
+    document.getElementById("total_paid").innerHTML = newtotal;
 }
