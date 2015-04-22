@@ -259,9 +259,13 @@ function initSelectItem(restaurantID){
             var selectedEntree = restaurant.menu.entrees[$(this).val()];
             if(selectedEntree){
                 selectedEntree.type = 'entree';
+
+                // if the new selection has mult sizes show the sizes, otherwise clear the size area
                 if('prices' in selectedEntree){
                     $('#select-entree-size').html(templateSize(selectedEntree));
                     $('#select-entree-size').removeClass('hidden');
+                }else{
+                    $('#select-drink-size').html("");
                 }
             }else{
                 $('#select-entree-size').html("");
@@ -274,9 +278,13 @@ function initSelectItem(restaurantID){
             var selectedDrink = restaurant.menu.drinks[$(this).val()];
             if(selectedDrink){
                 selectedDrink.type = 'drink';
+
+                // if the new selection has mult sizes show the sizes, otherwise clear the size area
                 if ('prices' in selectedDrink){
                     $('#select-drink-size').html(templateSize(selectedDrink));
                     $('#select-drink-size').removeClass('hidden');
+                }else{
+                    $('#select-drink-size').html("");
                 }
             }else{
                 $('#select-drink-size').html("");
@@ -289,9 +297,13 @@ function initSelectItem(restaurantID){
             var selectedSide = restaurant.menu.sides[$(this).val()];
             if(selectedSide){
                 selectedSide.type = 'side';
+
+                // if the new selection has mult sizes show the sizes, otherwise clear the size area
                 if ('prices' in selectedSide){
                     $('#select-side-size').html(templateSize(selectedSide));
                     $('#select-side-size').removeClass('hidden');
+                }else{
+                    $('#select-drink-size').html("");
                 }
             }else{
                 $('#select-side-size').html("");
@@ -369,7 +381,6 @@ function getpage (id, callback) {
             if(id == "select_item"){
                 initSelectItem(userdata.restaurant);
                 load_data('items');
-                return;
             }
             // uncomment after initcheckout is fixed
             else if(id == "check_out"){
@@ -596,12 +607,12 @@ function startTimer(duration, interruptJqueryID, getpageID) {
             // example 05:00 not 04:59
             start = Date.now() + 1000;
         }
-    };
+    }
 
     // listen on the jQueryID that when clicked, will interrupt the timer
     $(interruptJqueryID).on('click', function(e){
         interrupt = true;
-        $(this).off('click');
+        $(interruptJqueryID).off('click');
         if(_debug) console.log('timer interrupted by click on ', interruptJqueryID);
         clearInterval(setIntervalID);
         console.log("attached handler for ", interruptJqueryID);
