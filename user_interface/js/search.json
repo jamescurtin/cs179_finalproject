@@ -1,0 +1,22 @@
+{
+    "fast food":["pinocchio", "al", "crema", "tasty"],
+    "pizza":["pinocchio"],
+    "meatballs":["pinocchio", "al"],
+    "meatball sub":["pinocchio", "al"],
+    "subs":["al", "crema"],
+    "sandwich":["al", "crema"],
+    "sandwiches":["al", "crema"],
+    "burger":["tasty"],
+    "hamburger":["tasty"],
+    "salad":["pinocchio", "al", "crema", "tasty"],
+    "quick":["pinocchio", "al", "crema", "tasty"],
+    "american":["al", "crema", "tasty"],
+    "italian":["pinocchio"],
+    "soup":["crema"],
+    "bakery":["crema"],
+    "coffee":["crema"],
+    "pasta":["pinocchio", "crema"],
+    "deli":["al"],
+    "artisan":["crema"],
+    "cafe":["crema"]
+}

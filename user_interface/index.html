@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Lunch Express</title>
+
+    <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
+    <link href="css/lib/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/freelancer.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body id="page-top" class="index">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default" style="margin: 0; border-radius: 0">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-1">
+                    <a id="settings" onclick="getpage('settings');"><i class="fa fa-cog fa-inverse fa-2x endtimer" style="margin: 20px 0 0 0"></i></a>
+                </div>
+                <div class="col-xs-8 col-xs-offset-1">
+                    <h3 class="text-center" style="color:white;">Lunch Express</h3>
+                </div>
+                <div class="col-xs-1">
+                    <a id="home" onclick="getpage('home_screen');"><i class="fa fa-home fa-inverse fa-2x endtimer" style="margin:20px 0 0 0;"></i></a>
+                </div>
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    
+    <!--Section Goes Here -->
+    <section class="success" id="getpage-section">
+    </section>
+
+    <!--Handlebars Render Zone 
+    <section id="render">
+    </section> -->
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="footer-above">
+        </div>
+    </footer>
+    
+    <!-- jQuery -->
+    <script src="js/lib/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/lib/bootstrap.min.js"></script>
+
+    <script src="js/lib/handlebars-1.0.rc.2.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/freelancer.js"></script>
+    <script src="js/LE.js"></script>
+    <script src="js/LEDataModel.js"></script>
+    <script src="js/site.js"></script>
+    <script src="js/validation.js"></script>
+
+    <!-- LUNCH EXPRESS Handlebars templates -->
+    <script id="restaurant-info-template" type="text/x-handlebars-template">
+        <div>
+            Rate: <b>{{rate}} x</b><br>Wait time: <b>{{wait_time}} min</b><br>Distance: <b>{{distance}} miles</b><br>
+        </div>
+    </script>
+
+    <script id="restaurant-dropdown-template" type="text/x-handlebars-template">
+        {{#each this}}
+            <option value={{id}}>
+                {{name}}
+            </option>
+        {{/each}}
+    </script>
+
+    <script id="checkout-template" type="text/x-handlebars-template">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <h3>Check Out</h3>
+                    <hr class="star-light">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-8 col-xs-offset-2 text-center">
+                    <table style="width: 100%">
+                        {{#each items}}
+                            <tr>
+                                <td class="text-left" style="margin: 15px;">{{name}}:</td>
+                                <td class="text-right">{{decimal price}}</td>
+                            </tr>
+                        {{/each}}
+                        <tr style="height: 15px;"></tr>
+                        <tr>
+                            <td class="text-left">Sub Total:</td>
+                            <td class="text-right">{{decimal subtotal}}</td>
+                        </tr>
+                        <tr style="height: 15px;"></tr>
+                        <tr>
+                            <td class="text-left">Surge Rate: {{printrate}}X:</td>
+                            <td class="text-right">{{decimal premium_paid}}</td>
+                        </tr>
+                        <tr style="height: 15px;"></tr>
+                        <tr>
+                            <td class="text-left">Tax:</td>
+                            <td class="text-right">{{decimal tax_paid}}</td>
+                        </tr>
+                        <tr style="height: 15px;"></tr>
+                        <tr>
+                            <td class="text-left">Tip:</td>
+                            <td class="text-right" style="z-axis: 999999;">
+                                <select id="tip" onchange="updateTip();" style="color: black;">
+                                    <option value=10>10%</option>
+                                    <option value=15>15%</option>
+                                    <option value=20>20%</option>
+                                    <option value=0>No Tip</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                        <td><hr></td><td><hr></td>
+                        </tr>
+                        <tr>
+                            <td class="text-left">Total:</td>
+                            <td class="text-right" id="total_paid">{{decimal total_paid}}</td>
+                        </tr>
+                    </table>
+                </div>
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <button id="back-to-itemselect-button" type="button" class="btn btn-lg btn-outline endtimer" onclick="getpage('select_item');">Go Back</button>
+                    <button id="place-order-button" type="button" class="btn btn-lg btn-outline endtimer" onclick="getpage('thank_you');">Place Order</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <br>
+                    <p>You have <b><span id="timer"></span></b> minutes left to place your order</p>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script id="item-size-template" type="text/x-handlebars-template">
+        <div class="form-group col-xs-12">
+            {{#each prices}}
+                {{! TODO size as full word needed in text}}
+                <label style="margin-right: 20px;" ><input type="radio" id="{{../type}}_size_{{@key}} " name="{{../type}}_size" value="{{@key}}" required data-validation-required-message="Required.">&nbsp;{{@key}} ${{decimal this}}</label>
+            {{/each}}
+        </div>
+    </script>
+
+    <script id="item-choice-template" type="text/x-handlebars-template">
+        {{#each this}}
+            {{#if this.prices}}
+                {{! Has size }}
+                <option value="{{@index}}" data-gen="1" data-sizes=1>{{this.name}} - varies by size</option>
+            {{else}}
+                {{! No size, display price }}
+                <option value="{{@index}}" data-gen="1" data-sizes=0>{{this.name}} - ${{decimal this.price}}</option>
+            {{/if}}
+        {{/each}}
+        <p class="help-block" id="sizes-alert"></p>
+    </script>
+
+
+     <script id="select-item-template" type="text/x-handlebars-template">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <h3>Select Items</h3>
+                    <hr class="star-light">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <form name="select_item-form" id="select_item-form" novalidate>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12">
+                                <select id="entree" class="form-control" required data-validation-required-message="Required.">
+                                    <option value="" id="entree-render">Select Entree</option>
+
+                                    {{! Render Item choice template here}}
+
+                                    <option value="None">None</option>
+                                </select>
+                                <p class="help-block" id="entree-alert"></p>
+                            </div>
+                        </div>
+                        <div id="select-entree-size" class="row control-group hidden">
+                            {{! partial template needed for generating this}}
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12">
+                                <select id="side" class="form-control" required data-validation-required-message="Required.">
+                                    <option value="" id="side-render">Select Side</option>
+                                    
+                                    {{! Render Item choice template here}}
+
+                                    <option value="None">None</option>
+                                </select>
+                                <p class="help-block" id="side-alert"></p>
+                            </div>
+                        </div>
+                        <div id="select-side-size" class="row control-group hidden">
+                           {{! Render Item size template here}}
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12">
+                                <select id="drink" class="form-control" required data-validation-required-message="Required.">
+                                    <option value="" id="drink-render">Select Drink</option>
+
+                                    {{! Render Item choice template here}}
+
+                                    <option value="None">None</option>
+                                </select>
+                                <p class="help-block" id="drink-alert"></p>
+                            </div>
+                        </div>
+                        <div id="select-drink-size" class="row control-group hidden">
+                            {{! Render Item size template here}}
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12">
+                                <label for="notes">Special Notes:</label>
+                                <textarea class="form-control" rows="4" cols="50" id="notes" placeholder="ex: no cheese" required data-validation-required-message="Not Required."></textarea>
+                            </div>
+                        </div>
+                        
+                        <br>
+                        <div id="success"></div>
+                         <p class="help-block" id="sizes-alert"></p>
+                        <div class="row">
+                            <div class="form-group col-xs-12 text-center">
+                                <button type="button" onclick="getpage('home_screen')" class="btn btn-lg btn-outline">Go Back</button>&nbsp;
+                             <button id="select-item-continue-button" type="button" class="btn btn-lg btn-outline ">Continue</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </script>
+
+</body>
+</html>

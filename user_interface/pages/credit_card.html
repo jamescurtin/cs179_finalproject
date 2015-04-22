@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- redirect to index.html -->
+    <meta http-equiv="refresh" content="0;/index.html">
+    <meta name="description" content="html for modals">
+    <meta name="author" content="A-Team">
+    <title>credit_card.html</title>
+</head>
+<body>
+    <!--Section Goes Here -->
+    <section class="success" id="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <h3>Credit Card Information</h3>
+                    <hr class="star-light">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <form id="creditcard-form" method="post" name="register" novalidate="">
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12">
+                                <input class="form-control" data-validation-required-message=
+                                "Required*" id="card_number" required="" placeholder=
+                                "Credit Card Number">
+                                <p class="help-block" id="card_number-alert">
+                                </p>
+                                <input class="form-control" data-validation-required-message=
+                                "Required*" id="expiration_date" required=""  placeholder="Expiration Date">
+                                <p class="help-block" id="expiration_date-alert">
+                                </p>
+                                <input class="form-control" data-validation-required-message=
+                                "Required*" id="card_name" required=""  placeholder=
+                                "Name on Card">
+                                <p class="help-block" id="card_name-alert">
+                                </p>
+                                <input class="form-control" data-validation-required-message=
+                                "Required*" id="billing_address" required="" placeholder=
+                                "Billing Address">
+
+                                <p class="help-block" id="billing_address-alert">
+                                </p>
+                                <input class="form-control" data-validation-required-message=
+                                "Required*" id="cvv_code" required=""  type='password' placeholder="CVV Code">
+                                <p class="help-block" id="cvv_code-alert">
+                                </p>
+                                
+                            </div>
+                        </div>
+                        <br>
+                        <div id="success">
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-xs-12 text-center">
+                                <button class="btn btn-lg btn-outline" type="button" onclick="getpage('register');load_data('info');">Back</button>
+                                <button class="btn btn-lg btn-outline" type="button" value="submit" onclick="val('creditcard-form')">Continue</button>
+                                <div class="form-group col-xs-12 text-center">
+                                    <div class="portfolio-item">
+                                        <a class="portfolio-link" data-toggle="modal" href="#terms">
+                                        <div class="caption">
+                                            <div class="caption-content">
+                                                <button class="btn btn-lg btn-outline" type=
+                                                "button">Terms</button>
+                                            </div>
+                                        </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+            <p id="register-alert" class="help-block text-danger"></p>
+                </div>
+            </div>
+        </div>
+        <div class="portfolio-modal modal fade" id="terms" tabindex="-1">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                    <div class="lr">
+                        <div class="rl">
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-lg-offset-2">
+                            <div class="modal-body">
+                                <h2>Terms</h2>
+                                <br>
+
+
+                                <p>Our partner restaurants guarentee your order will be
+                                prepared immediately. If your order is not completed within
+                                <b>5 minutes</b> of submission, your meal is free</p>
+
+
+                                <p>During busier times of day, the premium for this service
+                                will be higher. You will never be charged for cancelling your
+                                order within 30 seconds of submission. Never wait in line for
+                                lunch again!</p>
+                                <button class="btn btn-default" data-dismiss="modal" type=
+                                "button">Got It.</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>    
+</html>
