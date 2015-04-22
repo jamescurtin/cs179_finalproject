@@ -376,7 +376,7 @@ function getpage (id, callback) {
                 initcheckout(userdata.items);
             }else if(id == "thank_you"){
                 $("#getpage-section").load(url, function(){
-                    startTimer(30, '.endtimer');
+                    startTimer(window.LE.wait.cancel, '.endtimer');
                     deferred.resolve();
                 });
             }else{
@@ -506,9 +506,11 @@ function initCheckout(items, restaurant){
         var template = Handlebars.compile(source);
 
         var html    = template(items);
-        $('#getpage-section').html(html);
+        var rendering = $('#getpage-section').html(html);
 
-        startTimer(180, '.endtimer');
+        $.when(rendering).done(function(){
+            startTimer(window.LE.wait.checkout, '.endtimer');
+        });
     });
 }
 
@@ -557,7 +559,7 @@ function remove_data(id){
 }
 
 // Countdown Timer for checkout.html and thank_you.html
-function startTimer(duration, interruptJueryID) {
+function startTimer(duration, interruptJqueryID, getpageID) {
     var start = Date.now(),
         diff,
         minutes,
@@ -566,15 +568,6 @@ function startTimer(duration, interruptJueryID) {
         setIntervalID;
 
     function timer() {
-        // listen on the jQueryID that when clicked, will interrupt the timer
-        $(interruptJueryID).on('click', function(e){
-            interrupt = true;
-            $(interruptJueryID).off('click');
-            if(_debug)console.log('timer interrupted by click on ', interruptJueryID);
-            clearInterval(setIntervalID);
-        });
-
-
         // get the number of seconds that have elapsed since 
         // startTimer() was called
         diff = duration - (((Date.now() - start) / 1000) | 0);
@@ -587,10 +580,15 @@ function startTimer(duration, interruptJueryID) {
         seconds = seconds < 10 ? "0" + seconds : seconds;
 
         $('#timer').html(minutes + ":" + seconds)
-        if (!interrupt && minutes == 0 && seconds == 0) {
-            $(interruptJueryID).off('click');
+        if ((!interrupt) && (minutes == 0) && (seconds == 0)) {
+            console.log('timer reached');
+            $(interruptJqueryID).off('click');
             clearInterval(setIntervalID);
-            getpage('home_screen');
+            if(getpageID){
+                getpage(getpageID);
+            }else{
+                getpage('home_screen');
+            }
         }
 
         if (diff <= 0) {
@@ -599,6 +597,15 @@ function startTimer(duration, interruptJueryID) {
             start = Date.now() + 1000;
         }
     };
+
+    // listen on the jQueryID that when clicked, will interrupt the timer
+    $(interruptJqueryID).on('click', function(e){
+        interrupt = true;
+        $(this).off('click');
+        if(_debug) console.log('timer interrupted by click on ', interruptJqueryID);
+        clearInterval(setIntervalID);
+        console.log("attached handler for ", interruptJqueryID);
+    });
 
     setIntervalID = setInterval(timer, 1000);
 

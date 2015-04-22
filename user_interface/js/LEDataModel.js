@@ -61,6 +61,10 @@
       info: null,
       credit_card: null
 
+    },
+    wait: {
+      cancel: 5, //30,
+      checkout: 5//180
     }
   };
 })();
