@@ -9,6 +9,10 @@ var hasStorage = false;
 
 var userdata = window.LE.userData;
 
+// TODO only compile templates once for efficiency
+window.LE.templates = {};
+var templates = window.LE.templates;
+
 var _debug = true;
 
 //shows hidden element by id
@@ -21,6 +25,43 @@ function hide(id){
     $( "#" + id ).addClass("hidden");
 }
 
+// called from initHome and initSelectRestaurant
+// invokes a handler that changes a dom element, rendering restaurant details
+function renderRestaurantDetails(templateRestInfo, getRestaurant, isSearch){
+    $(function(){
+        //first unbind any handlers previously
+        $("#restaurant").off("change");
+
+        console.log($("#restaurant").length);
+
+        // when the restaurant changes, we need to display rate and other data
+        $("#restaurant").on("change", function(){
+            var inputBox = $("#inputBox");
+            var selectedVal = $(this).val();
+
+            console.log("rest val: ", $(this));
+
+            if(selectedVal){
+                var selectedRestaurant = getRestaurant(selectedVal);
+                localStorage.setItem("rate", Number.random(1, 2, 2));
+                selectedRestaurant.rate = localStorage.getItem("rate");
+                // render restaurant info for selected restaurant
+                var html  = templateRestInfo(selectedRestaurant);
+                inputBox.html(html);
+            }else{
+                inputBox.html("");
+            }
+
+            isSearch = false;
+
+            if(_debug){ console.log("restaurant selected changed"); };
+        });
+
+
+        if(_debug){ console.log("renderRestaurantDetails called"); };
+    });
+}
+
 // call this function to initialize for home_screen.html
 function initHome(){
 
@@ -30,8 +71,12 @@ function initHome(){
     if(_debug){ console.log('initHome called'); }
 
     //prepare template that shows restaurant details
-    var source   = $("#restaurant-info-template").html();
-    var templateRestInfo = Handlebars.compile(source);
+    var source;
+
+    if(!templates.templateRestInfo){
+        source = $("#restaurant-info-template").html();
+        templates.templateRestInfo = Handlebars.compile(source);
+    }
 
      // prepare template that shows restaurant dropdown
     var source   = $("#restaurant-dropdown-template").html();
@@ -45,25 +90,11 @@ function initHome(){
 
         // populate dropdown for restaurants
         var html = templateRestaurantDropdown(getRestaurant());
-        $('#render-restaurants').after(html);
+        var renderingRestaurants = $('#render-restaurants').after(html);
 
         // when the restaurant changes, we need to display rate and other data
-        $("#restaurant").on("change", function(){
-            var inputBox = $("#inputBox");
-            var selectedVal = $(this).val();
-
-            if(selectedVal){
-                var selectedRestaurant = getRestaurant(selectedVal);
-                localStorage.setItem("rate", Number.random(1, 2, 1));
-                selectedRestaurant.rate = localStorage.getItem("rate");
-                // render restaurant info for selected restaurant
-                var html  = templateRestInfo(selectedRestaurant);
-                inputBox.html(html);
-            }else{
-                inputBox.html("");
-            }
-
-            isSearch = false;
+        $.when(renderingRestaurants).done(function(){
+            renderRestaurantDetails(templates.templateRestInfo, getRestaurant, isSearch);
         });
 
         // handler to process changes to the search bar for food
@@ -87,13 +118,13 @@ function initHome(){
 
                 // synchronization - ensure that search.json is loaded and select restaurant page fetched
                 $.when(window.LE.loadingSearchIndex, gettingPage).done(function(){
+                    // cleanup old event handlers before leaving home context
+                    destroyHome();
+
                     initSelectRestaurant(restaurants, searchTerm);
 
                     // ease scroll to top of next view
                     $("html, body").animate({ scrollTop: 0 }, "slow");
-
-                    // cleanup old event handlers before leaving home context
-                    destroyHome();
                 });
             }else{
                 // this is the restaurant id to render later
@@ -128,19 +159,29 @@ function destroyHome(){
 function initSelectRestaurant(restaurants, searchTerm){
     $(function(){
 
+        var getRestaurant = window.LE.restaurants.getRestaurant
+
         userdata.restaurant = null;
+
+        //dummy var
+        var isSearch = null;
 
          // prepare template
         var source   = $("#restaurant-dropdown-template").html();
         var template = Handlebars.compile(source);
 
-        html = template(restaurants);
+        html = template(restaurants); 
 
         // populate dropdown for restaurants
-        $('#render-restaurants').after(html);
+        var renderingRestaurants = $('#render-restaurants').after(html);
 
         // render confirmation of the search term so the user remembers what they were looking for
-        $('#select-restaurant-search-term').html(searchTerm);
+        var renderingSearchTerm = $('#select-restaurant-search-term').html(searchTerm);
+
+        // when the restaurant changes, we need to display rate and other data
+        $.when(renderingRestaurants, renderingSearchTerm).done(function(){
+            renderRestaurantDetails(templates.templateRestInfo, getRestaurant, isSearch);
+        });
         
         $("#select-restaurant-continue-button").on("click", function(){
             // this is the restaurant id to render later
@@ -325,18 +366,9 @@ function getpage (id, callback) {
     }
     else{
         if(userid != null){
-            if(id === "select_item"){
-                initSelectItem(userdata.restaurant);
-                load_data('items');
-                return;
-            }
+            if(id == "select_item"){initSelectItem(userdata.restaurant);}
             // uncomment after initcheckout is fixed
-            else if(id == "thank_you"){
-                $("#getpage-section").load(url, function(){
-                    startTimer(30, '.endtimer');
-                    deferred.resolve();
-                });
-            }       
+            if(id == "check_out"){initcheckout(userdata.items);}
             else{
                 $("#getpage-section").load(url,function(){
                      if(id == "home_screen"){initHome();}
@@ -424,27 +456,20 @@ function preCheckoutPrepareItems(items, restaurantObj){
 
     if(_debug){ console.log('subtotal: ', subtotal); }
     var rate = localStorage.getItem("rate");
-    var printrate = rate;
     var effective_rate = rate - 1.00;
     var premium_paid = (subtotal * effective_rate);
     var tax = (subtotal * 0.0625);
-    var tip = .10
     var total = (subtotal + premium_paid + tax);
-    // default 10% tip
-    total = total * (1+tip);
     var items = {
         items: resultItems,
         subtotal: subtotal,
-        printrate: printrate,
         rate: effective_rate * 100,
         premium_paid: premium_paid,
         tax_paid: tax,
-        tip: tip,
         total_paid: total
     };
 
     console.log(items);
-    userdata.pre_total = subtotal + premium_paid + tax;
 
     return items;
 }
@@ -464,7 +489,7 @@ function initCheckout(items, restaurant){
         var html    = template(items);
         $('#getpage-section').html(html);
 
-        startTimer(180, '.endtimer');
+        startTimer(180, '#place-order-button');
     });
 }
 
@@ -541,6 +566,7 @@ function startTimer(duration, interruptJueryID) {
 
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
+
         $('#timer').html(minutes + ":" + seconds)
         if (!interrupt && minutes == 0 && seconds == 0) {
             $(interruptJueryID).off('click');
@@ -583,29 +609,4 @@ Number.random = function(minimum, maximum, precision) {
     var random = Math.random() * (maximum - minimum) + minimum;
 
     return random.toFixed(precision);
-}
-
-function checkuser(formdata){
-    console.log(formdata);
-    if(formdata.username.toLowerCase() == "john" && formdata.password == "Harvard"){
-        login();
-        userdata.info = {first_name: "John", last_name: "Harvard", email_address: "jharvard@harvard.edu", password: "Harvard", confirm_password: "Harvard"};
-        userdata.payment = {card_number: "12345678910", expiration_date: "0167", card_name: "John Harvard", billing_address: "Harvard U. Cambridge, MA 02138", cvv_code: "000"};
-        if(hasStorage) {
-                localStorage.setItem("uinfo", JSON.stringify(userdata.info));
-                localStorage.setItem("upayment", JSON.stringify(userdata.payment));
-            }
-        getpage('home_screen');
-    }
-    else{
-        show('invalid_user-alert');
-    }
-}
-
-function updateTip(){
-    var tip= $("#tip").val();
-    var newtotal = userdata.pre_total * (1+(tip/100));
-    newtotal = newtotal.toFixed(2);
-    userdata.newtotal = newtotal;
-    document.getElementById("total_paid").innerHTML = newtotal;
 }
