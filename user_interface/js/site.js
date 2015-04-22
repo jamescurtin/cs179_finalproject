@@ -366,10 +366,20 @@ function getpage (id, callback) {
     }
     else{
         if(userid != null){
-            if(id == "select_item"){initSelectItem(userdata.restaurant);}
+            if(id == "select_item"){
+                initSelectItem(userdata.restaurant);
+                load_data('items');
+                return;
+            }
             // uncomment after initcheckout is fixed
-            if(id == "check_out"){initcheckout(userdata.items);}
-            else{
+            else if(id == "check_out"){
+                initcheckout(userdata.items);
+            }else if(id == "thank_you"){
+                $("#getpage-section").load(url, function(){
+                    startTimer(30, '.endtimer');
+                    deferred.resolve();
+                });
+            }else{
                 $("#getpage-section").load(url,function(){
                      if(id == "home_screen"){initHome();}
                      else{}
@@ -456,20 +466,29 @@ function preCheckoutPrepareItems(items, restaurantObj){
 
     if(_debug){ console.log('subtotal: ', subtotal); }
     var rate = localStorage.getItem("rate");
+    var printrate = rate;
     var effective_rate = rate - 1.00;
     var premium_paid = (subtotal * effective_rate);
     var tax = (subtotal * 0.0625);
+    var tip = .10;
     var total = (subtotal + premium_paid + tax);
+
+    // default 10% tip
+    total = total * (1+tip);
+
     var items = {
         items: resultItems,
         subtotal: subtotal,
+        printrate: printrate,
         rate: effective_rate * 100,
         premium_paid: premium_paid,
         tax_paid: tax,
+        tip: tip,
         total_paid: total
     };
 
     console.log(items);
+    userdata.pre_total = subtotal + premium_paid + tax;
 
     return items;
 }
@@ -489,7 +508,7 @@ function initCheckout(items, restaurant){
         var html    = template(items);
         $('#getpage-section').html(html);
 
-        startTimer(180, '#place-order-button');
+        startTimer(180, '.endtimer');
     });
 }
 
@@ -609,4 +628,29 @@ Number.random = function(minimum, maximum, precision) {
     var random = Math.random() * (maximum - minimum) + minimum;
 
     return random.toFixed(precision);
+}
+
+function checkuser(formdata){
+    console.log(formdata);
+    if(formdata.username.toLowerCase() == "john" && formdata.password == "Harvard"){
+        login();
+        userdata.info = {first_name: "John", last_name: "Harvard", email_address: "jharvard@harvard.edu", password: "Harvard", confirm_password: "Harvard"};
+        userdata.payment = {card_number: "12345678910", expiration_date: "0167", card_name: "John Harvard", billing_address: "Harvard U. Cambridge, MA 02138", cvv_code: "000"};
+        if(hasStorage) {
+                localStorage.setItem("uinfo", JSON.stringify(userdata.info));
+                localStorage.setItem("upayment", JSON.stringify(userdata.payment));
+            }
+        getpage('home_screen');
+    }
+    else{
+        show('invalid_user-alert');
+    }
+}
+
+function updateTip(){
+    var tip= $("#tip").val();
+    var newtotal = userdata.pre_total * (1+(tip/100));
+    newtotal = newtotal.toFixed(2);
+    userdata.newtotal = newtotal;
+    document.getElementById("total_paid").innerHTML = newtotal;
 }
