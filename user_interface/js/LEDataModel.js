@@ -63,8 +63,8 @@
 
     },
     wait: {
-      cancel: 5, //30,
-      checkout: 5//180
+      cancel: 30, //30,
+      checkout: 180//180
     }
   };
 })();
