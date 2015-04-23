@@ -384,7 +384,7 @@ function getpage (id, callback) {
             }
             // uncomment after initcheckout is fixed
             else if(id == "check_out"){
-                initcheckout(userdata.items);
+                initCheckout(userdata.items);
             }else if(id == "thank_you"){
                 $("#getpage-section").load(url, function(){
                     startTimer(window.LE.wait.cancel, '.endtimer');
@@ -504,6 +504,11 @@ function preCheckoutPrepareItems(items, restaurantObj){
     return items;
 }
 
+function destroyCheckout(){
+    $('#back-to-itemselect-button').off('click');
+    $('#place-order-button').off('click');
+}
+
 function initCheckout(items, restaurant){
     $(function(){
         Handlebars.registerHelper('decimal', function(number) {
@@ -520,7 +525,18 @@ function initCheckout(items, restaurant){
         var rendering = $('#getpage-section').html(html);
 
         $.when(rendering).done(function(){
-            startTimer(window.LE.wait.checkout, '.endtimer');
+            startTimer(window.LE.wait.checkout, '.endtimer', 'select_item');
+        });
+
+        $('#back-to-itemselect-button').on('click', function(){
+            destroyCheckout();
+            initSelectItem(userdata.currentRestaurant);
+            load_data('items');
+        });
+
+        $('#place-order-button').on('click', function(){
+            destroyCheckout();
+            getpage('thank_you');
         });
     });
 }
@@ -553,14 +569,13 @@ $(function (){
 function load_data(id){
     var data = userdata[id];
     console.log(data);
-    setTimeout(function(){
-        for(i in data){
-            if ($( "#" + i ).length ){
-                document.getElementById(i).value = data[i];
-                $("#" + i).change();
-            }
+    
+    for(var i in data){
+        if ($( "#" + i ).length ){
+            document.getElementById(i).value = data[i];
+            $("#" + i).change();
         }
-    },100);
+    }
 }
 
 //removes stored data from userdata by ID
