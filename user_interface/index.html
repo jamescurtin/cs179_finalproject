@@ -177,7 +177,7 @@
         {{#each this}}
             {{#if this.prices}}
                 {{! Has size }}
-                <option value="{{@index}}" data-gen="1" data-sizes=1>{{this.name}} - varies by size</option>
+                <option value="{{@index}}" data-gen="1" data-sizes=1>{{this.name}} - Select size to view price</option>
             {{else}}
                 {{! No size, display price }}
                 <option value="{{@index}}" data-gen="1" data-sizes=0>{{this.name}} - ${{decimal this.price}}</option>
