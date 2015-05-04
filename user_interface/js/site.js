@@ -15,6 +15,16 @@ var templates = window.LE.templates;
 
 var _debug = true;
 
+// handle return input
+$(document).keypress(function(e) {
+    if(e.which == 13) {
+        var btns = $('button');
+        for(var i = 0; i<btns.length; i++){
+           if(btns[i].innerHTML == "Continue"){btns[i].click();}
+        }
+    }
+});
+
 //shows hidden element by id
 function show(id){
     $( "#" + id ).removeClass("hidden");

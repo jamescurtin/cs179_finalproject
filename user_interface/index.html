@@ -151,7 +151,7 @@
                 </div>
             <div class="row">
                 <div class="col-xs-12 text-center">
-                    <button id="place-order-button" type="button" style="background-color:lightgreen" class="btn btn-lg btn-outline endtimer">Place Order</button>
+                    <button id="place-order-button" type="button" class="btn btn-lg btn-outline endtimer">Place Order</button>
                     <button id="back-to-itemselect-button" type="button" style="background-color:lightgrey" class="btn btn-lg btn-outline endtimer">Go Back</button>
                 </div>
             </div>
@@ -201,7 +201,7 @@
                         <div class="row control-group">
                             <div class="form-group col-xs-12">
                                 <select id="entree" class="form-control" required data-validation-required-message="Required.">
-                                    <option value="" id="entree-render">Select Entree</option>
+                                    <option value="None" id="entree-render">Select Entree</option>
 
                                     {{! Render Item choice template here}}
 
@@ -216,7 +216,7 @@
                         <div class="row control-group">
                             <div class="form-group col-xs-12">
                                 <select id="side" class="form-control" required data-validation-required-message="Required.">
-                                    <option value="" id="side-render">Select Side</option>
+                                    <option value="None" id="side-render">Select Side</option>
                                     
                                     {{! Render Item choice template here}}
 
@@ -231,7 +231,7 @@
                         <div class="row control-group">
                             <div class="form-group col-xs-12">
                                 <select id="drink" class="form-control" required data-validation-required-message="Required.">
-                                    <option value="" id="drink-render">Select Drink</option>
+                                    <option value="None" id="drink-render">Select Drink</option>
 
                                     {{! Render Item choice template here}}
 
@@ -246,7 +246,7 @@
                         <div class="row control-group">
                             <div class="form-group col-xs-12">
                                 <label for="notes">Special Notes:</label>
-                                <textarea class="form-control" rows="4" cols="50" id="notes" placeholder="ex: no cheese" required data-validation-required-message="Not Required."></textarea>
+                                <textarea class="form-control" rows="4" cols="50" id="notes" placeholder="Special instructions and allergy information can go here. Ex: no cheese" required data-validation-required-message="Not Required."></textarea>
                             </div>
                         </div>
                         
@@ -255,7 +255,7 @@
                          <p class="help-block" id="sizes-alert"></p>
                         <div class="row">
                             <div class="form-group col-xs-12 text-center">
-                                <button id="select-item-continue-button" type="button" style="background-color:lightgreen" class="btn btn-outline btn-lg">Continue</button>
+                                <button id="select-item-continue-button" type="button" class="btn btn-outline btn-lg">Continue</button>
                                 <button type="button" onclick="getpage('home_screen')" style="background-color:lightgrey" class="btn btn-lg btn-outline">Go Back</button>&nbsp;
                             </div>
                         </div>
