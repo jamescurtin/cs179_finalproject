@@ -50,7 +50,7 @@
 		"geo": [], 
 		"distance": 0.5,
 		"rate": 1.0, 
-		"wait_time": 8,
+		"wait_time": 4,
 		"time_saved": 20,
 		"name": "Al's Sandwiches",
 		"id": "al"
@@ -84,7 +84,7 @@
 		"geo": [], 
 		"distance": 1.0,
 		"rate": 1.0, 
-		"wait_time": 7,
+		"wait_time": 4,
 		"time_saved": 20,
 		"name": "Crema Cafe",
 		"id": "crema"
@@ -114,7 +114,7 @@
 		"geo": [], 
 		"distance": 0.7,
 		"rate": 1.0, 
-		"wait_time": 9,
+		"wait_time": 5,
 		"time_saved": 20,
 		"name": "Tasty Burger",
 		"id": "tasty"
