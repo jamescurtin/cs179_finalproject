@@ -19,7 +19,6 @@ var _debug = true;
 $(document).keypress(function(e) {
     if(e.which == 13) {
         var btns = $('button');
-        console.log(btns);
         for(var i = 0; i<btns.length; i++){
            if(btns[i].innerHTML == "Continue"){btns[i].click();}
         }
