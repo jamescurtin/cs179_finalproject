@@ -25,12 +25,14 @@
                     Lunch Express. A reciept has been sent to the email address
                     on file. Your name will be called when your order is
                     ready.</p>
+                    <div class="text-center"><b>You have 30 seconds to cancel this order.</b></div>
                 </div>
             </div>
 
             <div class="row">
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2 text-center">
+                        <button class="btn btn-lg btn-outline endtimer" onclick="getpage('home_screen')">Return Home</button>
                         <a class="btn btn-lg btn-outline endtimer" id='cancelorder' onclick="getpage('cancel');remove_data('items');">Cancel Order</a>
                     </div>
                 </div>
